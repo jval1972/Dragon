@@ -35,7 +35,8 @@ uses
 // of other structs: items (internal inventory),
 // animation states (closely tied to the sprites
 // used to represent them, unfortunately).
-  d_items, p_pspr_h,
+  d_items,
+  p_pspr_h,
 // In addition, the player is just a special
 // case of the generic moving object/actor.
   p_mobj_h,
@@ -43,10 +44,11 @@ uses
 // is buffered within the player data struct,
 // as commands per game tick.
   d_ticcmd,
-  m_fixed, doomdef;
+  m_fixed,
+  doomdef;
 
 //
-// Player states. 
+// Player states.
 //
 
 type

@@ -36,7 +36,8 @@ interface
 uses
   d_delphi,
   doomdef,
-  d_player, d_ticcmd,
+  d_player,
+  d_ticcmd,
   d_net_h;
 
 //
@@ -140,10 +141,15 @@ implementation
 uses
   m_menu,
   c_con,
-  i_system, i_net, i_io,
-  d_main, d_event,
-  r_intrpl, r_main,
-  p_mobj_h, p_terrain,
+  i_system,
+  i_net,
+  i_io,
+  d_main,
+  d_event,
+  r_intrpl,
+  r_main,
+  p_mobj_h,
+  p_terrain,
   g_game,
   doomstat;
 

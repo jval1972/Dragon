@@ -122,7 +122,8 @@ var
 implementation
 
 uses
-  doomtype, i_system,
+  doomtype,
+  i_system,
   z_zone;
 
 var

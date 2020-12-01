@@ -86,11 +86,14 @@ uses
   MMSystem,
   c_cmds,
   z_zone,
-  m_argv, m_misc,
-  i_system, DirectX,
+  m_argv,
+  m_misc,
+  i_system,
+  DirectX,
   s_sound,
   gl_main,
-  w_wad, w_pak,
+  w_wad,
+  w_pak,
   doomdef, doomstat;
 
 // The number of internal mixing channels,

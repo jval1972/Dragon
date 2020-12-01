@@ -104,19 +104,30 @@ var
 implementation
 
 uses
-  doomdef, doomstat,
+  doomdef,
+  doomstat,
 {$IFDEF FPC}
   d_fpc,
 {$ENDIF}
   d_think,
   g_game,
   i_system,
-  p_local, p_setup, p_tick, p_mobj_h, p_mobj, p_terrain,
-  r_sky, r_things, r_bsp, r_hires,
+  p_local,
+  p_setup,
+  p_tick,
+  p_mobj_h,
+  p_mobj,
+  p_terrain,
+  r_sky,
+  r_things,
+  r_bsp,
+  r_hires,
   r_main,
-  v_data, v_video,
+  v_data,
+  v_video,
   w_wad,
-  z_zone, sc_engine;
+  z_zone,
+  sc_engine;
 
 //
 // Graphics.

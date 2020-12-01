@@ -31,7 +31,8 @@ unit f_finale;
 interface
 
 uses
-  doomtype, d_event,
+  doomtype,
+  d_event,
   info_h;
 
 function F_Responder(ev: Pevent_t): boolean;
@@ -79,21 +80,29 @@ implementation
 
 uses
   d_delphi,
-  d_player, d_main,
+  d_player,
+  d_main,
   g_game,
   info,
   p_pspr,
-  r_data, r_defs, r_things,
+  r_data,
+  r_defs,
+  r_things,
 // Functions.
   i_system,
   z_zone,
-  v_data, v_video,
+  v_data,
+  v_video,
   w_wad,
   s_sound,
 // Data.
-  dstrings, d_englsh, sounds,
-  doomdef, doomstat,
-  hu_stuff, p_enemy;
+  dstrings,
+  d_englsh,
+  sounds,
+  doomdef,
+  doomstat,
+  hu_stuff,
+  p_enemy;
 
 var
 // Stage of animation:

@@ -59,17 +59,20 @@ implementation
 
 uses
   d_delphi,
-  doomdef, d_event,
+  doomdef,
+  d_event,
   z_zone,
   m_rnd,
   i_system,
   w_wad,
   g_game,
   s_sound,
-  r_defs, r_hires,
+  r_defs,
+  r_hires,
   doomstat,
   sounds,
-  v_data, v_video;
+  v_data,
+  v_video;
 
 const
 //

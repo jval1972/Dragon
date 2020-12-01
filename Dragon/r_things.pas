@@ -88,10 +88,17 @@ uses
 {$IFDEF OPENGL}
   gl_render, // JVAL OPENGL
 {$ENDIF}
-  p_mobj_h, p_pspr, p_pspr_h,
-  r_data, r_draw, r_main, r_bsp, 
-  r_hires, r_lights,
-  z_zone, w_wad,
+  p_mobj_h,
+  p_pspr,
+  p_pspr_h,
+  r_data,
+  r_draw,
+  r_main,
+  r_bsp,
+  r_hires,
+  r_lights,
+  z_zone,
+  w_wad,
   doomstat;
 
 const

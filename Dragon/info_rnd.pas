@@ -50,7 +50,9 @@ uses
   doomdef,
   info,
   m_rnd,
-  p_setup, p_mobj, p_mobj_h;
+  p_setup,
+  p_mobj,
+  p_mobj_h;
 
 type
   randompool_t = record

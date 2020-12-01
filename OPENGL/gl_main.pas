@@ -84,7 +84,8 @@ uses
   gl_defs,
   r_hires,
   v_data,
-  v_video, d_player;
+  v_video,
+  d_player;
 
 var
   s_alttab_disabled: boolean = false;

@@ -86,7 +86,11 @@ uses
   tables,
   c_cmds,
   d_items,
-  i_system, z_zone, w_wad, info, info_h,
+  i_system,
+  z_zone,
+  w_wad,
+  info,
+  info_h,
 {$IFDEF OPENGL}
   gl_main,
   gl_render,
@@ -95,17 +99,27 @@ uses
 {$ENDIF}
   g_game,
   st_lib,
-  p_local, p_inter, p_setup, p_enemy,
+  p_local,
+  p_inter,
+  p_setup,
+  p_enemy,
   d_player,
-  r_defs, r_main, r_draw, r_hires,
-  m_cheat, m_rnd, m_fixed,
+  r_defs,
+  r_main,
+  r_draw,
+  r_hires,
+  m_cheat,
+  m_rnd,
+  m_fixed,
   s_sound,
 // Needs access to LFB.
-  v_data, v_video,
+  v_data,
+  v_video,
 // State.
   doomstat,
 // Data.
-  dstrings, d_englsh,
+  dstrings,
+   d_englsh,
   sounds,
 // for mapnames
   hu_stuff;

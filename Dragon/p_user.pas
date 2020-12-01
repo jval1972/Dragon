@@ -48,16 +48,28 @@ implementation
 
 uses
   d_delphi,
-  m_fixed, tables,
-  d_ticcmd, d_event,
-  info_h, info,
+  m_fixed,
+  tables,
+  d_ticcmd,
+  d_event,
+  info_h,
+  info,
 {$IFDEF DEBUG}
   i_io,
 {$ENDIF}
-  g_game, 
-  p_mobj_h, p_mobj, p_tick, p_pspr, p_local, p_spec, p_map, p_extra,
-  r_main, r_defs,
-  doomdef, doomstat;
+  g_game,
+  p_mobj_h,
+  p_mobj,
+  p_tick,
+  p_pspr,
+  p_local,
+  p_spec,
+  p_map,
+  p_extra,
+  r_main,
+  r_defs,
+  doomdef,
+  doomstat;
 
 //
 // Movement.

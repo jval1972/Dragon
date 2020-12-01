@@ -39,7 +39,8 @@ interface
 uses
   m_bbox,
   doomdef,
-  p_local, p_mobj_h,
+  p_local,
+  p_mobj_h,
   m_fixed,
   r_defs;
 

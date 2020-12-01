@@ -31,8 +31,10 @@ unit p_ceilng;
 interface
 
 uses
-  z_zone, doomdef,
-  p_local, p_spec,
+  z_zone,
+  doomdef,
+  p_local,
+  p_spec,
   r_defs,
   s_sound,
 // State.

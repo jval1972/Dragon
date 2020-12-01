@@ -66,7 +66,8 @@ implementation
 
 uses
   d_delphi,
-  p_tick, p_setup;
+  p_tick,
+  p_setup;
 
 //
 // FIRELIGHT FLICKER

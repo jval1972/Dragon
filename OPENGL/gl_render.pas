@@ -130,7 +130,9 @@ uses
   r_lights,
   sc_engine,
   w_wad,
-  z_zone, hu_stuff, d_net;
+  z_zone,
+  hu_stuff,
+  d_net;
 
 {$IFDEF DEBUG}
 var

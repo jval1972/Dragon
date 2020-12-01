@@ -72,8 +72,10 @@ implementation
 
 uses
   doomdata,
-  m_fixed, tables,
-  doomdef, m_bbox,
+  m_fixed,
+  tables,
+  doomdef,
+  m_bbox,
   p_setup,
   gl_defs,
   gl_clipper,

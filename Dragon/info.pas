@@ -72,7 +72,10 @@ implementation
 uses
   i_system,
   m_fixed,
-  p_enemy, p_pspr, p_mobj_h, p_extra,
+  p_enemy,
+  p_pspr,
+  p_mobj_h,
+  p_extra,
   sounds;
 
 var

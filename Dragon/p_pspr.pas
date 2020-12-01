@@ -36,7 +36,8 @@ uses
   m_fixed,
   tables,
   info_h,
-  p_pspr_h, p_mobj_h,
+  p_pspr_h,
+  p_mobj_h,
   d_player;
 
 const
@@ -108,10 +109,18 @@ uses
 // i.e. the Thing Atrributes table
 // and the Frame Sequence table.
   doomdef,
-  d_event, d_items,
+  d_event,
+  d_items,
   m_rnd,
-  p_local, p_plats, p_tick, p_mobj, p_enemy, p_map, p_inter,
-  r_main, r_draw,
+  p_local,
+  p_plats,
+  p_tick,
+  p_mobj,
+  p_enemy,
+  p_map,
+  p_inter,
+  r_main,
+  r_draw,
   s_sound,
 // State.
   doomstat,

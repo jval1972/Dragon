@@ -51,10 +51,14 @@ implementation
 
 uses
   d_delphi,
-  doomdef, doomdata,
+  doomdef,
+  doomdata,
   i_system,
-  p_local, p_setup, p_map,
-  r_defs, r_main;
+  p_local,
+  p_setup,
+  p_map,
+  r_defs,
+  r_main;
 
 //
 // P_CheckSight

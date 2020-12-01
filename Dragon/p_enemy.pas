@@ -36,7 +36,12 @@ unit p_enemy;
 interface
 
 uses
-  doomdef, p_local, p_mobj_h, s_sound, d_player, p_pspr_h,
+  doomdef,
+  p_local,
+  p_mobj_h,
+  s_sound,
+  d_player,
+  p_pspr_h,
 // State.
   doomstat,
 // Data.
@@ -193,15 +198,32 @@ implementation
 uses
   d_delphi,
   doomdata,
-  d_think, d_main,
+  d_think,
+  d_main,
   g_game,
-  m_fixed, tables,
+  m_fixed,
+  tables,
   i_system,
-  info_h, info,
+  info_h,
+  info,
   m_rnd,
-  p_map, p_maputl, p_setup, p_sight, p_switch, p_tick, p_mobj, p_doors, p_spec,
-  p_inter, p_floor, p_pspr, p_extra, p_sounds,
-  r_defs, r_main, p_telept;
+  p_map,
+  p_maputl,
+  p_setup,
+  p_sight,
+  p_switch,
+  p_tick,
+  p_mobj,
+  p_doors,
+  p_spec,
+  p_inter,
+  p_floor,
+  p_pspr,
+  p_extra,
+  p_sounds,
+  r_defs,
+  r_main,
+  p_telept;
 
 const
   opposite: array[0..8] of dirtype_t = (

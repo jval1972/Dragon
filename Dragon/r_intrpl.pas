@@ -35,7 +35,7 @@ unit r_intrpl;
 interface
 
 uses
-    m_fixed;
+  m_fixed;
     
 procedure R_InitInterpolations;
 
@@ -70,7 +70,9 @@ uses
   p_mobj_h,
   p_pspr_h,
   r_defs,
-  tables, r_main, gl_render;
+  tables,
+  r_main,
+  gl_render;
 
 type
   itype = (iinteger, ismallint, ibyte, iangle);

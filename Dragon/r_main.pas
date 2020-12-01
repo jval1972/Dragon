@@ -41,8 +41,10 @@ uses
   doomdef,
   d_player,
   m_stack,  // JVAL: WOLF
-  m_fixed, tables,
-  r_data, r_defs;
+  m_fixed,
+  tables,
+  r_data,
+  r_defs;
 
 var
   qz: TIntegerQueue; // JVAL: WOLF
@@ -239,20 +241,35 @@ uses
   doomdata,
   doomtype, // jval: WOLF
   c_cmds,
-  d_net, i_io,
-  m_bbox, m_menu, m_misc,
-  p_setup, p_sight, p_map, p_maputl, p_mobj_h,
+  d_net,
+  i_io,
+  m_bbox,
+  m_menu,
+  m_misc,
+  p_setup,
+  p_sight,
+  p_map,
+  p_maputl,
+  p_mobj_h,
   p_sun, // jval: WOLF
-  r_draw, r_bsp, r_things, r_plane, r_sky, r_hires,
+  r_draw,
+  r_bsp,
+  r_things,
+  r_plane,
+  r_sky,
+  r_hires,
   r_lights,
   r_intrpl,
   gl_terrain, // JVAL: WOLF
   gl_render, // JVAL OPENGL
   gl_clipper,
   gl_tex,
-  v_data, v_video,
+  v_data,
+  v_video,
   st_stuff,
-  z_zone, g_game, hu_stuff;
+  z_zone,
+  g_game,
+  hu_stuff;
 
 const
 // Fineangles in the SCREENWIDTH wide window.
@@ -983,6 +1000,7 @@ end;
 //
 const
   CAMERARADIOUS = 32 * FRACUNIT;
+  
 var
   globalfloorz: Integer;
 

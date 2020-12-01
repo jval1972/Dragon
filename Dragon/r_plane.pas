@@ -39,7 +39,8 @@ interface
 uses
   m_fixed,
   doomdef, 
-  r_data, r_defs;
+  r_data,
+  r_defs;
 
 //-----------------------------------------------------------------------------
 
@@ -74,8 +75,13 @@ uses
   d_player,
   tables,
   i_system,
-  r_sky, r_draw, r_main, r_things, r_hires,
-  z_zone, w_wad;
+  r_sky,
+  r_draw,
+  r_main,
+  r_things,
+  r_hires,
+  z_zone,
+  w_wad;
 
 // Here comes the obnoxious "visplane".
 const
