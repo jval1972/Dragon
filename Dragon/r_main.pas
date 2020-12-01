@@ -535,11 +535,7 @@ begin
     dy := temp;
   end;
 
-  {$IFDEF FPC}
-  angle := _SHRW(tantoangle[FixedDiv(dy, dx) shr DBITS], ANGLETOFINESHIFT);
-  {$ELSE}
   angle := tantoangle[FixedDiv(dy, dx) shr DBITS] shr ANGLETOFINESHIFT;
-  {$ENDIF}
 
   result := FixedDiv(dx, finecosine[angle]);
 end;
@@ -1087,8 +1083,8 @@ begin
     p_justspawned := false;
 //******************************
 
-  viewsin := finesine[{$IFDEF FPC}_SHRW(viewangle, ANGLETOFINESHIFT){$ELSE}viewangle shr ANGLETOFINESHIFT{$ENDIF}];
-  viewcos := finecosine[{$IFDEF FPC}_SHRW(viewangle, ANGLETOFINESHIFT){$ELSE}viewangle shr ANGLETOFINESHIFT{$ENDIF}];
+  viewsin := finesine[viewangle shr ANGLETOFINESHIFT];
+  viewcos := finecosine[viewangle shr ANGLETOFINESHIFT];
 
   sscount := 0;
 

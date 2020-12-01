@@ -209,9 +209,7 @@ uses
   t_tga,
   t_jpeg,
   t_tex,
-{$IFNDEF FPC}
   t_png,
-{$ENDIF}
   t_material,
   t_draw,
   r_hires,
@@ -1352,9 +1350,7 @@ var
   tm_targa: TTGATextureManager;
   tm_jpg: TJPGTextureManager;
   tm_jpeg: TJPGTextureManager;
-{$IFNDEF FPC}
   tm_png: TPNGTextureManager;
-{$ENDIF}
   tm_mat: TMaterialTextureManager;
   tm_tex: TTexTextureManager;
 
@@ -1362,9 +1358,7 @@ procedure T_Init;
 begin
   TextureExtensions := TDStringList.Create;
   ImageFormats := nil;
-{$IFNDEF FPC}
   tm_png.Create;
-{$ENDIF}
   tm_jpg.Create('.JPG');
   tm_jpeg.Create('.JPEG');
   tm_targa.Create;
@@ -1378,9 +1372,7 @@ end;
 procedure T_ShutDown;
 begin
   TextureExtensions.Free;
-{$IFNDEF FPC}
   tm_png.Destroy;
-{$ENDIF}
   tm_jpg.Destroy;
   tm_jpeg.Destroy;
   tm_targa.Destroy;

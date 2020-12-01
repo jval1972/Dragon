@@ -1387,11 +1387,7 @@ begin
     end;
   end;
 
-  {$IFDEF FPC}
-  exact := _SHRW(actor.angle, ANGLETOFINESHIFT);
-  {$ELSE}
   exact := actor.angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
   actor.momx := FixedMul(actor.info.speed, finecosine[exact]);
   actor.momy := FixedMul(actor.info.speed, finesine[exact]);
 
@@ -1581,11 +1577,7 @@ begin
   if not P_CheckSight(actor.target, dest) then
     exit;
 
-  {$IFDEF FPC}
-  an := _SHRW(dest.angle, ANGLETOFINESHIFT);
-  {$ELSE}
   an := dest.angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
 
   P_UnsetThingPosition(actor);
   actor.x := dest.x + FixedMul(24 * FRACUNIT, finecosine[an]);
@@ -1647,11 +1639,7 @@ begin
   P_DamageMobj(actor.target, actor, actor, 20);
   actor.target.momz := 1000 * FRACUNIT div actor.target.info.mass;
 
-  {$IFDEF FPC}
-  an := _SHRW(actor.angle, ANGLETOFINESHIFT);
-  {$ELSE}
   an := actor.angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
 
   fire := actor.tracer;
 
@@ -1694,11 +1682,7 @@ begin
     exit;
 
   mo.angle := mo.angle + FATSPREAD;
-  {$IFDEF FPC}
-  an := _SHRW(mo.angle, ANGLETOFINESHIFT);
-  {$ELSE}
   an := mo.angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
   mo.momx := FixedMul(mo.info.speed, finecosine[an]);
   mo.momy := FixedMul(mo.info.speed, finesine[an]);
 end;
@@ -1718,11 +1702,7 @@ begin
     exit;
 
   mo.angle := mo.angle - FATSPREAD * 2;
-  {$IFDEF FPC}
-  an := _SHRW(mo.angle, ANGLETOFINESHIFT);
-  {$ELSE}
   an := mo.angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
   mo.momx := FixedMul(mo.info.speed, finecosine[an]);
   mo.momy := FixedMul(mo.info.speed, finesine[an]);
 end;
@@ -1739,11 +1719,7 @@ begin
     exit;
 
   mo.angle := mo.angle - FATSPREAD div 2;
-  {$IFDEF FPC}
-  an := _SHRW(mo.angle, ANGLETOFINESHIFT);
-  {$ELSE}
   an := mo.angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
   mo.momx := FixedMul(mo.info.speed, finecosine[an]);
   mo.momy := FixedMul(mo.info.speed, finesine[an]);
 
@@ -1752,11 +1728,7 @@ begin
     exit;
 
   mo.angle := mo.angle + FATSPREAD div 2;
-  {$IFDEF FPC}
-  an := _SHRW(mo.angle, ANGLETOFINESHIFT);
-  {$ELSE}
   an := mo.angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
   mo.momx := FixedMul(mo.info.speed, finecosine[an]);
   mo.momy := FixedMul(mo.info.speed, finesine[an]);
 end;
@@ -1782,11 +1754,7 @@ begin
 
   A_AttackSound(actor, actor);
   A_FaceTarget(actor);
-  {$IFDEF FPC}
-  an := _SHRW(actor.angle, ANGLETOFINESHIFT);
-  {$ELSE}
   an := actor.angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
   actor.momx := FixedMul(SKULLSPEED, finecosine[an]);
   actor.momy := FixedMul(SKULLSPEED, finesine[an]);
   dist := P_AproxDistance(dest.x - actor.x, dest.y - actor.y);
@@ -1832,11 +1800,7 @@ begin
 
 
   // okay, there's playe for another one
-  {$IFDEF FPC}
-  an := _SHRW(angle, ANGLETOFINESHIFT);
-  {$ELSE}
   an := angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
 
   prestep := 4 * FRACUNIT +
              3 * (actor.info.radius + mobjinfo[Ord(MT_SKULL)].radius) div 2;

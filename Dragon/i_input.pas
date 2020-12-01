@@ -47,9 +47,6 @@ implementation
 uses
   Windows,
   DirectX,
-{$IFDEF FPC}
-  d_fpc,
-{$ENDIF}
   d_delphi,
   doomdef,
   d_event,

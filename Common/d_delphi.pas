@@ -509,11 +509,7 @@ implementation
 
 uses
   Windows,
-  SysUtils
-{$IFDEF FPC}
-  ,d_fpc
-{$ENDIF}
-  ;
+  SysUtils;
 
 procedure sprintf(var s: string; const Fmt: string; const Args: array of const);
 begin

@@ -162,11 +162,7 @@ begin
         // spawn teleport fog at source and destination
         fog := P_SpawnMobj(oldx, oldy, oldz, Ord(MT_TFOG));
         S_StartSound(fog, Ord(sfx_telept));
-        {$IFDEF FPC}
-        an := _SHRW(m.angle, ANGLETOFINESHIFT);
-        {$ELSE}
         an := m.angle shr ANGLETOFINESHIFT;
-        {$ENDIF}
         fog := P_SpawnMobj(m.x + 20 * finecosine[an],
                            m.y + 20 * finesine[an],
                            thing.z, Ord(MT_TFOG));

@@ -32,8 +32,8 @@ unit w_pak;
 interface
 
 uses
-  d_delphi{$IFNDEF FPC},
-  z_files{$ENDIF};
+  d_delphi,
+  z_files;
 
 const
   Pakid: integer = $4B434150;   // 'PACK' In Hex!
@@ -64,7 +64,6 @@ type
   PFWadHeadArray = ^TFWadHeadArray;
 
 type
-  {$IFNDEF FPC}
   TCompressorCache = class(TObject)
   private
     fZip: TZipFile;
@@ -80,7 +79,6 @@ type
     property Position: integer read fPosition;
     property Size: integer read fSize;
   end;
-  {$ENDIF}
 
   TPakEntry = record // A Directory Entry Memory Image
     Pak: string[255];
@@ -88,9 +86,7 @@ type
     ShortName: string[32];
     Offset, Size: Integer;
     Hash: integer;
-  {$IFNDEF FPC}
     ZIP: TZipFile;
-  {$ENDIF}
   end;
   PPakEntry = ^TPakEntry;
 
@@ -100,9 +96,7 @@ type
   TPakFile = record
     Entry: Integer;
     F: file;
-  {$IFNDEF FPC}
     Z: TCompressorCache;
-  {$ENDIF}
   end;
   PPakFile = ^TPakFile;
 
@@ -129,9 +123,7 @@ type
     procedure Grow;
     procedure AddEntry(var H: FPakHead; const Pakn: string); overload;
     procedure AddEntry(var HD: FWADhead; const Pakn: string); overload;
-  {$IFNDEF FPC}
     procedure AddEntry(ZIPFILE: TZipFile; const ZIPFileName, EntryName: string; const index: integer); overload;
-  {$ENDIF}
     function HashToHashTableIndex(const hash: integer): integer;
     procedure AddEntryToHashTable(const idx: integer);
     function POpenPreferedFileNameSearch(var F: TPakFile; const aName: string; prefdirs: TDStringList): boolean;
@@ -198,7 +190,6 @@ implementation
 uses
   i_system;
 
-{$IFNDEF FPC}
 {******** TCompressorCache ********}
 constructor TCompressorCache.Create(aZip: TZipFile; aID: integer);
 begin
@@ -236,7 +227,6 @@ begin
     result := true;
   end;
 end;
-{$ENDIF}
 
 function MkHash(const s: string): integer;
 var
@@ -284,10 +274,8 @@ begin
 // Autoload file types in directory
 // Does not load ZIP files, only PK3/PK4 files as well as PAK files and new WAD format.
   DoLoad('*.PAK');
-{$IFNDEF FPC}
   DoLoad('*.PK3');
   DoLoad('*.PK4');
-{$ENDIF}
   DoLoad('*.WAD');
 end;
 
@@ -304,7 +292,6 @@ begin
   end;
 end;
 
-{$IFNDEF FPC}
 // Add a ZIP file entry (ZIP/PK3/PK4)
 procedure TPakManager.AddEntry(ZIPFILE: TZipFile; const ZIPFileName, EntryName: string; const index: integer);
 var
@@ -322,7 +309,6 @@ begin
   
   AddEntryToHashTable(NumEntries - 1);
 end;
-{$ENDIF}
 
 // Add an entry from Quake PAK file
 procedure TPakManager.AddEntry(var H: FPakHead; const Pakn: string); // Add A Pak Entry to Memory List
@@ -347,9 +333,7 @@ begin
   e.Hash := MkHash(e.ShortName);
   e.Offset := H.Offs;
   e.Size := H.Fsize;
-{$IFNDEF FPC}
   e.ZIP := nil;
-{$ENDIF}
 
   AddEntryToHashTable(NumEntries - 1);
 end;
@@ -377,9 +361,7 @@ begin
   e.Hash := MkHash(e.ShortName);
   e.Offset := HD.Offs;
   e.Size := HD.size;
-{$IFNDEF FPC}
   e.ZIP := nil;
-{$ENDIF}
 
   AddEntryToHashTable(NumEntries - 1);
 end;
@@ -410,9 +392,7 @@ var
   F: file;
   P: Pointer;
   I: Integer;
-{$IFNDEF FPC}
   z: TZipFile;
-{$ENDIF}
   pkid: integer;
   Fn: string;
 begin
@@ -433,7 +413,7 @@ begin
     close(F);
     exit;
   end;
-  if (Id <> Pakid) and (Id <> WAD2Id) and (Id <> WAD3Id){$IFNDEF FPC} and (id <> ZIPFILESIGNATURE) {$ENDIF} then
+  if (Id <> Pakid) and (Id <> WAD2Id) and (Id <> WAD3Id) and (id <> ZIPFILESIGNATURE) then
   begin
     result := false;
     close(F);
@@ -462,7 +442,6 @@ begin
       AddEntry(PFPakHeadArray(P)[i], Fn);
     memfree(P, Nr * SizeOf(FPakHead));
   end
-{$IFNDEF FPC}
   else if id = ZIPFILESIGNATURE then // zip, pk3, pk4 file
   begin
     z := TZipFile.Create(Fn);
@@ -470,7 +449,6 @@ begin
     for i := 0 to z.FileCount - 1 do
       AddEntry(z, Fn, z.Files[i], i);
   end
-{$ENDIF}
   else // WAD2 or WAD3
   begin
     BlockRead(F, Nr, 4, N);
@@ -539,9 +517,7 @@ var
   hashcheck: PPakHash;
 begin
   result := false;
-{$IFNDEF FPC}
   F.Z := nil;
-{$ENDIF}
 
   if fopen(F.F, Name, fOpenReadOnly) then
   begin
@@ -560,11 +536,9 @@ begin
     if hcode = pe.Hash then   // Fast compare the hash values
       if pe.Name = Name then  // Slow compare strings
       begin // Found In Pak
-      {$IFNDEF FPC}
         if pe.ZIP <> nil then // It's a zip (pk3/pk4) file
           F.Z := TCompressorCache.Create(pe.ZIP, pe.Offset)
         else
-      {$ENDIF}
         begin // Standard Quake1/2 pak file
           if not fopen(F.F, string(pe.Pak), fOpenReadOnly)  then
             exit;
@@ -584,11 +558,9 @@ begin
     if hcode = pe.Hash then   // Fast compare the hash values
       if pe.Name = Name then  // Slow compare strings
       begin // Found In Pak
-      {$IFNDEF FPC}
         if pe.ZIP <> nil then // It's a zip (pk3/pk4) file
           F.Z := TCompressorCache.Create(pe.ZIP, pe.Offset)
         else
-      {$ENDIF}
         begin // Standard Quake1/2 pak file
           if not fopen(F.F, string(pe.Pak), fOpenReadOnly)  then
             exit;
@@ -614,11 +586,9 @@ begin
     exit;
 
   pe := @Entries[idx];
-  {$IFNDEF FPC}
   if pe.ZIP <> nil then // It's a zip (pk3/pk4) file
     F.Z := TCompressorCache.Create(pe.ZIP, pe.Offset)
   else
-  {$ENDIF}
   begin // Standard Quake1/2 pak file
     if not fopen(F.F, string(pe.Pak), fOpenReadOnly)  then
       exit;
@@ -637,9 +607,7 @@ var
   hashcheck: PPakHash;
 begin
   result := false;
-{$IFNDEF FPC}
   F.Z := nil;
-{$ENDIF}
 
   if fopen(F.F, Name, fOpenReadOnly) then
   begin
@@ -658,11 +626,9 @@ begin
     if hcode = pe.Hash then   // Fast compare the hash values
       if pe.ShortName = Name then  // Slow compare strings
       begin // Found In Pak
-      {$IFNDEF FPC}
         if pe.ZIP <> nil then // It's a zip (pk3/pk4) file
           F.Z := TCompressorCache.Create(pe.ZIP, pe.Offset)
         else
-      {$ENDIF}
         begin // Standard Quake1/2 pak file
           if not fopen(F.F, string(pe.Pak), fOpenReadOnly)  then
             exit;
@@ -682,11 +648,9 @@ begin
     if hcode = pe.Hash then
       if pe.ShortName = Name then
       begin // Found In Pak
-      {$IFNDEF FPC}
         if pe.ZIP <> nil then
           F.Z := TCompressorCache.Create(pe.ZIP, pe.Offset)
         else
-      {$ENDIF}
         begin
           if not fopen(F.F, string(pe.Pak), fOpenReadOnly) then
             exit;
@@ -730,9 +694,7 @@ var
   Name: string;
 begin
   result := false;
-{$IFNDEF FPC}
   F.Z := nil;
-{$ENDIF}
 
   pref_head := malloc(SizeOf(pref_rec));
   pref_head.index := -1;
@@ -782,11 +744,9 @@ begin
     exit;
 
   pe := @Entries[i];
-  {$IFNDEF FPC}
   if pe.ZIP <> nil then
     F.Z := TCompressorCache.Create(pe.ZIP, pe.Offset)
   else
-  {$ENDIF}
   begin
     if not fopen(F.F, string(pe.Pak), fOpenReadOnly) then
       exit;
@@ -811,9 +771,7 @@ var
   hashcheck: PPakHash;
 begin
   result := false;
-{$IFNDEF FPC}
   F.Z := nil;
-{$ENDIF}
 
   if fopen(F.F, aName, fOpenReadOnly) then
   begin
@@ -873,11 +831,9 @@ begin
     exit;
 
   pe := @Entries[i];
-  {$IFNDEF FPC}
   if pe.ZIP <> nil then
     F.Z := TCompressorCache.Create(pe.ZIP, pe.Offset)
   else
-  {$ENDIF}
   begin
     if not fopen(F.F, string(pe.Pak), fOpenReadOnly) then
       exit;
@@ -896,7 +852,6 @@ end;
 
 function TPakManager.PClosefile(var F: TPakFile): boolean;
 begin
-{$IFNDEF FPC}
   if F.Z <> nil then
   begin
     F.Z.Free;
@@ -904,7 +859,6 @@ begin
     result := true;
   end
   else
-{$ENDIF}
   begin
     {$I-}
     Close(F.F);
@@ -915,11 +869,9 @@ end;
 
 function TPakManager.PBlockRead(var F: TPakFile; var Buf; const Size: Integer): integer;
 begin
-{$IFNDEF FPC}
   if F.Z <> nil then
     result := F.Z.Read(Buf, Size)
   else
-{$ENDIF}
   begin
     {$I-}
     Blockread(F.F, Buf, Size, result);
@@ -929,11 +881,9 @@ end;
 
 function TPakManager.PSeek(var F: TPakFile; const Pos: Integer): boolean;
 begin
-{$IFNDEF FPC}
   if F.Z <> nil then
     result := F.Z.Seek(pos)
   else
-{$ENDIF}
   begin
   {$I-}
     if F.Entry = -1 then
@@ -947,11 +897,9 @@ end;
 
 function TPakManager.PFilePos(var F: TPakFile): Integer;
 begin
-{$IFNDEF FPC}
   if F.Z <> nil then
     result := F.Z.Position
   else
-{$ENDIF}
   begin
     result := FilePos(F.F);
     if F.Entry <> -1 then
@@ -961,10 +909,9 @@ end;
 
 function TPakManager.PFileSize(var F: TPakFile): Integer;
 begin
-{$IFNDEF FPC}
   if F.Z <> nil then
     result := F.Z.Size
-  else {$ENDIF} if F.Entry <> -1 then
+  else if F.Entry <> -1 then
     result := Entries[F.Entry].Size
   else
   begin

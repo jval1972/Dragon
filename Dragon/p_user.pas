@@ -88,11 +88,7 @@ var
 //
 procedure P_Thrust(player: Pplayer_t; angle: angle_t; const move: fixed_t);
 begin
-  {$IFDEF FPC}
-  angle := _SHRW(angle, ANGLETOFINESHIFT);
-  {$ELSE}
   angle := angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
 
   player.mo.momx := player.mo.momx + FixedMul(move, finecosine[angle]);
   player.mo.momy := player.mo.momy + FixedMul(move, finesine[angle]);

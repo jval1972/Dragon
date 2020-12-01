@@ -132,7 +132,6 @@ uses
   d_delphi in 'Common\d_delphi.pas',
   d_englsh in 'Dragon\d_englsh.pas',
   d_event in 'Dragon\d_event.pas',
-  d_fpc in 'Dragon\d_fpc.pas',
   d_items in 'Dragon\d_items.pas',
   d_main in 'Dragon\d_main.pas',
   d_net in 'Dragon\d_net.pas',

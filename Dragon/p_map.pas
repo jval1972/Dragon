@@ -760,13 +760,8 @@ begin
     deltaangle := deltaangle + ANG180;
     //  I_Error ("SlideLine: ang>ANG180");
 
-  {$IFDEF FPC}
-  lineangle := _SHRW(lineangle, ANGLETOFINESHIFT);
-  deltaangle := _SHRW(deltaangle, ANGLETOFINESHIFT);
-  {$ELSE}
   lineangle := lineangle shr ANGLETOFINESHIFT;
   deltaangle := deltaangle shr ANGLETOFINESHIFT;
-  {$ENDIF}
 
   movelen := P_AproxDistance(tmxmove, tmymove);
   newlen := FixedMul(movelen, finecosine[deltaangle]);
@@ -1256,11 +1251,7 @@ var
   x2: fixed_t;
   y2: fixed_t;
 begin
-  {$IFDEF FPC}
-  angle := _SHRW(angle, ANGLETOFINESHIFT);
-  {$ELSE}
   angle := angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
   shootthing := t1;
 
   x2 := t1.x + FixedInt(distance) * finecosine[angle];
@@ -1293,11 +1284,7 @@ var
   x2: fixed_t;
   y2: fixed_t;
 begin
-  {$IFDEF FPC}
-  angle := _SHRW(angle, ANGLETOFINESHIFT);
-  {$ELSE}
   angle := angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
   shootthing := t1;
   la_damage := damage;
   x2 := t1.x + FixedInt(distance) * finecosine[angle];
@@ -1359,11 +1346,7 @@ var
 begin
   usething := player.mo;
 
-  {$IFDEF FPC}
-  angle := _SHRW(player.mo.angle, ANGLETOFINESHIFT);
-  {$ELSE}
   angle := player.mo.angle shr ANGLETOFINESHIFT;
-  {$ENDIF}
 
   x1 := player.mo.x;
   y1 := player.mo.y;

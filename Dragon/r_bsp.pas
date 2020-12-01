@@ -358,13 +358,8 @@ begin
 
     // The seg is in the view range,
     // but not necessarily visible.
-    {$IFDEF FPC}
-    angle1 := _SHRW(angle1 + ANG90, ANGLETOFINESHIFT);
-    angle2 := _SHRW(angle2 + ANG90, ANGLETOFINESHIFT);
-    {$ELSE}
     angle1 := (angle1 + ANG90) shr ANGLETOFINESHIFT;
     angle2 := (angle2 + ANG90) shr ANGLETOFINESHIFT;
-    {$ENDIF}
     x1 := viewangletox[angle1];
     x2 := viewangletox[angle2];
 

@@ -130,11 +130,7 @@ begin
   ZeroMemory(@cachedheight, SizeOf(cachedheight));
 
   // left to right mapping
-  {$IFDEF FPC}
-  angle := _SHRW(viewangle - ANG90, ANGLETOFINESHIFT);
-  {$ELSE}
   angle := (viewangle - ANG90) shr ANGLETOFINESHIFT;
-  {$ENDIF}
 
   // scale will be unit scale at SCREENWIDTH/2 distance
   basexscale := FixedDiv(finecosine[angle], centerxfrac);

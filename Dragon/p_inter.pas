@@ -918,11 +918,7 @@ begin
       thrust := thrust * 4;
     end;
 
-    {$IFDEF FPC}
-    ang := _SHRW(ang, ANGLETOFINESHIFT);
-    {$ELSE}
     ang := ang shr ANGLETOFINESHIFT;
-    {$ENDIF}
     target.momx := target.momx + FixedMul(thrust, finecosine[ang]);
     target.momy := target.momy + FixedMul(thrust, finesine[ang]);
   end;

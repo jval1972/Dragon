@@ -170,9 +170,6 @@ function I_GetWindowDPI(const h: THandle): integer;
 implementation
 
 uses
-{$IFDEF FPC}
-  d_fpc,
-{$ENDIF}
   c_cmds,
   Windows,
   Messages,

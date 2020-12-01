@@ -1132,11 +1132,7 @@ begin
 
   // spawn a teleport fog
   ss := R_PointInSubsector(x, y);
-  {$IFDEF FPC}
-  an := _SHRW(ANG45 * (mthing.angle div 45), ANGLETOFINESHIFT);
-  {$ELSE}
   an := (ANG45 * (mthing.angle div 45)) shr ANGLETOFINESHIFT;
-  {$ENDIF}
 
   mo := P_SpawnMobj(x + 20 * finecosine[an], y + 20 * finesine[an],
           ss.sector.floorheight, Ord(MT_TFOG));

@@ -1151,11 +1151,7 @@ begin
     an := an + _SHLW(P_Random - P_Random, 20);
 
   th.angle := an;
-  {$IFDEF FPC}
-  an := _SHRW(an, ANGLETOFINESHIFT);
-  {$ELSE}
   an := an shr ANGLETOFINESHIFT;
-  {$ENDIF}
   th.momx := FixedMul(th.info.speed, finecosine[an]);
   th.momy := FixedMul(th.info.speed, finesine[an]);
 
@@ -1332,8 +1328,8 @@ begin
 
   th.target := source;
   th.angle := an;
-  th.momx := FixedMul(th.info.speed, finecosine[{$IFDEF FPC}_SHRW(an, ANGLETOFINESHIFT){$ELSE}an shr ANGLETOFINESHIFT{$ENDIF}]);
-  th.momy := FixedMul(th.info.speed, finesine[{$IFDEF FPC}_SHRW(an, ANGLETOFINESHIFT){$ELSE}an shr ANGLETOFINESHIFT{$ENDIF}]);
+  th.momx := FixedMul(th.info.speed, finecosine[an shr ANGLETOFINESHIFT]);
+  th.momy := FixedMul(th.info.speed, finesine[an shr ANGLETOFINESHIFT]);
   th.momz := FixedMul(th.info.speed, slope);
 
   P_CheckMissileSpawn(th);
