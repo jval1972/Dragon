@@ -50,8 +50,6 @@ procedure R_ClearPlanes;
 
 function R_FindPlane(height: fixed_t; picnum: integer; lightlevel: integer; xoffs, yoffs: fixed_t): Pvisplane_t;
 
-function R_CheckPlane(pl: Pvisplane_t; start: integer; stop: integer): Pvisplane_t;
-
 var
   floorplane: Pvisplane_t;
   ceilingplane: Pvisplane_t;
@@ -153,13 +151,7 @@ end;
 procedure R_NewVisPlane;
 begin
   if lastvisplane > maxvisplane then
-  begin
-    visplanes[lastvisplane].top := Pvisindex_tArray(
-      Z_Malloc((SCREENWIDTH + 2) * SizeOf(visindex_t), PU_LEVEL, nil));
-    visplanes[lastvisplane].bottom := Pvisindex_tArray(
-      Z_Malloc((SCREENWIDTH + 2) * SizeOf(visindex_t), PU_LEVEL, nil));
     maxvisplane := lastvisplane;
-  end;
 
   inc(lastvisplane);
 end;
@@ -210,83 +202,6 @@ begin
   result.maxx := -1;
   result.xoffs := xoffs;
   result.yoffs := yoffs;
-
-  memset(@result.top[-1], iVISEND, (2 + SCREENWIDTH) * SizeOf(visindex_t));
-end;
-
-//
-// R_CheckPlane
-//
-function R_CheckPlane(pl: Pvisplane_t; start: integer; stop: integer): Pvisplane_t;
-var
-  intrl: integer;
-  intrh: integer;
-  unionl: integer;
-  unionh: integer;
-  x: integer;
-  pll: Pvisplane_t;
-begin
-  if start < pl.minx then
-  begin
-    intrl := pl.minx;
-    unionl := start;
-  end
-  else
-  begin
-    unionl := pl.minx;
-    intrl := start;
-  end;
-
-  if stop > pl.maxx then
-  begin
-    intrh := pl.maxx;
-    unionh := stop;
-  end
-  else
-  begin
-    unionh := pl.maxx;
-    intrh := stop;
-  end;
-
-  x := intrl;
-  while x <= intrh do
-  begin
-    if pl.top[x] <> VISEND then
-      break
-    else
-      inc(x);
-  end;
-
-  if x > intrh then
-  begin
-    pl.minx := unionl;
-    pl.maxx := unionh;
-
-    // use the same one
-    result := pl;
-    exit;
-  end;
-
-  // make a new visplane
-
-  if lastvisplane = MAXVISPLANES then
-    I_Error('R_CheckPlane(): no more visplanes');
-
-  pll := @visplanes[lastvisplane];
-  pll.height := pl.height;
-  pll.picnum := pl.picnum;
-  pll.lightlevel := pl.lightlevel;
-
-  pl := pll;
-
-  R_NewVisPlane;
-
-  pl.minx := start;
-  pl.maxx := stop;
-  result := pl;
-
-  memset(@result.top[-1], iVISEND, (2 + SCREENWIDTH) * SizeOf(visindex_t));
-
 end;
 
 end.
