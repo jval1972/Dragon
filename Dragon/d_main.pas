@@ -833,6 +833,8 @@ var
   i: integer;
   mb_min: integer; // minimum zone size
 begin
+  I_SetDPIAwareness;
+
   SUC_Open;
   outproc := @SUC_Outproc;
   wadfiles := TDSTringList.Create;

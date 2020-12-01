@@ -162,6 +162,10 @@ var
   usemultithread: boolean;
   criticalcpupriority: boolean;
 
+function I_SetDPIAwareness: boolean;
+
+function I_GetWindowDPI(const h: THandle): integer;
+
 implementation
 
 uses
@@ -797,6 +801,54 @@ end;
 function I_ScreenHeight: integer;
 begin
   result := GetSystemMetrics(SM_CYSCREEN);
+end;
+
+type
+  dpiproc_t = function: BOOL; stdcall;
+  dpiproc2_t = function(value: integer): HRESULT; stdcall;
+
+function I_SetDPIAwareness: boolean;
+var
+  dpifunc: dpiproc_t;
+  dpifunc2: dpiproc2_t;
+  dllinst: THandle;
+begin
+  result := false;
+
+  dllinst := LoadLibrary('Shcore.dll');
+  if dllinst <> 0 then
+  begin
+    dpifunc2 := GetProcAddress(dllinst, 'SetProcessDpiAwareness');
+    if assigned(dpifunc2) then
+    begin
+      result := dpifunc2(2) = S_OK;
+      if not result then
+        result := dpifunc2(1) = S_OK;
+    end;
+    FreeLibrary(dllinst);
+    exit;
+  end;
+
+  dllinst := LoadLibrary('user32');
+  dpifunc := GetProcAddress(dllinst, 'SetProcessDPIAware');
+  if assigned(dpifunc) then
+    result := dpifunc;
+  FreeLibrary(dllinst);
+end;
+
+function I_GetWindowDPI(const h: THandle): integer;
+var
+  dpifunc2: dpiproc2_t;
+  dllinst: THandle;
+begin
+  dllinst := LoadLibrary(user32);
+  dpifunc2 := GetProcAddress(dllinst, 'GetDpiForWindow');
+  if assigned(dpifunc2) then
+    result := dpifunc2(h)
+  else
+    result := 96;
+
+  FreeLibrary(dllinst);
 end;
 
 initialization
