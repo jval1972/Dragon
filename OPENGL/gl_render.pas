@@ -282,10 +282,11 @@ begin
   BlackFogColor[2] := 0.0;
   BlackFogColor[3] := 0.0;
 
-  printf('GL_VENDOR: %s'#13#10 , [glGetString(GL_VENDOR)]);
-  printf('GL_RENDERER: %s'#13#10, [glGetString(GL_RENDERER)]);
-  printf('GL_VERSION: %s'#13#10, [glGetString(GL_VERSION)]);
-  printf('GL_EXTENSIONS:'#13#10);
+  printf('gld_Init(): Initializing OpenGL'#13#10);
+  printf(' GL_VENDOR: %s'#13#10 , [glGetString(GL_VENDOR)]);
+  printf(' GL_RENDERER: %s'#13#10, [glGetString(GL_RENDERER)]);
+  printf(' GL_VERSION: %s'#13#10, [glGetString(GL_VERSION)]);
+  printf(' GL_EXTENSIONS:'#13#10);
 
   extensions := StringVal(glGetString(GL_EXTENSIONS));
   extensions_l := '';
@@ -301,7 +302,7 @@ begin
   try
     ext_lst.Text := extensions_l;
     for i := 0 to ext_lst.count - 1 do
-      printf('%s'#13#10, [ext_lst.strings[i]]);
+      printf('  %s'#13#10, [ext_lst.strings[i]]);
     gld_InitExtensions(ext_lst);
   finally
     ext_lst.Free;
@@ -320,9 +321,9 @@ begin
   {$ENDIF}
 
   glGetIntegerv(GL_MAX_TEXTURE_SIZE, @gld_max_texturesize);
-  printf('GL_MAX_TEXTURE_SIZE=%d'#13#10, [gld_max_texturesize]);
+  printf(' GL_MAX_TEXTURE_SIZE=%d'#13#10, [gld_max_texturesize]);
   glGetIntegerv(GL_MAX_3D_TEXTURE_SIZE, @gld_max_texturesize3d);
-  printf('GL_MAX_3D_TEXTURE_SIZE=%d'#13#10, [gld_max_texturesize3d]);
+  printf(' GL_MAX_3D_TEXTURE_SIZE=%d'#13#10, [gld_max_texturesize3d]);
 
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1571,7 +1572,6 @@ begin
   glLoadIdentity;
 
   infinitePerspective(64.0, 320.0 / 200.0, gl_nearclip / 1000.0);
-
 
   if zaxisshift then
     pitch := -players[displayplayer].lookdir / 2
@@ -3440,7 +3440,7 @@ begin
       until max_scale = MAXINT;
     end;
   end;
-                               
+
   if gl_uselightmaps then
     gld_DeActivateLightmap;
 
