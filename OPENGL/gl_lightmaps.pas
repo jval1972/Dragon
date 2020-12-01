@@ -298,7 +298,7 @@ begin
          (pdls.z >= fz1) and (pdls.z <= fz2) then
       begin
         l := pdls.l;
-        checkradious := l.radious;
+        checkradious := l.radius;
         if checkradious <  MINLIGHTMAPRADIOUS then
           checkradious := MINLIGHTMAPRADIOUS;
         squarecheck := checkradious * checkradious;

@@ -53,7 +53,7 @@ type
 
   GLDRenderLight = record
     r, g, b: float;     // Color
-    radious: float;     // radious
+    radius: float;     // radious
     x, y, z: float;     // Offset
     shadow: Boolean; // JVAL: wolf
   end;
@@ -554,7 +554,7 @@ begin
       result.r := l.r1;
       result.g := l.g1;
       result.b := l.b1;
-      result.radious := l.size1;
+      result.radius := l.size1;
       _CalcOffset(result, true);
     end
     else if l.validcount <> leveltime then
@@ -611,19 +611,19 @@ begin
       if l.chance > 0 then
       begin
         if C_Random(lightrnd) < l.chance then
-          result.radious := l.size1
+          result.radius := l.size1
         else
-          result.radious := l.size2;
+          result.radius := l.size2;
       end
       else if l.interval > 0 then
       begin
         if Odd(FixedDiv(l.randomseed + leveltime * FRACUNIT, l.interval)) then
-          result.radious := l.size1
+          result.radius := l.size1
         else                               
-          result.radious := l.size2;
+          result.radius := l.size2;
       end
       else
-        result.radious := l.size1;
+        result.radius := l.size1;
 
       _CalcOffset(result, l.validcount < 0);
       l.validcount := leveltime div TICRATE;
@@ -675,18 +675,18 @@ begin
         frac := FixedDiv(l.randomseed + leveltime * FRACUNIT, l.interval) mod l.interval;
         frac1 := frac / l.interval;
         frac2 := 1.0 - frac1;
-        result.radious := l.size1 * frac1 + l.size2 * frac2;
+        result.radius := l.size1 * frac1 + l.size2 * frac2;
       end
       // chance should be present in pulse light but just in case
       else if l.chance > 0 then
       begin
         if C_Random(lightrnd) < l.chance then
-          result.radious := l.size1
+          result.radius := l.size1
         else
-          result.radious := l.size2;
+          result.radius := l.size2;
       end
       else
-        result.radious := l.size1;
+        result.radius := l.size1;
 
       _CalcOffset(result, l.validcount < 0);
       l.validcount := leveltime;

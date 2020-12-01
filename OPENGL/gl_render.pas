@@ -227,18 +227,18 @@ type
 
 procedure gld_VSync(vsync: TVSyncMode);
 var
-   i : Integer;
+  i: Integer;
 begin
-   if WGL_EXT_swap_control then
-   begin
-      i := wglGetSwapIntervalEXT;
-      case VSync of
-         vsmSync    : if i<>1 then wglSwapIntervalEXT(1);
-         vsmNoSync  : if i<>0 then wglSwapIntervalEXT(0);
-      else
-         Assert(False);
-      end;
-   end;
+  if WGL_EXT_swap_control then
+  begin
+    i := wglGetSwapIntervalEXT;
+    case VSync of
+      vsmSync    : if i <> 1 then wglSwapIntervalEXT(1);
+      vsmNoSync  : if i <> 0 then wglSwapIntervalEXT(0);
+    else
+      Assert(False);
+    end;
+  end;
 
 end;
 
@@ -1056,7 +1056,7 @@ begin
         inc(num);
         realloc(pointer(points), (num - 1) * SizeOf(vertex_t), num * SizeOf(vertex_t));
         if num >= MAX_CC_SIDES then
-          I_Error('gld_FlatEdgeClipper: Too many points in carver');
+          I_Error('gld_FlatEdgeClipper(): Too many points in carver');
 
         // Make room for the new vertex.
         memmove(@points[endIdx + 1], @points[endIdx], (num - endIdx - 1) * SizeOf(vertex_t)); // VJ SOS
@@ -1515,8 +1515,7 @@ var
 
 procedure gld_StartDrawScene;
 var
-  ytr: float;
-  xCamera, yCamera: float;
+  xCamera, yCamera, zCamera: float;
   height: integer;
 begin
   if gl_shared_texture_palette then
@@ -1551,8 +1550,7 @@ begin
   // Player coordinates
   xCamera := -viewx / MAP_SCALE;
   yCamera := viewy / MAP_SCALE;
-
-  ytr := viewz / MAP_SCALE;
+  zCamera := viewz / MAP_SCALE;
 
   yaw := 270.0 - (viewangle shr ANGLETOFINESHIFT) * 360.0 / FINEANGLES;
   inv_yaw := -90.0 + (viewangle shr ANGLETOFINESHIFT) * 360.0 / FINEANGLES;
@@ -1570,7 +1568,7 @@ begin
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity;
 
-  infinitePerspective(64.0, 320.0 / 200.0, gl_nearclip / 1000.0);
+  infinitePerspective(64.0, 320.0 / 200.0, gl_nearclip / 100.0);
 
   if zaxisshift then
     pitch := -players[displayplayer].lookdir / 2
@@ -1586,12 +1584,12 @@ begin
   glRotatef(roll,  0.0, 0.0, 1.0);
   glRotatef(pitch, 1.0, 0.0, 0.0);
   glRotatef(yaw,   0.0, 1.0, 0.0);
-  glTranslatef(-xCamera, -ytr, -yCamera);
+  glTranslatef(-xCamera, -zCamera, -yCamera);
   camera.rotation[0] := pitch;
   camera.rotation[1] := yaw;
   camera.rotation[2] := roll;
   camera.position[0] := xCamera;
-  camera.position[1] := ytr;
+  camera.position[1] := zCamera;
   camera.position[2] := yCamera;
 
   inc(rendermarker);
@@ -1745,60 +1743,20 @@ end;
  *               *
  *****************)
 
-procedure gld_DrawWall(wall: PGLWall);
-var
-  seg: PGLSeg;
-begin
-  if (not gl_drawsky) and (wall.flag >= GLDWF_SKY) then
-    exit;
-  if wall.gltexture.index = 0 then
-    exit;
-
-  gld_BindTexture(wall.gltexture);
-  if wall.flag >= GLDWF_SKY then
-  begin
-    glMatrixMode(GL_TEXTURE);
-    glPushMatrix;
-    if wall.flag and GLDWF_SKYFLIP = GLDWF_SKYFLIP then
-      glScalef(-128.0 / wall.gltexture.buffer_width / 2, 200.0 / 320.0 * 2.0, 1.0)
-    else
-      glScalef(128.0 / wall.gltexture.buffer_width, 200.0 / 320.0 * 2.0, 1.0);
-    glTranslatef(wall.skyyaw, wall.skyymid, 0.0);
-
-    seg := wall.glseg;
-    glBegin(GL_TRIANGLE_STRIP);
-      glVertex3f(seg.x1, wall.ytop, seg.z1);
-      glVertex3f(seg.x1, wall.ybottom, seg.z1);
-      glVertex3f(seg.x2, wall.ytop, seg.z2);
-      glVertex3f(seg.x2, wall.ybottom, seg.z2);
-    glEnd;
-    glPopMatrix;
-    glMatrixMode(GL_MODELVIEW);
-  end
-  else
-  begin
-    gld_StaticLightAlpha(wall.light, wall.alpha);
-    seg := wall.glseg;
-    glBegin(GL_TRIANGLE_STRIP);
-      glTexCoord2f(wall.ul, wall.vt); glVertex3f(seg.x1, wall.ytop, seg.z1);
-      glTexCoord2f(wall.ul, wall.vb); glVertex3f(seg.x1, wall.ybottom, seg.z1);
-      glTexCoord2f(wall.ur, wall.vt); glVertex3f(seg.x2, wall.ytop, seg.z2);
-      glTexCoord2f(wall.ur, wall.vb); glVertex3f(seg.x2, wall.ybottom, seg.z2);
-    glEnd;
-  end;
-end;
+const
+  SMALLDELTA = 0.001;
 
 procedure CALC_Y_VALUES(w: PGLWall; var lineheight: float; floor_height, ceiling_height: integer);
 begin
-  w.ytop := ceiling_height / MAP_SCALE + 0.001;
-  w.ybottom := floor_height / MAP_SCALE - 0.001;
+  w.ytop := ceiling_height / MAP_SCALE + SMALLDELTA;
+  w.ybottom := floor_height / MAP_SCALE - SMALLDELTA;
   lineheight := abs((ceiling_height - floor_height) / FRACUNIT);
 end;
 
 procedure CALC_Y_VALUES2(w: PGLWall; var lineheight: float; floor_height, ceiling_height: integer);
 begin
-  w.ytop := ceiling_height / MAP_SCALE + 0.001;
-  w.ybottom := floor_height / MAP_SCALE - 0.001;
+  w.ytop := ceiling_height / MAP_SCALE + SMALLDELTA;
+  w.ybottom := floor_height / MAP_SCALE - SMALLDELTA;
   lineheight := (ceiling_height - floor_height) / FRACUNIT;
 end;
 
@@ -1917,6 +1875,53 @@ begin
   gld_drawinfo.walls[gld_drawinfo.num_walls] := wall^;
   inc(gld_drawinfo.num_walls);
 end;
+
+procedure gld_DrawWall(wall: PGLWall);
+var
+  seg: PGLSeg;
+begin
+  if (not gl_drawsky) and (wall.flag >= GLDWF_SKY) then
+    exit;
+
+  if wall.gltexture.index = 0 then
+    exit;
+
+  gld_BindTexture(wall.gltexture);
+  if wall.flag >= GLDWF_SKY then
+  begin
+    glMatrixMode(GL_TEXTURE);
+    glPushMatrix;
+    if wall.flag and GLDWF_SKYFLIP = GLDWF_SKYFLIP then
+      glScalef(-128.0 / wall.gltexture.buffer_width / 2, 200.0 / 320.0 * 2.0, 1.0)
+    else
+      glScalef(128.0 / wall.gltexture.buffer_width, 200.0 / 320.0 * 2.0, 1.0);
+    glTranslatef(wall.skyyaw, wall.skyymid, 0.0);
+
+    seg := wall.glseg;
+
+    glBegin(GL_TRIANGLE_STRIP);
+      glVertex3f(seg.x1, wall.ytop, seg.z1);
+      glVertex3f(seg.x1, wall.ybottom, seg.z1);
+      glVertex3f(seg.x2, wall.ytop, seg.z2);
+      glVertex3f(seg.x2, wall.ybottom, seg.z2);
+    glEnd;
+
+    glPopMatrix;
+    glMatrixMode(GL_MODELVIEW);
+  end
+  else
+  begin
+    gld_StaticLightAlpha(wall.light, wall.alpha);
+    seg := wall.glseg;
+    glBegin(GL_TRIANGLE_STRIP);
+      glTexCoord2f(wall.ul, wall.vt); glVertex3f(seg.x1, wall.ytop, seg.z1);
+      glTexCoord2f(wall.ul, wall.vb); glVertex3f(seg.x1, wall.ybottom, seg.z1);
+      glTexCoord2f(wall.ur, wall.vt); glVertex3f(seg.x2, wall.ytop, seg.z2);
+      glTexCoord2f(wall.ur, wall.vb); glVertex3f(seg.x2, wall.ybottom, seg.z2);
+    glEnd;
+  end;
+end;
+
 
 procedure gld_AddFlatEx(sectornum: integer; pic, zheight: integer);
 var
@@ -2590,7 +2595,7 @@ end;
 const
   shadow: GLDRenderLight = (
     r: 0.0; g: 0.0;  b: 0.0;
-    radious: 0.25;     // radious
+    radius: 0.25;     // radious
     x: 0.0; y: 0.0; z: 0.0;     // Offset
     shadow: true; // JVAL: wolf
   );
@@ -2747,7 +2752,6 @@ begin
 
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix;
-
   glTranslatef(sprite.x, sprite.y, sprite.z);
   glRotatef(sprite.mo.angle / (ANGLE_MAX / 360.0) - 90.0, 0.0, 1.0, 0.0);
 
@@ -2951,7 +2955,7 @@ begin
   glTranslatef(pdls.x, pdls.y, pdls.z);
   glRotatef(inv_yaw, 0.0, 1.0, 0.0);
 
-  sz := pdls.l.radious;
+  sz := pdls.l.radius;
 //  if GL_CheckVisibility(pdls.x, pdls.y, pdls.z, 2 * sz) then
   begin
     glBegin(GL_TRIANGLE_FAN);
@@ -3460,7 +3464,6 @@ begin
       end;
     end;
   end;
-
 
 {$IFDEF DEBUG}
   printf('rendered_visplanes := %d'#13#10'rendered_segs := %d'#13#10'rendered_vissprites := %d'#13#10#13#10,
