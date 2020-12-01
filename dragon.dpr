@@ -41,6 +41,8 @@
 
 program dragon;
 
+{$R *.RES}
+
 uses
   FastMM4 in 'FASTMM4\FastMM4.pas',
   FastMM4Messages in 'FASTMM4\FastMM4Messages.pas',
