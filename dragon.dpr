@@ -39,7 +39,7 @@
 {$Error: To compile this project you must define "DOOM"}
 {$ENDIF}
 
-{$I Doom32.inc}
+{$I Dragon.inc}
 {$D Dragon game based on the DelphiDoom engine}
 
 program dragon;
