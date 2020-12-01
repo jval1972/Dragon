@@ -878,10 +878,8 @@ type
   GLFlat = record
     sectornum: integer;
     light: float; // the lightlevel of the flat
-    {$IFDEF DOOM}
     hasoffset: boolean;
     uoffs, voffs: float; // the texture coordinates
-    {$ENDIF}
     z: float; // the z position of the flat (height)
     gltexture: PGLTexture;
     ceiling: boolean;
@@ -1660,7 +1658,6 @@ begin
     glEnable(GL_ALPHA_TEST);
   end;
 
-  {$IFDEF DOOM}
   if R_UnderWater then
   begin
     extra_blue := 1.0;
@@ -1668,7 +1665,6 @@ begin
     if extra_alpha > 1.0 then
       extra_alpha := 1.0;
   end;
-  {$ENDIF}
 
   if extra_alpha > 0.0 then
   begin
@@ -1924,9 +1920,7 @@ end;
 
 procedure gld_AddFlatEx(sectornum: integer; pic, zheight: integer);
 var
-  {$IFDEF DOOM}
   tempsec: sector_t; // needed for R_FakeFlat
-  {$ENDIF}
   sector: Psector_t; // the sector we want to draw
   flat: GLFlat;
 begin
@@ -1943,9 +1937,7 @@ begin
 
   flat.sectornum := sectornum;
   sector := @sectors[sectornum]; // get the sector
-  {$IFDEF DOOM}
   sector := R_FakeFlat(sector, @tempsec, nil, nil, false); // for boom effects
-  {$ENDIF}
   flat.ceiling := true;
 
   // get the texture. flattranslation is maintained by doom and
@@ -1956,11 +1948,9 @@ begin
   // get the lightlevel
   flat.light := gld_CalcLightLevel(sector.lightlevel + (extralight shl 5));
   // calculate texture offsets
-  {$IFDEF DOOM}
   flat.hasoffset := (sector.ceiling_xoffs <> 0) or (sector.ceiling_yoffs <> 0);
   flat.uoffs := sector.ceiling_xoffs / FLATUVSCALE;
   flat.voffs := sector.ceiling_yoffs / FLATUVSCALE;
-  {$ENDIF}
 
   // get height from plane
   flat.z := zheight / MAP_SCALE;
@@ -1986,10 +1976,8 @@ var
   floor_height, ceiling_height: integer;
   floormax, ceilingmin, linelen: integer;
   mip: float;
-{$IFDEF DOOM}
   ftempsec: sector_t; // needed for R_FakeFlat
   btempsec: sector_t; // needed for R_FakeFlat
-{$ENDIF}
   x: integer;
 label
   bottomtexture;
@@ -2014,11 +2002,8 @@ begin
   if seg.frontsector = nil then
     exit;
 
-  {$IFDEF DOOM}
   frontsector := R_FakeFlat(seg.frontsector, @ftempsec, nil, nil, false); // for boom effects
-  {$ELSE}
-  frontsector := seg.frontsector;
-  {$ENDIF}
+
   wall.glseg := @gl_segs[seg.iSegID];
 
   if seg.linedef.dx = 0 then
@@ -2091,11 +2076,8 @@ begin
   end
   else // twosided
   begin
-    {$IFDEF DOOM}
     backsector := R_FakeFlat(seg.backsector, @btempsec, nil, nil, true); // for boom effects
-    {$ELSE}
-    backsector := seg.backsector;
-    {$ENDIF}
+
     // toptexture
     ceiling_height := frontsector.ceilingheight;
     floor_height := backsector.ceilingheight;
@@ -2407,14 +2389,12 @@ begin
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix;
   glTranslatef(0.0, flat.z, 0.0);
-  {$IFDEF DOOM}
   if flat.hasoffset then
   begin
     glMatrixMode(GL_TEXTURE);
     glPushMatrix;
     glTranslatef(flat.uoffs, flat.voffs, 0.0);
   end;
-  {$ENDIF}
   // JVAL: Call the precalced list if available
   if terrainandskycullregion and (glsec.list_nonormal <> GL_BAD_LIST) then
     glCallList(glsec.list_nonormal)
@@ -2432,13 +2412,11 @@ begin
       glDrawArrays(currentloop.mode, currentloop.vertexindex, currentloop.vertexcount);
     end;
   end;
-  {$IFDEF DOOM}
   if flat.hasoffset then
   begin
     glPopMatrix;
     glMatrixMode(GL_MODELVIEW);
   end;
-  {$ENDIF}
   if gl_uselightmaps then
   begin
     glActiveTextureARB(GL_TEXTURE1_ARB);
@@ -2459,9 +2437,7 @@ end;
 //
 procedure gld_AddFlat(sectornum: integer; ceiling: boolean; plane: Pvisplane_t);
 var
-  {$IFDEF DOOM}
   tempsec: sector_t; // needed for R_FakeFlat
-  {$ENDIF}
   sector: Psector_t; // the sector we want to draw
   flat: GLFlat;
 begin
@@ -2470,9 +2446,7 @@ begin
 
   flat.sectornum := sectornum;
   sector := @sectors[sectornum]; // get the sector
-  {$IFDEF DOOM}
   sector := R_FakeFlat(sector, @tempsec, nil, nil, false); // for boom effects
-  {$ENDIF}
   flat.ceiling := ceiling;
   if ceiling then // if it is a ceiling ...
   begin
@@ -2484,13 +2458,11 @@ begin
     if flat.gltexture = nil then
       exit;
     // get the lightlevel from floorlightlevel
-    flat.light := gld_CalcLightLevel({$IFDEF DOOM}sector.ceilinglightlevel{$ELSE}sector.lightlevel{$ENDIF} + (extralight shl 5));
+    flat.light := gld_CalcLightLevel(sector.ceilinglightlevel + (extralight shl 5));
     // calculate texture offsets
-    {$IFDEF DOOM}
     flat.hasoffset := (sector.ceiling_xoffs <> 0) or (sector.ceiling_yoffs <> 0);
     flat.uoffs := sector.ceiling_xoffs / FLATUVSCALE;
     flat.voffs := sector.ceiling_yoffs / FLATUVSCALE;
-    {$ENDIF}
   end
   else // if it is a floor ...
   begin
@@ -2502,13 +2474,11 @@ begin
     if flat.gltexture = nil then
       exit;
     // get the lightlevel from ceilinglightlevel
-    flat.light := gld_CalcLightLevel({$IFDEF DOOM}sector.floorlightlevel{$ELSE}sector.lightlevel{$ENDIF} + (extralight shl 5));
+    flat.light := gld_CalcLightLevel(sector.floorlightlevel + (extralight shl 5));
     // calculate texture offsets
-    {$IFDEF DOOM}
     flat.hasoffset := (sector.floor_xoffs <> 0) or (sector.floor_yoffs <> 0);
     flat.uoffs := sector.floor_xoffs / FLATUVSCALE;
     flat.voffs := sector.floor_yoffs / FLATUVSCALE;
-    {$ENDIF}
   end;
 
   // get height from plane
@@ -3254,15 +3224,12 @@ end;
  *****************)
 
 procedure gld_StartFog;
-{$IFDEF DOOM}
 var
   FogColor: array[0..3] of TGLfloat; // JVAL: set blue fog color if underwater
-{$ENDIF}
 begin
   if use_fog then
     if players[displayplayer].fixedcolormap = 0 then
     begin
-{$IFDEF DOOM}
       FogColor[0] := 0.25;
       FogColor[1] := 0.25;
       if R_UnderWater then
@@ -3272,7 +3239,6 @@ begin
       FogColor[3] := 0.0;
 
       glFogfv(GL_FOG_COLOR, @FogColor);
-{$ENDIF}
 
       if (players[displayplayer].mo <> nil) and
          (Psubsector_t(players[displayplayer].mo.subsector).sector.tag = 666) then

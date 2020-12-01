@@ -229,7 +229,6 @@ begin
 end;
 {$ENDIF}
 
-{$IFDEF DOOM}
 var
   overlay_created: boolean = false;
 //  sub_y2: integer;
@@ -237,14 +236,10 @@ var
   last_y1: integer = GLDRAWTEXHEIGHT;
   health1, health2, ammo1, ammo2: GLuint;
   uitexloaded: Boolean = false;
-{$ENDIF}
 
 procedure I_FinishUpdate;
-{$IFDEF DOOM}
 var
-{  sub_y1, y1, y2: integer;   }
   h, a: integer;
-{$ENDIF}
 begin
   if (hMainWnd = 0) or (screens[SCN_FG] = nil) or (screen32 = nil) then
     exit;

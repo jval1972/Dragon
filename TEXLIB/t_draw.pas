@@ -45,11 +45,7 @@ procedure T_ShutDownDrawTextures;
 implementation
 
 uses
-{$IFDEF HEXEN}
-  xn_defs,
-{$ELSE}
   doomdef,
-{$ENDIF}  
   m_fixed,
   r_hires,
   r_mmx,

@@ -119,11 +119,7 @@ implementation
 
 uses
   c_cmds,
-{$IFDEF HEXEN}
-  xn_defs,
-{$ELSE}
   doomdef,
-{$ENDIF}
   m_misc,
   i_system,
   gl_main,
