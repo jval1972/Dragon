@@ -442,7 +442,7 @@ begin
   ss := R_PointInSubsector(thing.x, thing.y);
   thing.subsector := ss;
 
-  if (thing.flags and MF_NOSECTOR) = 0 then
+  if thing.flags and MF_NOSECTOR = 0 then
   begin
     // invisible things don't go into the sector links
     sec := ss.sector;
@@ -471,7 +471,6 @@ begin
     P_CreateSecNodeList(thing, thing.x, thing.y);
     thing.touching_sectorlist := sector_list; // Attach to Thing's mobj_t
     sector_list := nil; // clear for next time
-
   end;
 
   // link into blockmap

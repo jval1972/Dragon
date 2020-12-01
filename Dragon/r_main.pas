@@ -687,6 +687,7 @@ begin
     screenblocks := 12
   else
     screenblocks := 11; //jval: wolf
+
   if not allowlowdetails then
     if detailLevel < DL_NORMAL then
       detailLevel := DL_NORMAL;
@@ -1001,7 +1002,7 @@ end;
 //
 const
   CAMERARADIOUS = 32 * FRACUNIT;
-  
+
 var
   globalfloorz: Integer;
 
@@ -1018,7 +1019,6 @@ var
   i: integer;
   size1: integer;
 begin
-
   if chasecamera then
   begin
     sec := Psubsector_t(viewplayer.mo.subsector).sector;

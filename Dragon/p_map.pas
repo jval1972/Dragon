@@ -137,7 +137,7 @@ var
 
 //
 // TELEPORT MOVE
-// 
+//
 
 //
 // PIT_StompThing
@@ -252,7 +252,7 @@ begin
   thing.flags := thing.flags or MF_JUSTAPPEARED;
 
   result := true;
-end;                                     
+end;
 
 //
 // MOVEMENT ITERATOR FUNCTIONS
@@ -279,7 +279,7 @@ begin
     result := true;
     exit;
   end;
-    
+
   // A line has been hit
 
   // The moving thing's destination position will cross
@@ -388,7 +388,7 @@ begin
     damage := ((P_Random mod 8) + 1) * tmthing.info.damage;
     P_DamageMobj(thing, tmthing, tmthing, damage);
 
-    tmthing.flags := tmthing.flags and (not MF_SKULLFLY);
+    tmthing.flags := tmthing.flags and not MF_SKULLFLY;
     tmthing.momx := 0;
     tmthing.momy := 0;
     tmthing.momz := 0;
@@ -1116,6 +1116,7 @@ var
           result := false;
           exit;
         end;
+
       // JVAL: Spawn puff to lower textures.
         if G_NeedsCompatibilityMode then
         begin
@@ -1124,8 +1125,10 @@ var
           if zoffs > dist div 2 then
             zoffs := dist div 2;
           P_SpawnPuff(x, y, z + zoffs);
+
           P_RestoreRandom;
           result := false;
+
           exit;
         end;
       end;
@@ -1558,7 +1561,7 @@ begin
   begin
     P_SetMobjState(thing, S_GIBS);
 
-    thing.flags := thing.flags and (not MF_SOLID);
+    thing.flags := thing.flags and not MF_SOLID;
     thing.height := 0;
     thing.radius := 0;
 
@@ -1590,25 +1593,20 @@ begin
   begin
     P_DamageMobj(thing, nil, nil, 10);
 
-    if G_PlayingEngineVersion >= VERSION115 then
+    if (thing.flags and MF_NOBLOOD <> 0) or
+       (thing.flags_ex and MF_EX_INVULNERABLE <> 0) then
     begin
-
-		  if (thing.flags and MF_NOBLOOD <> 0) or
-  			 (thing.flags_ex and MF_EX_INVULNERABLE <> 0) then
-        begin
-          result := true;
-          exit;
-        end;
-
-      plr := thing.player;
-      if plr <> nil then
-        if (plr.cheats and CF_GODMODE <> 0) or (plr.powers[Ord(pw_invulnerability)] <> 0) then
-        begin
-          result := true;
-          exit;
-        end;
-
+      result := true;
+      exit;
     end;
+
+    plr := thing.player;
+    if plr <> nil then
+      if (plr.cheats and CF_GODMODE <> 0) or (plr.powers[Ord(pw_invulnerability)] <> 0) then
+      begin
+        result := true;
+        exit;
+      end;
 
     // spray blood in a random direction
     // JVAL: player with custom blood color :)

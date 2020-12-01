@@ -496,12 +496,6 @@ type
     maxx: integer;
     xoffs: fixed_t;
     yoffs: fixed_t;
-
-    // leave pads for [minx-1] and [maxx+1]
-    top: Pvisindex_tArray;    // Now allocated dinamically!
-
-    // See above.
-    bottom: Pvisindex_tArray; // Now allocated dinamically!
   end;
   Pvisplane_t = ^visplane_t;
 
