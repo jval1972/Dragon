@@ -295,7 +295,6 @@ end;
 
 function gld_FrustumAngle: angle_t;
 var
- // floatangle: double;
   tilt: single;
 begin
   tilt := abs(viewplayer.lookdir / 2);
@@ -305,11 +304,10 @@ begin
   begin
     result := ANGLE_MAX;
     exit;
-  end;      
+  end;
 
   // ok, this is a gross hack that barely works...
   // but at least it doesn't overestimate too much...
-//  floatangle := ;
   result := round(ANG1 * (2.0 + (45.0 + (tilt / 1.9))));
   if result >= ANG180 then
     result := ANGLE_MAX;
