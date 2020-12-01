@@ -133,9 +133,7 @@ var
 
 var
   isinterpolateddisplay: boolean;
-{$IFDEF OPENGL}
   firstinterpolation: boolean;
-{$ENDIF}
 
 implementation
 
@@ -844,9 +842,7 @@ begin
 
   didinterpolations := false;
   isinterpolateddisplay := true;
-{$IFDEF OPENGL}
   firstinterpolation := true;
-{$ENDIF}
 
   // wait for new tics if needed
   repeat
@@ -879,9 +875,7 @@ begin
       begin
         didinterpolations := true;
         D_Display;
-{$IFDEF OPENGL}
         firstinterpolation := false;
-{$ENDIF}
       end;
     end;
   until lowtic >= gametic div ticdup + counts;
@@ -930,9 +924,7 @@ begin
   // Update display, next frame, with current state.
   if (not didinterpolations) or (Ord(gamestate) <> wipegamestate) then
   begin
-{$IFDEF OPENGL}
     firstinterpolation := true;
-{$ENDIF}
     D_Display;
   end;
 end;
@@ -950,9 +942,7 @@ begin
   G_Ticker;
   inc(gametic);
   inc(maketic);
-  {$IFDEF OPENGL}
   firstinterpolation := true;
-  {$ENDIF}
   D_Display;
 end;
 

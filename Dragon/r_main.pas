@@ -230,11 +230,9 @@ function R_GetColormap32(const cmap: PByteArray): PLongWordArray;
 
 procedure R_Ticker;
 
-{$IFDEF OPENGL}
 var
   viewpitch: integer;
   absviewpitch: integer;
-{$ENDIF}
 
 implementation
 
@@ -725,17 +723,9 @@ begin
   begin
     scaledviewwidth := (setblocks * SCREENWIDTH div 10) and (not 7);
     if setblocks = 10 then
-    {$IFDEF OPENGL}
       viewheight := trunc(ST_Y * SCREENHEIGHT / 200)
-    {$ELSE}
-      viewheight := V_PreserveY(ST_Y)
-    {$ENDIF}
     else
-    {$IFDEF OPENGL}
       viewheight := (setblocks * trunc(ST_Y * SCREENHEIGHT / 2000)) and (not 7);
-    {$ELSE}
-      viewheight := (setblocks * V_PreserveY(ST_Y) div 10) and (not 7);
-    {$ENDIF}
   end;
 
   viewwidth := scaledviewwidth;
@@ -750,14 +740,7 @@ begin
   if olddetail <> setdetail then
   begin
     olddetail := setdetail;
-{$IFDEF OPENGL}
-{    if setdetail < DL_NORMAL then
-      videomode := vm8bit
-    else}
-      videomode := vm32bit;
-{$ELSE}
-    R_SetRenderingFunctions;
-{$ENDIF}
+    videomode := vm32bit;
   end;
 
   R_InitBuffer(scaledviewwidth, viewheight);
@@ -871,29 +854,17 @@ end;
 
 procedure R_CmdScreenWidth;
 begin
-  {$IFDEF OPENGL}
   printf('ScreenWidth = %d.'#13#10, [SCREENWIDTH]);
-  {$ELSE}
-  printf('ScreenWidth = %d.'#13#10, [WINDOWWIDTH]);
-  {$ENDIF}
 end;
 
 procedure R_CmdScreenHeight;
 begin
-  {$IFDEF OPENGL}
   printf('ScreenHeight = %d.'#13#10, [SCREENHEIGHT]);
-  {$ELSE}
-  printf('ScreenHeight = %d.'#13#10, [WINDOWHEIGHT]);
-  {$ENDIF}
 end;
 
 procedure R_CmdClearCache;
 begin
-  {$IFDEF OPENGL}
   gld_ClearTextureMemory;
-  {$ELSE}
-  R_Clear32Cache;
-  {$ENDIF}
   Z_FreeTags(PU_CACHE, PU_CACHE);
   printf('Texture cache clear'#13#10);
 end;
@@ -958,10 +929,8 @@ begin
   R_ResetInterpolationBuffer;
   printf(#13#10 + 'R_FreeMemory');
   R_FreeMemory;
-{$IFDEF OPENGL}
   printf(#13#10 + 'R_ShutDownOpenGL');
   R_ShutDownOpenGL;
-{$ENDIF}  
   printf(#13#10);
 end;
 
@@ -1077,7 +1046,6 @@ begin
   end;
 
 end;
-
 
 //
 // R_SetupFrame

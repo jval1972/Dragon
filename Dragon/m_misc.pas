@@ -73,11 +73,7 @@ uses
   m_argv,
   m_defs,
   i_system,
-{$IFDEF OPENGL}
   gl_main,
-{$ELSE}
-  i_video,
-{$ENDIF}
   z_zone,
   d_sshot,
   i_tmp;
@@ -209,7 +205,7 @@ begin
   buffer[14] := SCREENHEIGHT and 255;
   buffer[15] := SCREENHEIGHT div 256;
   buffer[16] := 32;  // pixel size
-  buffer[17] := {$IFDEF OPENGL}0{$ELSE}32{$ENDIF};  // Origin in upper left-hand corner.
+  buffer[17] := 0;  // Origin in upper left-hand corner.
 
   src := @buffer[18];
 

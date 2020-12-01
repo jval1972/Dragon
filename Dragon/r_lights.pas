@@ -62,10 +62,8 @@ procedure R_CmdLightBoostFactor(const parm1: string = '');
 
 implementation
 
-{$IFDEF OPENGL}
 uses
   gl_lights;
-{$ENDIF}
 
 //
 // R_InitLightBoost
@@ -93,7 +91,7 @@ begin
           c := 0
         else
           c := 255 - c;
-        lightboost[i * LIGHTBOOSTSIZE + j] := $10000 + c * {$IFDEF OPENGL}GL_LIGHTBOOSTFACTOR{$ELSE}lightboostfactor{$ENDIF};
+        lightboost[i * LIGHTBOOSTSIZE + j] := $10000 + c * GL_LIGHTBOOSTFACTOR;
         if j < lighboostlookup[i].topdelta then
           lighboostlookup[i].topdelta := j;
       end

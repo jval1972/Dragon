@@ -106,10 +106,6 @@ function R_FakeFlat(sec: Psector_t; tempsec: Psector_t;
   floorlightlevel, ceilinglightlevel: PSmallInt; back: boolean): Psector_t;
 var
   secheight: Psector_t;
-{$IFDEF OPENGL}
-  heightsec: integer;
-  underwater: boolean;
-{$ENDIF}
 
   function notback1: boolean;
   begin
@@ -134,139 +130,6 @@ begin
     else
       ceilinglightlevel^ := sectors[sec.ceilinglightsec].lightlevel;
   end;
-  result := sec;
-  exit; // JVAL: WOLF!  
-{$IFDEF OPENGL}
- // underwater := false;
-
-  if sec.heightsec <> -1 then
-  begin
-    secheight := @sectors[sec.heightsec];
-    heightsec := Psubsector_t(viewplayer.mo.subsector).sector.heightsec;
-    underwater := (heightsec <> -1) and (viewz <= sectors[heightsec].floorheight);
-
-    // Replace sector being drawn, with a copy to be hacked
-    tempsec^ := sec^;
-
- {   test
-    if underwater then
-    begin
-      tempsec.ceilingpic := tempsec.floorpic;
-      tempsec.ceilingheight := secheight.floorheight - 1;
-    end
-    else
-      tempsec.floorheight := secheight.floorheight;
-
-     result := tempsec;
-    exit;  }
-
-    tempsec.floorheight := secheight.floorheight;
-    tempsec.ceilingheight := secheight.ceilingheight;
-
-
-    // Replace floor and ceiling height with other sector's heights.
-{    if underwater then
-    begin
-      tempsec.floorheight := sec.floorheight;
-      tempsec.ceilingheight := s.floorheight - 1;
-    end
-    else
-    begin
-      tempsec.floorheight := s.floorheight;
-      tempsec.ceilingheight := s.ceilingheight;
-    end;}
-
-    if (underwater and notback1) or (viewz <= secheight.floorheight) then
-    begin                   // head-below-floor hack
-      tempsec.floorpic := secheight.floorpic;
-      tempsec.floor_xoffs := secheight.floor_xoffs;
-      tempsec.floor_yoffs := secheight.floor_yoffs;
-
-      if underwater then
-      begin
-        if secheight.ceilingpic = skyflatnum then
-        begin
-          tempsec.floorheight := tempsec.ceilingheight + 1;
-          tempsec.ceilingpic := tempsec.floorpic;
-          tempsec.ceiling_xoffs := tempsec.floor_xoffs;
-          tempsec.ceiling_yoffs := tempsec.floor_yoffs;
-        end
-        else
-        begin
-          tempsec.ceilingpic := secheight.ceilingpic;
-          tempsec.ceiling_xoffs := secheight.ceiling_xoffs;
-          tempsec.ceiling_yoffs := secheight.ceiling_yoffs;
-        end;
-      end;
-
-      tempsec.lightlevel  := secheight.lightlevel;
-
-      if floorlightlevel <> nil then
-      begin
-        if secheight.floorlightsec = -1 then
-          floorlightlevel^ := secheight.lightlevel
-        else
-          floorlightlevel^ := sectors[secheight.floorlightsec].lightlevel; // killough 3/16/98
-      end;
-
-      if ceilinglightlevel <> nil then
-      begin
-        if secheight.ceilinglightsec = -1 then
-          ceilinglightlevel^ := secheight.lightlevel
-        else
-          ceilinglightlevel^ := sectors[secheight.ceilinglightsec].lightlevel; // killough 4/11/98
-      end;
-
-    end
-    else
-    begin
-      if (heightsec <> -1) and (viewz >= sectors[heightsec].ceilingheight) and
-         (sec.ceilingheight > secheight.ceilingheight) then
-      begin   // Above-ceiling hack
-        tempsec.ceilingheight := secheight.ceilingheight;
-        tempsec.floorheight := secheight.ceilingheight + 1;
-
-        tempsec.ceilingpic := secheight.ceilingpic;
-        tempsec.ceiling_xoffs := secheight.ceiling_xoffs;
-        tempsec.ceiling_yoffs := secheight.ceiling_yoffs;
-
-        if secheight.floorpic <> skyflatnum then
-        begin
-          tempsec.ceilingheight := sec.ceilingheight;
-          tempsec.floorpic := secheight.floorpic;
-          tempsec.floor_xoffs := secheight.floor_xoffs;
-          tempsec.floor_yoffs := secheight.floor_yoffs;
-        end
-        else
-        begin
-          tempsec.floorpic := secheight.ceilingpic;
-          tempsec.floor_xoffs := secheight.ceiling_xoffs;
-          tempsec.floor_yoffs := secheight.ceiling_yoffs;
-        end;
-
-        tempsec.lightlevel := secheight.lightlevel;
-
-        if floorlightlevel <> nil then
-        begin
-          if secheight.floorlightsec = -1 then
-            floorlightlevel^ := secheight.lightlevel
-          else
-            floorlightlevel^ := sectors[secheight.floorlightsec].lightlevel; // killough 3/16/98
-        end;
-
-        if ceilinglightlevel <> nil then
-        begin
-          if secheight.ceilinglightsec = -1 then
-            ceilinglightlevel^ := secheight.lightlevel
-          else
-            ceilinglightlevel^ := sectors[secheight.ceilinglightsec].lightlevel; // killough 4/11/98
-        end;
-
-      end;
-    end;
-    sec := tempsec;               // Use other sector
-  end;
-{$ENDIF}
   result := sec;
 end;
 
@@ -343,7 +206,6 @@ end;
 var
   tempsec: sector_t;     // killough 3/8/98: ceiling/water hack
 
-{$IFDEF OPENGL}
 var
   tempsec_back, tempsec_front: sector_t;
 
@@ -413,7 +275,6 @@ begin
   result := false;
 end;
 
-{$ENDIF}
 //
 // R_AddLine
 // Clips the given segment
@@ -550,14 +411,6 @@ var
   angle1: angle_t;
   angle2: angle_t;
   pcoord: PIntegerArray;
-{$IFNDEF OPENGL}
-  span: angle_t;
-  tspan: angle_t;
-  clipangle2: angle_t;
-  start: Pcliprange_t;
-  sx1: integer;
-  sx2: integer;
-{$ENDIF}
 begin
   if side = 0 then
     bspcoord := bspcoordA
@@ -593,91 +446,9 @@ begin
   x2 := bspcoord[pcoord[2]];
   y2 := bspcoord[pcoord[3]];
 
-{$IFDEF OPENGL}
   angle1 := R_PointToAngle(x1, y1);
   angle2 := R_PointToAngle(x2, y2);
   result := gld_clipper_SafeCheckRange(angle2, angle1);
-  exit;
-{$ELSE}
-  // check clip list for an open space
-  angle1 := R_PointToAngle(x1, y1) - viewangle;
-  angle2 := R_PointToAngle(x2, y2) - viewangle;
-
-  span := angle1 - angle2;
-
-  // Sitting on a line?
-  if span >= ANG180 then
-  begin
-    result := true;
-    exit;
-  end;
-
-  tspan := angle1 + clipangle;
-  clipangle2 := 2 * clipangle;
-  if tspan > clipangle2 then
-  begin
-    tspan := tspan - clipangle2;
-
-    // Totally off the left edge?
-    if tspan >= span then
-    begin
-      result := false;
-      exit;
-    end;
-
-    angle1 := clipangle;
-  end;
-
-  tspan := clipangle - angle2;
-  if tspan > clipangle2 then
-  begin
-    tspan := tspan - clipangle2;
-
-    // Totally off the left edge?
-    if tspan >= span then
-    begin
-      result := false;
-      exit;
-    end;
-
-    angle2 := -clipangle;
-  end;
-
-
-  // Find the first clippost
-  //  that touches the source post
-  //  (adjacent pixels are touching).
-  {$IFDEF FPC}
-  angle1 := _SHRW(angle1 + ANG90, ANGLETOFINESHIFT);
-  angle2 := _SHRW(angle2 + ANG90, ANGLETOFINESHIFT);
-  {$ELSE}
-  angle1 := (angle1 + ANG90) shr ANGLETOFINESHIFT;
-  angle2 := (angle2 + ANG90) shr ANGLETOFINESHIFT;
-  {$ENDIF}
-
-  sx1 := viewangletox[angle1];
-  sx2 := viewangletox[angle2];
-
-  // Does not cross a pixel.
-  if sx1 = sx2 then
-  begin
-    result := false;
-    exit;
-  end;
-
-  dec(sx2);
-
-  start := @solidsegs[0];
-  while start.last < sx2 do
-    inc(start);
-
-  if (sx1 >= start.first) and
-     (sx2 <= start.last) then
-    // The clippost contains the new span.
-    result := false
-  else
-    result := true;
-{$ENDIF}
 end;
 
 //
@@ -710,10 +481,8 @@ begin
   // killough 3/8/98, 4/4/98: Deep water / fake ceiling effect
   frontsector := R_FakeFlat(frontsector, @tempsec,
     @floorlightlevel, @ceilinglightlevel, false);   // killough 4/11/98
-{$IFDEF OPENGL}
   frontsector.floorlightlevel := floorlightlevel;
   frontsector.ceilinglightlevel := ceilinglightlevel;
-{$ENDIF}  
 
   if (frontsector.floorheight < viewz) or
      ((frontsector.heightsec <> -1) and

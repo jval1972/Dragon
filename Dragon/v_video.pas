@@ -1299,10 +1299,10 @@ var
 begin
   // initialize translation tables
   for i := 0 to 319 do
-    preserveX[i] := trunc(i * {$IFDEF OPENGL}V_GetScreenWidth(SCN_FG){$ELSE}SCREENWIDTH{$ENDIF} / 320);
+    preserveX[i] := trunc(i * V_GetScreenWidth(SCN_FG) / 320);
 
   for i := 0 to 199 do
-    preserveY[i] := trunc(i * {$IFDEF OPENGL}V_GetScreenHeight(SCN_FG){$ELSE}SCREENHEIGHT{$ENDIF} / 200);
+    preserveY[i] := trunc(i * V_GetScreenHeight(SCN_FG) / 200);
 end;
 
 //

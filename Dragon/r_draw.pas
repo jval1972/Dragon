@@ -106,9 +106,7 @@ uses
   z_zone,
   st_stuff,
   i_system,
-{$IFDEF OPENGL}
   gl_render,
-{$ENDIF}
 // State.
   doomstat,
   v_data;

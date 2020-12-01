@@ -1084,13 +1084,7 @@ begin
     if flatpresent[i] <> 0 then
     begin
       lump := R_GetLumpForFlat(i);
-{$IFDEF OPENGL}
       W_CacheLumpNum(lump, PU_CACHE);
-{$ELSE}
-      flat := W_CacheLumpNum(lump, PU_STATIC);
-      R_ReadDS32Cache(i);
-      Z_ChangeTag(flat, PU_CACHE);
-{$ENDIF}
       flatmemory := flatmemory + lumpinfo[lump].size;
     end;
   end;

@@ -347,11 +347,7 @@ begin
   newfullscreen := C_BoolEval(parm1, fullscreen);
 
   if newfullscreen <> fullscreen then
-  {$IFDEF OPENGL}
     GL_ChangeFullScreen(newfullscreen);
-  {$ELSE}
-    I_ChangeFullScreen;
-  {$ENDIF}
   R_CmdFullScreen;
 end;
 
@@ -415,11 +411,7 @@ begin
   if useexternaltextures <> new_useexternaltextures then
   begin
     useexternaltextures := new_useexternaltextures;
-    {$IFDEF OPENGL}
     gld_ClearTextureMemory;
-    {$ELSE}
-    R_Clear32Cache;
-    {$ENDIF}
   end;
   R_CmdUseExternalTextures;
 end;

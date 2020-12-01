@@ -3,26 +3,21 @@ File_0=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\d_main.pas',0,1,963
 File_1=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Base\dl_form.pas',0,1,62,51,72,0,0
 File_2=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\OPENGL\gl_terrain.pas',0,1,1,18,22,0,0
 File_3=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\r_main.pas',0,1,254,3,272,0,0
-File_4=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\r_plane.pas',0,1,69,3,84,0,0
-File_5=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\r_things.pas',0,1,37,1,37,0,0
-File_6=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\st_stuff.pas',0,1,112,4,122,0,0
-File_7=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\c_con.pas',0,1,78,3,90,0,0
-File_8=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\i_music.pas',0,1,88,3,92,0,0
-File_9=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\r_bsp.pas',0,1,67,3,78,0,0
+File_4=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\r_things.pas',0,1,37,1,37,0,0
+File_5=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\st_stuff.pas',0,1,112,4,122,0,0
+File_6=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\c_con.pas',0,1,78,3,90,0,0
+File_7=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\i_music.pas',0,1,88,3,92,0,0
+File_8=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\r_bsp.pas',0,1,67,3,78,0,0
 
 [Modules]
-Module0=F:\DelphiDoom_Release\Dragon\Src\OPENGL\gl_render.pas
-Module1=F:\DelphiDoom_Release\Dragon\Src\Dragon\m_defs.pas
-Module2=F:\DelphiDoom_Release\Dragon\Src\dragon.dpr
-Count=3
+Module0=F:\DelphiDoom_Release\Dragon\Src\Dragon\r_plane.pas
+Module1=F:\DelphiDoom_Release\Dragon\Src\dragon.dpr
+Module2=F:\DelphiDoom_Release\Dragon\Src\Dragon\m_defs.pas
+Module3=F:\DelphiDoom_Release\Dragon\Src\OPENGL\gl_render.pas
+Count=4
 EditWindowCount=1
 
-[F:\DelphiDoom_Release\Dragon\Src\OPENGL\gl_render.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[F:\DelphiDoom_Release\Dragon\Src\Dragon\m_defs.pas]
+[F:\DelphiDoom_Release\Dragon\Src\Dragon\r_plane.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -32,16 +27,27 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
+[F:\DelphiDoom_Release\Dragon\Src\Dragon\m_defs.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[F:\DelphiDoom_Release\Dragon\Src\OPENGL\gl_render.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
 [C:\Program Files (x86)\Borland\Delphi7\Projects\ProjectGroup1.bpg]
 FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=3
-CurrentView=0
+ViewCount=4
+CurrentView=3
 View0=0
 View1=1
 View2=2
+View3=3
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -67,8 +73,8 @@ BottomPanelData=0000040000000000000000000000000000000000000000000001000000000000
 
 [View0]
 Module=F:\DelphiDoom_Release\Dragon\Src\OPENGL\gl_render.pas
-CursorX=29
-CursorY=1574
+CursorX=23
+CursorY=1674
 TopLine=1664
 LeftCol=1
 
@@ -76,14 +82,21 @@ LeftCol=1
 Module=F:\DelphiDoom_Release\Dragon\Src\Dragon\m_defs.pas
 CursorX=1
 CursorY=7
-TopLine=26
+TopLine=1
 LeftCol=1
 
 [View2]
 Module=F:\DelphiDoom_Release\Dragon\Src\dragon.dpr
-CursorX=5
-CursorY=258
-TopLine=246
+CursorX=38
+CursorY=233
+TopLine=226
+LeftCol=1
+
+[View3]
+Module=F:\DelphiDoom_Release\Dragon\Src\Dragon\r_plane.pas
+CursorX=1
+CursorY=207
+TopLine=90
 LeftCol=1
 
 [Watches]

@@ -213,12 +213,12 @@ const
 
 function HU_TITLEY: integer;
 begin
-  result := {$IFDEF OPENGL}V_GetScreenHeight(SCN_FG) * 167 div 200{$ELSE}167{$ENDIF} - hu_font[0].height;
+  result := V_GetScreenHeight(SCN_FG) * 167 div 200 - hu_font[0].height;
 end;
 
 function HU_LEVELTIMEY: integer;
 begin
-  result := {$IFDEF OPENGL}V_GetScreenHeight(SCN_FG) * 167 div 200{$ELSE}167{$ENDIF} - 2 * hu_font[0].height;
+  result := V_GetScreenHeight(SCN_FG) * 167 div 200 - 2 * hu_font[0].height;
 end;
 
 const

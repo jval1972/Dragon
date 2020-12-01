@@ -259,9 +259,7 @@ type
 
     // thinker_t for reversable actions
     specialdata: pointer;
-    {$IFDEF OPENGL}
     renderflags: integer;
-    {$ENDIF}
   end;
   Pline_t = ^line_t;
   PPline_t = ^Pline_t;
@@ -307,11 +305,9 @@ type
     // backsector is NULL for one sided lines
     frontsector: Psector_t;
     backsector: Psector_t;
-{$IFDEF OPENGL}
     length: single;
     iSegID: integer;
     miniseg: boolean;
-{$ENDIF}
   end;
   Pseg_t = ^seg_t;
   seg_tArray = packed array[0..$FFFF] of seg_t;
@@ -475,16 +471,7 @@ type
   spritedef_tArray = packed array[0..$FFFF] of spritedef_t;
   Pspritedef_tArray = ^spritedef_tArray;
 
-const
-  VISEND = $FFFF;
-  iVISEND = integer($FFFFFFFF);
-
 type
-  visindex_t = word;
-  Pvisindex_t = ^visindex_t;
-  visindex_tArray = packed array[-1..$FFFF] of visindex_t;
-  Pvisindex_tArray = ^visindex_tArray;
-
 //
 // Now what is a visplane, anyway?
 //
@@ -554,8 +541,6 @@ type
     name: char8_t;
     width: smallint;
     height: smallint;
-    factorbits: integer;
-
     // All the patches[patchcount]
     //  are drawn back to front into the cached texture.
     patchcount: smallint;

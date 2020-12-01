@@ -54,9 +54,7 @@ uses
   info_h,
   rtl_types,
   sc_engine,
-  {$IFDEF OPENGL}
   sc_states,
-  {$ENDIF}
   w_wad;
 
 var
@@ -477,9 +475,7 @@ var
   procedure SubmitParsedData;
   var
     cnt: integer;
-    {$IFDEF OPENGL}
     stateprefix: string;
-    {$ENDIF}
   begin
     res := '';
     AddRes('NewThing ' + mobj.name);
@@ -538,14 +534,10 @@ var
       if m_states[numstates - 1].nextstate = numstates then
         m_states[numstates - 1].nextstate := numstates - 1;
 
-      {$IFDEF OPENGL}
       stateprefix := 'S_' + strupper(mobj.name);
-      {$ENDIF}
       for cnt := 0 to numstates - 1 do
       begin
-      {$IFDEF OPENGL}
         statenames.Add(stateprefix + itoa(cnt));
-      {$ENDIF}
         AddRes('Frame NewFrame ' + itoa(cnt));
         AddRes('Sprite Number = ' + m_states[cnt].sprite);
         if m_states[cnt].bright then
@@ -1008,9 +1000,7 @@ var
   p: integer;
   lumplist: TDNumberList;
 begin
-  {$IFDEF OPENGL}
   SC_ParseStatedefLump;
-  {$ENDIF}
 // JVAL
 // Retrive sndinfo lumps for sound alias list
   sound_tx := '';
@@ -1073,17 +1063,13 @@ end;
 procedure SC_Init;
 begin
   soundaliases := TDStringList.Create;
-  {$IFDEF OPENGL}
   statenames := TDStringList.Create;
-  {$ENDIF}
 end;
 
 procedure SC_ShutDown;
 begin
   soundaliases.Free;
-  {$IFDEF OPENGL}
   statenames.Free;
-  {$ENDIF}
 end;
 
 end.

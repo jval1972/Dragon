@@ -92,12 +92,8 @@ uses
   w_wad,
   info,
   info_h,
-{$IFDEF OPENGL}
   gl_main,
   gl_render,
-{$ELSE}
-  i_video,
-{$ENDIF}
   g_game,
   st_lib,
   p_local,
@@ -1276,11 +1272,7 @@ begin
   if palette <> st_palette then
   begin
     st_palette := palette;
-    {$IFDEF OPENGL}
     gld_SetPalette(palette);
-    {$ELSE}
-    R_SetPalette(palette);
-    {$ENDIF}
     p := W_CacheLumpNum(lu_palette, PU_STATIC);
     pal := PByteArray(integer(p) + palette * 768);
     I_SetPalette(pal);

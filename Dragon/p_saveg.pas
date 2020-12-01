@@ -305,9 +305,7 @@ begin
       sec.ceiling_yoffs := 0;
     end;
     sec.touching_thinglist := nil;
-    {$IFDEF OPENGL}
     sec.iSectorID := i;
-    {$ENDIF}
     inc(i);
   end;
 

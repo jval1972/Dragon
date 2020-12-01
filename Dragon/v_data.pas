@@ -66,28 +66,16 @@ type
   end;
 
 const
-{$IFDEF OPENGL}
-{  GLDRAWWIDTH = 512;
-  GLDRAWHEIGHT = 320;
-  GLDRAWTEXWIDTH = 512;
-  GLDRAWTEXHEIGHT = 512;  }
   GLDRAWWIDTH = 1024;
   GLDRAWHEIGHT = 768;
   GLDRAWTEXWIDTH = 1024;
   GLDRAWTEXHEIGHT = 1024;
-{$ENDIF}
 
   FIXED_DIMENTIONS: array[SCN_320x200..SCN_ST] of screendimention_t = (
     (width: 320; height: 200; depth: 1),
-    {$IFDEF OPENGL}
     (width: GLDRAWWIDTH; height: GLDRAWHEIGHT; depth: 1),
     (width: GLDRAWWIDTH; height: GLDRAWHEIGHT; depth: 1),
     (width: GLDRAWWIDTH; height: GLDRAWHEIGHT; depth: 1),
-    {$ELSE}
-    (width:  -1; height:  -1; depth: 1),
-    (width:  -1; height:  -1; depth: 1),
-    (width:  -1; height:  -1; depth: 1),
-    {$ENDIF}
     (width: 320; height: 200; depth: 1),
     (width: 320; height:  32; depth: 1)
   );

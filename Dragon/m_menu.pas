@@ -460,11 +460,7 @@ var
 // DISPLAY MENU
 type
   optionsdisplay_e = (
-{$IFDEF OPENGL}
     od_opengl,
-{$ELSE}
-    od_detail,
-{$ENDIF}
     od_appearance,
     od_advanced,
     od_32bitsetup,
@@ -535,7 +531,6 @@ var
   OptionsDisplay32bitMenu: array[0..Ord(optdisp32bit_end) - 1] of menuitem_t;
   OptionsDisplay32bitDef: menu_t;
 
-{$IFDEF OPENGL}
 // DISPLAY OPENGL RENDERING MENU
 type
   optionsdisplayopengl_e = (
@@ -558,7 +553,6 @@ type
 var
   OptionsDisplayOpenGLMenu: array[0..Ord(optdispopengl_end) - 1] of menuitem_t;
   OptionsDisplayOpenGLDef: menu_t;
-{$ENDIF}
 
 type
 //
@@ -1035,12 +1029,10 @@ begin
   M_SetupNextMenu(@OptionsDisplay32bitDef);
 end;
 
-{$IFDEF OPENGL}
 procedure M_OptionsDisplayOpenGL(choice: integer);
 begin
   M_SetupNextMenu(@OptionsDisplayOpenGLDef);
 end;
-{$ENDIF}
 
 procedure M_SfxVol(choice: integer);
 begin
@@ -1193,11 +1185,7 @@ var
   stmp: string;
 begin
   M_DrawDisplayOptions;
-  {$IFDEF OPENGL}
   sprintf(stmp, 'Detail level: %s (%dx%dx32)', [detailStrings[detailLevel], SCREENWIDTH, SCREENHEIGHT]);
-  {$ELSE}
-  sprintf(stmp, 'Detail level: %s (%dx%dx%s)', [detailStrings[detailLevel], WINDOWWIDTH, WINDOWHEIGHT, colordepths[videomode = vm32bit]]);
-  {$ENDIF}
   M_WriteText(OptionsDisplayDetailDef.x, OptionsDisplayDetailDef.y + OptionsDisplayDetailDef.itemheight * Ord(od_detaillevel), stmp);
 end;
 
@@ -1219,12 +1207,10 @@ begin
     'Flat filtering: ' + flatfilteringstrings[extremeflatfiltering]);
 end;
 
-{$IFDEF OPENGL}
 procedure M_DrawOptionsDisplayOpenGL;
 begin
   M_DrawDisplayOptions;
 end;
-{$ENDIF}
 
 procedure M_Options(choice: integer);
 begin
@@ -1526,11 +1512,7 @@ begin
         begin
           if m_altdown then
           begin
-          {$IFDEF OPENGL}
             GL_ChangeFullScreen(not fullscreen);
-          {$ELSE}
-            I_ChangeFullScreen;
-          {$ENDIF}
             result := true;
             exit;
           end;
@@ -1711,13 +1693,8 @@ function M_Thr_ShadeScreen(p: pointer): integer; stdcall;
 var
   half: integer;
 begin
-{$IFDEF OPENGL}
   half := V_GetScreenWidth(SCN_FG) * V_GetScreenHeight(SCN_FG) div 2;
   V_ShadeBackground(half, V_GetScreenWidth(SCN_FG) * V_GetScreenHeight(SCN_FG) - half);
-{$ELSE}
-  half := SCREENWIDTH * SCREENHEIGHT div 2;
-  V_ShadeScreen(SCN_FG, half, SCREENWIDTH * SCREENHEIGHT - half);
-{$ENDIF}
   result := 0;
 end;
 
@@ -1731,20 +1708,12 @@ begin
     begin
     // JVAL
       h1 := I_CreateProcess(@M_Thr_ShadeScreen, nil);
-      {$IFDEF OPENGL}
       V_ShadeBackground(0, V_GetScreenWidth(SCN_FG) * V_GetScreenHeight(SCN_FG) div 2);
-      {$ELSE}
-      V_ShadeScreen(SCN_FG, 0, SCREENWIDTH * SCREENHEIGHT div 2);
-      {$ENDIF}
       // Wait for extra thread to terminate.
       I_WaitForProcess(h1);
     end
     else
-      {$IFDEF OPENGL}
       V_ShadeBackground;
-      {$ELSE}
-      V_ShadeScreen(SCN_FG);
-      {$ENDIF}
   end;
 end;
 
@@ -1928,12 +1897,10 @@ begin
   M_CmdSetupNextMenu(@OptionsDisplay32bitDef);
 end;
 
-{$IFDEF OPENGL}
 procedure M_CmdOptionsDisplayOpenGL;
 begin
   M_CmdSetupNextMenu(@OptionsDisplayOpenGLDef);
 end;
-{$ENDIF}
 
 procedure M_CmdMenuSoundDef;
 begin
@@ -2048,11 +2015,7 @@ begin
   C_AddCmd('menu_optionsdisplayappearence, menu_displayappearenceoptions, menu_displayappearence', @M_CmdMenuOptionsDisplayAppearanceDef);
   C_AddCmd('menu_optionsdisplayadvanced, menu_displayadvancedoptions, menu_displayadvanced', @M_CmdMenuOptionsDisplayAdvancedDef);
   C_AddCmd('menu_optionsdisplay32bit, menu_display32bitoptions, menu_display32bit', @M_CmdMenuOptionsDisplay32bitDef);
-{$IFDEF OPENGL}
   C_AddCmd('menu_optionsdisplayopengl, menu_optionsopengl, menu_opengl', @M_CmdOptionsDisplayOpenGL);
-{$ELSE}
-  C_AddCmd('menu_optionsdisplaydetail, menu_displaydetailoptions', @M_CmdMenuOptionsDisplayDetailDef);
-{$ENDIF}
   C_AddCmd('menu_optionssound, menu_soundoptions, menu_sound', @M_CmdMenuSoundDef);
   C_AddCmd('menu_optionssoundvol, menu_soundvoloptions, menu_soundvol', @M_CmdMenuSoundVolDef);
   C_AddCmd('menu_optionscompatibility, menu_compatibilityoptions, menu_compatibility', @M_CmdMenuCompatibilityDef);
@@ -2375,19 +2338,11 @@ begin
 //OptionsDisplayMenu
   pmi := @OptionsDisplayMenu[0];
   pmi.status := 1;
-{$IFDEF OPENGL}
   pmi.name := '@OpenGL';
   pmi.cmd := '';
   pmi.routine := @M_OptionsDisplayOpenGL;
   pmi.pBoolVal := nil;
   pmi.alphaKey := 'o';
-{$ELSE}
-  pmi.name := '@Detail';
-  pmi.cmd := '';
-  pmi.routine := @M_OptionsDisplayDetail;
-  pmi.pBoolVal := nil;
-  pmi.alphaKey := 'd';
-{$ENDIF}
 
   inc(pmi);
   pmi.status := 1;
@@ -2636,7 +2591,6 @@ begin
   OptionsDisplay32bitDef.lastOn := 0; // last item user was on in menu
   OptionsDisplay32bitDef.itemheight := LINEHEIGHT2;
 
-{$IFDEF OPENGL}
 ////////////////////////////////////////////////////////////////////////////////
 //OptionsDisplayOpenGLMenu
   pmi := @OptionsDisplayOpenGLMenu[0];
@@ -2754,7 +2708,6 @@ begin
   OptionsDisplayOpenGLDef.lastOn := 0; // last item user was on in menu
   OptionsDisplayOpenGLDef.itemheight := LINEHEIGHT2;
 
-{$ENDIF}
 ////////////////////////////////////////////////////////////////////////////////
 //ReadMenu1
   pmi := @ReadMenu1[0];

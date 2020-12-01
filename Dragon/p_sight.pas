@@ -200,10 +200,8 @@ begin
   for i := 0 to sub.numlines - 1 do
   begin
     inc(seg);
-    {$IFDEF OPENGL}
     if seg.miniseg then // JVAL: skip minisegs
       continue;
-    {$ENDIF}
 
     line := seg.linedef;
 

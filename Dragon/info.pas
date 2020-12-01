@@ -313,12 +313,10 @@ begin
   begin
     if states[i].params <> nil then
       FreeAndNil(states[i].params);
-{$IFDEF OPENGL}
     if states[i].dlights <> nil then
       FreeAndNil(states[i].dlights);
     if states[i].models <> nil then
       FreeAndNil(states[i].models);
-{$ENDIF}
   end;
 
   memfree(pointer(states), numstates * SizeOf(state_t));

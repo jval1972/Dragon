@@ -348,7 +348,7 @@ begin
   startlump := numlumps;
 
   ext := strupper(fext(filename));
-  if (ext <> '.WAD') and (ext <> '.DAT') {$IFDEF OPENGL} and (ext <> '.GWA'){$ENDIF} then
+  if (ext <> '.WAD') and (ext <> '.DAT') and (ext <> '.GWA') then
   begin
     // single lump file
     len := 0;

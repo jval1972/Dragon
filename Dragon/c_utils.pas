@@ -39,11 +39,7 @@ uses
   d_delphi,
   c_cmds,
   doomdef,
-{$IFDEF OPENGL}
   gl_main,
-{$ELSE}
-  i_video,
-{$ENDIF}
   i_system;
 
 procedure C_CmdDir(const parm1, parm2: string);
@@ -125,11 +121,7 @@ end;
 procedure C_CmdGoToWebPage(const parm: string);
 begin
   if fullscreen then
-  {$IFDEF OPENGL}
     GL_ChangeFullScreen(false);
-  {$ELSE}
-    I_ChangeFullScreen;
-  {$ENDIF}
   I_GoToWebPage(parm);
 end;
 

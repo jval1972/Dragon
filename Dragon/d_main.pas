@@ -259,9 +259,7 @@ var
 
 procedure D_Display;
 
-{$IFDEF OPENGL}
 procedure D_DisplayHU;
-{$ENDIF}
 var
   redrawsbar: boolean;
   palette: PByteArray;
@@ -278,21 +276,7 @@ begin
     R_ExecuteSetViewSize;
     oldgamestate := -1; // force background redraw
     borderdrawcount := 3;
-    {$IFDEF OPENGL}
-//    R_VideoBlanc(SCN_FG, 0,
-    {$ENDIF}
   end;
-
-{$IFNDEF OPENGL}
-  // save the current screen if about to wipe
-  if Ord(gamestate) <> wipegamestate then
-  begin
-    wipe := true;
-    wipe_StartScreen;
-  end
-  else
-    wipe := false;
-{$ENDIF}
 
   if (gamestate = GS_LEVEL) and (gametic <> 0) then
     HU_Erase;
@@ -371,7 +355,7 @@ begin
 
   // normal update
 end;
-{$IFDEF OPENGL}
+
 begin
   HU_DoFPSStuff;
   if firstinterpolation then
@@ -389,39 +373,26 @@ begin
   end;
   D_FinishUpdate; // page flip or blit buffer
 end;
-{$ENDIF}
 
 //
 //  D_GameLoop
 //
 
-{$IFDEF DEBUG}
-var
-  internalerrors: integer = 0;
-{$ENDIF}
-
 procedure D_GameLoop;
-{$IFNDEF DEBUG}
 var
   iscritical: boolean;
-{$ENDIF}
 begin
   if demorecording then
     G_BeginRecording;
 
   while true do
   begin
-{$IFDEF DEBUG}
-    try
-{$ENDIF}
     // frame syncronous IO operations
     I_StartFrame;
 
-{$IFNDEF DEBUG}
     iscritical := not usemultithread and not devparm and criticalcpupriority;
     if iscritical then
       I_SetCriticalCPUPriority;
-{$ENDIF}
 
     // process one or more tics
     if singletics then
@@ -429,19 +400,10 @@ begin
     else
       D_RunMultipleTicks; // will run at least one tick
 
-{$IFNDEF DEBUG}
     if iscritical then
       I_SetNormalCPUPriority;
-{$ENDIF}
 
     S_UpdateSounds(players[consoleplayer].mo);// move positional sounds
-
-{$IFDEF DEBUG}
-    except
-      inc(internalerrors);
-      fprintf(debugfile, 'Internal Error No %d'#13#10, [internalerrors]);
-    end;
-{$ENDIF}
   end;
 end;
 
