@@ -1,4 +1,35 @@
-{$I Doom32.inc}
+//
+//  Dragon
+//  A game for Windows based on a modified and improved version of the
+//  DelphiDoom engine
+//
+//  Copyright (C) 1993-1996 by id Software, Inc.
+//  Copyright (C) 2004-2020 by Jim Valavanis
+//
+//  This program is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU General Public License
+//  as published by the Free Software Foundation; either version 2
+//  of the License, or (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+//  02111-1307, USA.
+//
+//  DESCRIPTION:
+//    Terrain
+//
+//------------------------------------------------------------------------------
+//  Site  : https://sourceforge.net/projects/dragon-game/
+//------------------------------------------------------------------------------
+
+{$I dragon.inc}
+
 unit gl_terrain;
 
 interface
@@ -152,9 +183,11 @@ end;
 
 
 var
-  subdivisionlength: single;
 
-procedure MakeSubDivision(const x, y: integer);
+  subdivisionlength: single;
+
+
+procedure MakeSubDivision(const x, y: integer);
 
 var
 
@@ -228,7 +261,8 @@ begin
   avheight := 0;; // Average height for small list
 
   avcount := 0;
-
+
+
   underwaterdivision := false;
 
   // Create the full detail list
@@ -491,7 +525,8 @@ begin
   glEnd;
   glEndList;
 end;
-
+
+
 
 
 var
@@ -522,7 +557,8 @@ begin
 
   for iX := 0 to TerrainSubDivisions - 1 do
     for iY := 0 to TerrainSubDivisions - 1 do
-      MakeSubDivision(iX, iY);
+
+      MakeSubDivision(iX, iY);
 end;
 
 

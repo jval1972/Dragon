@@ -3,6 +3,8 @@
 //  Dragon
 //  A game for Windows based on a modified and improved version of the
 //  DelphiDoom engine
+//
+//  Copyright (C) 1993-1996 by id Software, Inc.
 //  Copyright (C) 2011 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
@@ -24,6 +26,7 @@
 //  E-Mail: jimmyvalavanis@yahoo.gr
 //  DelphiDoom Site: http://delphidoom.sitesled.com/
 //------------------------------------------------------------------------------
+
 {$IFDEF FPC}
 {$Error: Use you must use Delphi to compile this project.}
 {$ENDIF}

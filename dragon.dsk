@@ -11,22 +11,24 @@ File_8=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\i_music.pas',0,1,88
 File_9=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\r_bsp.pas',0,1,67,3,78,0,0
 
 [Modules]
-Module0=F:\DelphiDoom_Release\Dragon\Src\Dragon\m_defs.pas
-Module1=F:\DelphiDoom_Release\Dragon\Src\OPENGL\gl_render.pas
-Count=2
+Module0=F:\DelphiDoom_Release\Dragon\Src\OPENGL\gl_render.pas
+Module1=F:\DelphiDoom_Release\Dragon\Src\Dragon\m_defs.pas
+Module2=F:\DelphiDoom_Release\Dragon\Src\dragon.dpr
+Count=3
 EditWindowCount=1
-
-[F:\DelphiDoom_Release\Dragon\Src\Dragon\m_defs.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
 
 [F:\DelphiDoom_Release\Dragon\Src\OPENGL\gl_render.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
+[F:\DelphiDoom_Release\Dragon\Src\Dragon\m_defs.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
 [F:\DelphiDoom_Release\Dragon\Src\dragon.dpr]
+ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
@@ -35,10 +37,11 @@ FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=2
-CurrentView=1
+ViewCount=3
+CurrentView=0
 View0=0
 View1=1
+View2=2
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -64,16 +67,23 @@ BottomPanelData=0000040000000000000000000000000000000000000000000001000000000000
 
 [View0]
 Module=F:\DelphiDoom_Release\Dragon\Src\OPENGL\gl_render.pas
-CursorX=50
+CursorX=29
 CursorY=1574
-TopLine=1562
+TopLine=1664
 LeftCol=1
 
 [View1]
 Module=F:\DelphiDoom_Release\Dragon\Src\Dragon\m_defs.pas
-CursorX=13
-CursorY=361
-TopLine=349
+CursorX=1
+CursorY=7
+TopLine=26
+LeftCol=1
+
+[View2]
+Module=F:\DelphiDoom_Release\Dragon\Src\dragon.dpr
+CursorX=5
+CursorY=258
+TopLine=246
 LeftCol=1
 
 [Watches]

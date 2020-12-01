@@ -1,8 +1,10 @@
-//------------------------------------------------------------------------------
 //
-//  DelphiDoom: A modified and improved DOOM engine for Windows
-//  based on original Linux Doom as published by "id Software"
-//  Copyright (C) 2004-2009 by Jim Valavanis
+//  Dragon
+//  A game for Windows based on a modified and improved version of the
+//  DelphiDoom engine
+//
+//  Copyright (C) 1993-1996 by id Software, Inc.
+//  Copyright (C) 2004-2020 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -20,17 +22,16 @@
 //  02111-1307, USA.
 //
 // DESCRIPTION:
-//      Zone Memory Allocation, perhaps NeXT ObjectiveC inspired.
-//  Remark: this was the only stuff that, according
+//   Zone Memory Allocation, perhaps NeXT ObjectiveC inspired.
+//   Remark: this was the only stuff that, according
 //   to John Carmack, might have been useful for
 //   Quake.
 //
 //------------------------------------------------------------------------------
-//  E-Mail: jimmyvalavanis@yahoo.gr
-//  Site  : http://delphidoom.sitesled.com/
+//  Site  : https://sourceforge.net/projects/dragon-game/
 //------------------------------------------------------------------------------
 
-{$I Doom32.inc}
+{$I dragon.inc}
 
 unit z_zone;
 
