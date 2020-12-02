@@ -124,14 +124,14 @@ DLL=0
 Locale=1033
 CodePage=1252
 [Version Info Keys]
-CompanyName=
-FileDescription=
+CompanyName=Jim Valavanis
+FileDescription=Dragon game
 FileVersion=1.0.2.6
-InternalName=
-LegalCopyright=
-LegalTrademarks=
-OriginalFilename=
-ProductName=
+InternalName=Dragon
+LegalCopyright=(c) 2004-2020 by Jim Valavanis
+LegalTrademarks=(c) 2004-2020 by Jim Valavanis
+OriginalFilename=Dragon.exe
+ProductName=Dragon
 ProductVersion=1.0.0.0
 [HistoryLists\hlConditionals]
 Count=3
