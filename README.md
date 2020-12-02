@@ -50,23 +50,38 @@ CONTROLS
 --------
 
 IN GAME CONTROLS:
+
 -------+--------------------------------+
+
 Action | Control                        |
+
 -------+--------------------------------+
+
 MOVE   | arrows (up, down, left, right) |
+
 FIGHT  | CTRL                           |
+
 STRAFE | ALT ( + left/right arrow)      |
+
 MENU   | ESC                            |
+
 -------+--------------------------------+
 
 
 MENU CONTROLS:
+
 -------+--------------------------------+
+
 Action | Control                        |
+
 -------+--------------------------------+
+
 CLOSE  | ESC                            |
+
 SELECT | ENTER                          |
+
 MOVE   | up/down arrows                 |
+
 -------+--------------------------------+
 
 
@@ -77,9 +92,15 @@ Total controls used: 4 arrows + 4 buttons (ESC, ENTER, ALT, CTRL)
 PROGRAMMING
 -----------
 The game uses as a base a modified version of the DelphiDoom engine (version 1.1.3.489 beta - opengl mode). 
+
 Some of the new enhancements of the original engine are: 
+
 -Terrain with seamless integration with buildings!
+
 -Simple shadows. 
+
 -Sloped surfaces (eg the building's roofs, sloped floors).
+
 -Pushable objects and walls.
+
 
