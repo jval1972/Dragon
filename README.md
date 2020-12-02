@@ -5,6 +5,9 @@
 This is the entry of "Jimmy Valavanis" for the "1st PGD Challenge: Simple Controller"
 Post competition release.
 
+## Binaries
+[version 1.0.2.6 (20201202 - win32)](https://sourceforge.net/projects/dragon-game/files/Dragon_1.0/Dragon_1.0.2.6_win32.zip/download)
+
 ----------
 DISCLAIMER
 ----------
