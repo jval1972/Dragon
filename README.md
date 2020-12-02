@@ -40,19 +40,25 @@ SYSTEM REQUIREMENTS
 OS: Windows XP (SP2), Vista or 7
 
 Minimum Hardware: 
+
 1 GHz CPU
+
 512 MB RAM
+
 A video card with 128 MB VRAM, supporting 3D textures (GL_TEXTURE3D) and multitexturing with 3 texture units.
+
 The game will start with a low-end video card but some features will be disabled, also you may encounter poor 
 frame rate.
 
+
 Recommented:
+
 2 GHz CPU
+
 1024 MB RAM
+
 A modern fast video card - 256 MB VRAM
 
-If you encounter performance issues running the game, try using the RUN_LOWRES.cmd located in \bin folder 
-to start the game in lower screen resolution and with lower resolution textures.
 
 
 --------
