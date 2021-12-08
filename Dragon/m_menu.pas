@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2021 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -862,7 +862,7 @@ begin
     quickSaveSlot := -2;  // means to pick a slot now
     exit;
   end;
-  
+
   sprintf(tempstring, QSPROMPT + #13#10 + PRESSYN, [savegamestrings[quickSaveSlot]]);
   M_StartMessage(tempstring, @M_QuickSaveResponse, true);
 end;
@@ -957,7 +957,7 @@ procedure M_DrawControls;
 begin
   V_DrawPatch(108, 15, SCN_TMP, 'M_OPTTTL', false);
   M_WriteText(20, 48, 'Controls', 2 * FRACUNIT);
-                                   
+
   M_WriteText(ControlsDef.x, ControlsDef.y + ControlsDef.itemheight * Ord(ctrl_keyboardmodearrows), 'Use arrows for moving');
   M_WriteText(ControlsDef.x, ControlsDef.y + ControlsDef.itemheight * Ord(ctrl_keyboardmodewasd), 'Use WASD keys for moving');
 end;
@@ -2092,7 +2092,7 @@ begin
   pmi.cmd := '';
   pmi.routine := @M_Demo;
   pmi.pBoolVal := nil;
-  pmi.alphaKey := 'd';       
+  pmi.alphaKey := 'd';
 
 
   inc(pmi);

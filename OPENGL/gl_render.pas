@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2021 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -1621,7 +1621,7 @@ begin
     gld_CalculateSun;
     gld_DrawSun;
   end;
-  
+
   gld_Set2DMode;
 
 
@@ -2608,10 +2608,10 @@ var
   psl: Pdlsortitem_t;
 begin
   if sprite.dlights <> nil then
-    exit;    
+    exit;
   if sprite.models = nil then
     Exit;
-    
+
   xdist := camera.position[0] - sprite.x;
   ydist := camera.position[1] - sprite.y;
   zdist := camera.position[2] - sprite.z;
@@ -3078,7 +3078,7 @@ begin
   pSpr := vspr.mo;
   if (viewx < -3000 * FRACUNIT) and (viewy < -3000 * FRACUNIT) then
     if (pSpr.x < -3000 * FRACUNIT) and (pSpr.y > -500 * FRACUNIT) then
-      exit; 
+      exit;
   if (viewy > -500 * FRACUNIT) then
     if (pSpr.x < -3500 * FRACUNIT) and (pSpr.y < -3000 * FRACUNIT) then
       exit;

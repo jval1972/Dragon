@@ -159,7 +159,7 @@ begin
 
   if viewx > 0 then
     exit;
-    
+
   if not flareloaded then
   begin
     for i := 0 to 8 do

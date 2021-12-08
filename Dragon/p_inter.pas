@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2021 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -862,7 +862,7 @@ var
 begin
   if target.flags and MF_SHOOTABLE = 0 then
   begin
-  // 19/9/2009 jval: Display a warning message for debugging 
+  // 19/9/2009 jval: Display a warning message for debugging
     I_DevWarning('P_DamageMobj(): Trying to damage unshootable mobj "%s"'#13#10, [target.info.name]);
 //    target.tics := -1;
     exit; // shouldn't happen...

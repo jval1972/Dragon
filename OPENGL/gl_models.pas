@@ -549,7 +549,7 @@ begin
   numfloors3d := 0;
 
   in_text := W_TextLumpName(lumpname);
-  
+
   if devparm then
   begin
     printf('--------'#13#10);
@@ -579,10 +579,10 @@ begin
           floorp := @floors3d[numfloors3d];
 
           floorp.tri := false;
-          
+
           sc.MustGetString;
           floorp.texid := gld_AddModelTexture(strupper(sc._String));
-          
+
           for i := 0 to 3 do
           begin
             sc.MustGetInteger;
@@ -707,7 +707,7 @@ begin
       nverts := 4;
       glBegin(GL_QUADS);
     end;
-    
+
       glNormal3f(0.0, 1.0, 0.0);
 
       for j := 0 to nverts - 1 do
@@ -936,7 +936,7 @@ begin
       (frameNames.Objects[frameNames.Count - 1] as TFrameIndexInfo).StartFrame := (model.frameNames.Objects[i] as TFrameIndexInfo).StartFrame + fNumFrames;
       (frameNames.Objects[frameNames.Count - 1] as TFrameIndexInfo).EndFrame := (model.frameNames.Objects[i] as TFrameIndexInfo).EndFrame + fNumFrames;
   end;
-  
+
   realloc(pointer(TheVectorsArray),
     fNumFrames * SizeOf(PGLVertexArray),
     (model.fNumFrames + fNumFrames) * SizeOf(PGLVertexArray));

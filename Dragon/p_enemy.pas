@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2021 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -396,7 +396,7 @@ begin
     end;
     dist := _SHR1(dist);
   end;
-  
+
 
   if (actor._type = Ord(MT_CYBORG)) or
      (actor._type = Ord(MT_SPIDER)) or
@@ -527,7 +527,7 @@ var
   tdir: dirtype_t;
   olddir: dirtype_t;
   turnaround: dirtype_t;
-  idx: integer; 
+  idx: integer;
 begin
   if actor.target = nil then
     I_Error('P_NewChaseDir(): called with no target');
@@ -864,7 +864,7 @@ begin
 
   if not seeyou then
   begin
-    if not P_LookForPlayers(actor, actor.flags_ex and MF_EX_LOOKALLAROUND <> 0) then 
+    if not P_LookForPlayers(actor, actor.flags_ex and MF_EX_LOOKALLAROUND <> 0) then
       exit;
   end;
 

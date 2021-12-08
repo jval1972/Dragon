@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2021 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -372,7 +372,7 @@ begin
     result := 0;
     exit;
   end;
-  
+
   if (strupper(char8tostring(W_GetNameForNum(base + Ord(ML_GL_VERTS)))) <> 'GL_VERT') or
      (strupper(char8tostring(W_GetNameForNum(base + Ord(ML_GL_SEGS)))) <> 'GL_SEGS') or
      (strupper(char8tostring(W_GetNameForNum(base + Ord(ML_GL_SSECT)))) <> 'GL_SSECT') or
@@ -417,7 +417,7 @@ var
 begin
   if (count = 0) or (ver = 0) then
     exit;
-    
+
   data := W_CacheLumpNum(lump, PU_STATIC);
   if ver = 1 then
   begin
@@ -487,7 +487,7 @@ end;
 //
 // GetGLMapAdler32
 // JVAL: This function returns the Adler-32 value of glBSP utility
-// 
+//
 function GetGLMapAdler32(glmaplump: integer; glmapname: string): longword;
 var
   txt: string;

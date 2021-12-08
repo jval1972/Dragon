@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2021 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -426,7 +426,7 @@ if { jval: WOLF (joyxmove <> 0)  or}
      (gamekeydown[key_right]) or
      (gamekeydown[key_left]) then
     turnheld := turnheld + ticdup
-  else      
+  else
     turnheld := 0;
 
   if turnheld < SLOWTURNTICS then
@@ -1303,7 +1303,7 @@ begin
       exit;
     end;
   end;
-  
+
   if strupper(Copy(name, length(name) - 3, 4)) <> '.DSG' then
     result := name + '.DSG'
   else
@@ -1683,7 +1683,7 @@ begin
     map := 9;
 
   R_ResetInterpolationBuffer;
-  
+
   M_ClearRandom;
 
   if (skill = sk_nightmare) or respawnparm then

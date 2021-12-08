@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2021 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -165,7 +165,7 @@ begin
       h_RC := 0;
     end;
   end;
-  
+
   // Attemps to release the device context
   if ((h_DC > 0) and (ReleaseDC(hMainWnd, h_DC) = 0)) then
   begin
@@ -666,7 +666,7 @@ begin
   set_hud := gl_linear_hud;
 
   glTexImage2D(GL_TEXTURE_2D, 0, 4, GLDRAWTEXWIDTH, GLDRAWTEXHEIGHT, 0, GL_BGRA, GL_UNSIGNED_BYTE, screen32);
-          
+
 end;
 
 const

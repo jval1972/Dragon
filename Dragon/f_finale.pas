@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2021 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -151,7 +151,7 @@ procedure F_StartFinale;
 begin
   if demorecording then
     G_CheckDemoStatus;
-    
+
   gameaction := ga_nothing;
   gamestate := GS_FINALE;
   viewactive := false;
@@ -536,7 +536,7 @@ begin
   F_CastPrint(castorder[castnum].name);
 
   // draw the current frame in the middle of the screen
-  sprdef := @sprites[caststate.sprite];    
+  sprdef := @sprites[caststate.sprite];
   sprframe := @sprdef.spriteframes[caststate.frame and FF_FRAMEMASK];
   lump := sprframe.lump[0];
   flip := sprframe.flip[0];
@@ -547,7 +547,7 @@ begin
   else
     V_DrawPatch(160, 170, SCN_TMP, patch, false);
   Z_ChangeTag(patch, PU_CACHE);
-  
+
   V_CopyRect(0, 0, SCN_TMP, 320, 200, 0, 0, SCN_FG, true);
 
 end;

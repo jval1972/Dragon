@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2021 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -529,7 +529,7 @@ begin        EXIT;
 {  if P_AproxDistance(p.mo.x - p.lastsoundstepx,
                      p.mo.y - p.lastsoundstepy) < 256 * FRACUNIT then
     exit;      }
- 
+
   p.lastsoundstepx := p.mo.x;
   p.lastsoundstepy := p.mo.y;
 
@@ -1901,7 +1901,7 @@ begin
 
   mult_v := actor.state.params.IntVal[3];
   if mult_v <= 0 then mult_v := FRACUNIT;
-  
+
   for i := 0 to count - 1 do
   begin
     mo := P_SpawnMobj(actor.x + ((N_Random - 128) shr 12),

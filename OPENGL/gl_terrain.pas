@@ -56,7 +56,7 @@ implementation
 
 uses
   d_main,
-  i_system, 
+  i_system,
   g_game,
   r_draw,
   gl_defs,
@@ -663,7 +663,7 @@ var
   dist: single; // Distance of a subdivision
   pdiv: Pterrainsubdivision_t;
   mtextest: single;
-  mdetailtest: single;                          
+  mdetailtest: single;
 begin
   gld_StaticLight(1.0);
 

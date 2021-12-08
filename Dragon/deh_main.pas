@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2021 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -451,7 +451,7 @@ begin
           continue;
         end;
         dec(mobj_no); // JVAL DEH patches start Think numbers from 1
-      end;                      
+      end;
 
       while true do
       begin
@@ -1873,7 +1873,7 @@ begin
   mobj_flags2_ex.Add('MF2_EX_CANNOTPUSH');
   mobj_flags2_ex.Add('MF2_EX_DONTDRAW');
 
-  
+
   state_tokens := TDTextList.Create;
   state_tokens.Add('SPRITE NUMBER');    // .sprite
   state_tokens.Add('SPRITE SUBNUMBER'); // .frame

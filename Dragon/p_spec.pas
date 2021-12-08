@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2021 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -75,7 +75,7 @@ procedure P_PlayerInSpecialSector(player: Pplayer_t);
 
 function twoSided(sector: integer; line: integer): boolean;
 
-function twoSidedS(sector: Psector_t; line: integer): boolean; 
+function twoSidedS(sector: Psector_t; line: integer): boolean;
 
 function getSector(currentSector: integer; line: integer; side: integer): Psector_t;
 
@@ -271,7 +271,7 @@ type
     thinker: thinker_t;
     _type: vldoor_e;
     sector: Psector_t;
-    line: Pline_t; 
+    line: Pline_t;
     topheight: fixed_t;
     speed: fixed_t;
 
@@ -1486,7 +1486,7 @@ begin
           exit;
         end;
       end;
-      
+
     Ord(YCard):
       begin
         if not player.cards[Ord(it_yellowcard)] and
@@ -2821,7 +2821,7 @@ begin
       end;
       exit; // if not a gun type, do nothing here
     end;
-    
+
   end;
 
   //  Impacts that other things can activate.
@@ -3036,7 +3036,7 @@ begin
       else
         flats[i].translation := pic;
     end;
-  end;           
+  end;
 
   // ANIMATE LINE SPECIALS
   for i := 0 to numlinespecials - 1 do

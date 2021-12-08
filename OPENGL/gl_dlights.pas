@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2021 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -138,7 +138,7 @@ var
 
 //
 // SC_ParceDynamicLights
-// JVAL: Parse LIGHTDEF 
+// JVAL: Parse LIGHTDEF
 //
 procedure SC_ParceDynamicLight(const in_text: string);
 var
@@ -619,7 +619,7 @@ begin
       begin
         if Odd(FixedDiv(l.randomseed + leveltime * FRACUNIT, l.interval)) then
           result.radius := l.size1
-        else                               
+        else
           result.radius := l.size2;
       end
       else
