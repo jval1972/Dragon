@@ -522,7 +522,8 @@ begin
           17: mobjinfo[mobj_no].height := mobj_val;
           18: mobjinfo[mobj_no].mass := mobj_val;
           19: mobjinfo[mobj_no].damage := mobj_val;
-          20: mobjinfo[mobj_no].activesound := S_GetSoundNumForName(token2);
+          20,
+          41: mobjinfo[mobj_no].activesound := S_GetSoundNumForName(token2);
           21: begin
                 if mobj_val >= 0 then
                   mobjinfo[mobj_no].flags := mobj_val
@@ -1792,7 +1793,7 @@ begin
   mobj_tokens.Add('HEAL FRAME');         // .healstate                // 38
   mobj_tokens.Add('FLAGS2_EX');          // .flags2_ex (DelphiDoom)   // 39
   mobj_tokens.Add('CRASH FRAME');        // .crashstate (DelphiDoom)  // 40
-
+  mobj_tokens.Add('ACTIVE SOUND');       // .activesound              // 41 - Alias for 20
 
   mobj_flags := TDTextList.Create;
   mobj_flags.Add('MF_SPECIAL');
