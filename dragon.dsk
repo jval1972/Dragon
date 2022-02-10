@@ -62,9 +62,9 @@ LeftCol=1
 
 [View1]
 Module=G:\DelphiDoom_Release\Dragon\Src\Dragon\g_game.pas
-CursorX=11
-CursorY=1570
-TopLine=1165
+CursorX=6
+CursorY=1190
+TopLine=1693
 LeftCol=1
 
 [Watches]
