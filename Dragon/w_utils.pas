@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -31,6 +31,11 @@ unit w_utils;
 
 interface
 
+//==============================================================================
+//
+// W_RegisterUtilityCommands
+//
+//==============================================================================
 procedure W_RegisterUtilityCommands;
 
 implementation
@@ -44,6 +49,11 @@ uses
   w_wad,
   z_zone;
 
+//==============================================================================
+//
+// W_CmdLumpLen
+//
+//==============================================================================
 procedure W_CmdLumpLen(const name: string);
 var
   lump: integer;
@@ -65,6 +75,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// W_CmdCheckNumForName
+//
+//==============================================================================
 procedure W_CmdCheckNumForName(const name: string);
 var
   lump: integer;
@@ -82,11 +97,21 @@ begin
     printf('Lump %s num = %d'#13#10, [lump]);
 end;
 
+//==============================================================================
+//
+// W_CmdNumLumps
+//
+//==============================================================================
 procedure W_CmdNumLumps;
 begin
   printf('%d total lumps'#13#10, [W_NumLumps]);
 end;
 
+//==============================================================================
+//
+// W_CmdSaveLumpToDisk
+//
+//==============================================================================
 procedure W_CmdSaveLumpToDisk(const lumpname: string; const filename: string);
 var
   fname: string;
@@ -127,6 +152,11 @@ begin
   Z_Free(p);
 end;
 
+//==============================================================================
+//
+// W_RegisterUtilityCommands
+//
+//==============================================================================
 procedure W_RegisterUtilityCommands;
 begin
   C_AddCmd('lumpsize, lumplength', @W_CmdLumpLen);
@@ -134,6 +164,5 @@ begin
   C_AddCmd('numlumps', @W_CmdNumLumps);
   C_AddCmd('savelumptodisk', @W_CmdSaveLumpToDisk);
 end;
-
 
 end.

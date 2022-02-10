@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -31,8 +31,18 @@ unit dl_utils;
 
 interface
 
+//==============================================================================
+//
+// Get2Ints
+//
+//==============================================================================
 function Get2Ints(const s: string; var i1, i2: integer): boolean;
 
+//==============================================================================
+//
+// IsCDRomDrive
+//
+//==============================================================================
 function IsCDRomDrive(const drive: char = #0): boolean;
 
 implementation
@@ -40,6 +50,11 @@ implementation
 uses
   Windows, SysUtils;
 
+//==============================================================================
+//
+// Get2Ints
+//
+//==============================================================================
 function Get2Ints(const s: string; var i1, i2: integer): boolean;
 var
   p: integer;
@@ -62,6 +77,11 @@ begin
 
 end;
 
+//==============================================================================
+//
+// IsCDRomDrive
+//
+//==============================================================================
 function IsCDRomDrive(const drive: char = #0): boolean;
 var
   drv: array[0..3] of char;
@@ -90,8 +110,6 @@ begin
     result := GetDriveType(drv) = DRIVE_CDROM;
   end;
 end;
-
-
 
 end.
 

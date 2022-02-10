@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -47,8 +47,18 @@ type
     function Remove: boolean; overload;
   end;
 
+//==============================================================================
+//
+// M_PushValue
+//
+//==============================================================================
 procedure M_PushValue(const x: integer);
 
+//==============================================================================
+//
+// M_PopValue
+//
+//==============================================================================
 function M_PopValue: integer;
 
 implementation
@@ -59,11 +69,21 @@ uses
 var
   globalstack: TIntegerStack;
 
+//==============================================================================
+//
+// TIntegerStack.Push
+//
+//==============================================================================
 procedure TIntegerStack.Push(const x: integer);
 begin
   Add(x);
 end;
 
+//==============================================================================
+//
+// TIntegerStack.Pop
+//
+//==============================================================================
 function TIntegerStack.Pop(var x: integer): boolean;
 begin
   result := Count > 0;
@@ -74,6 +94,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// TIntegerQueue.Remove
+//
+//==============================================================================
 function TIntegerQueue.Remove(var x: integer): boolean;
 begin
   result := Count > 0;
@@ -84,17 +109,32 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// TIntegerQueue.Remove
+//
+//==============================================================================
 function TIntegerQueue.Remove: boolean;
 begin
   result := Count > 0;
   Delete(0);
 end;
 
+//==============================================================================
+//
+// M_PushValue
+//
+//==============================================================================
 procedure M_PushValue(const x: integer);
 begin
   globalstack.Push(x);
 end;
 
+//==============================================================================
+//
+// M_PopValue
+//
+//==============================================================================
 function M_PopValue: integer;
 begin
   if not globalstack.Pop(result) then

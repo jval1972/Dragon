@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -31,12 +31,32 @@ unit i_input;
 
 interface
 
+//==============================================================================
+//
+// I_InitInput
+//
+//==============================================================================
 procedure I_InitInput;
 
+//==============================================================================
+//
+// I_ProcessInput
+//
+//==============================================================================
 procedure I_ProcessInput;
 
+//==============================================================================
+//
+// I_ShutDownInput
+//
+//==============================================================================
 procedure I_ShutDownInput;
 
+//==============================================================================
+//
+// I_SynchronizeInput
+//
+//==============================================================================
 procedure I_SynchronizeInput(active: boolean);
 
 var
@@ -54,6 +74,11 @@ uses
   gl_main,
   i_system;
 
+//==============================================================================
+//
+// TranslateKey
+//
+//==============================================================================
 function TranslateKey(keycode: integer): integer;
 begin
   case keycode of
@@ -69,6 +94,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// TranslateSysKey
+//
+//==============================================================================
 function TranslateSysKey(keycode: integer): integer;
 begin
   case keycode of
@@ -89,6 +119,9 @@ var
   curkeys: PKeyboardState;
   oldkeys: PKeyboardState;
 
+//==============================================================================
+// I_InitInput
+//
 //-----------------------------------------------------------------------------
 // Name: CreateDInput()
 // Desc: Initialize the DirectInput variables using:
@@ -97,6 +130,8 @@ var
 //           IDirectInputDevice::SetDataFormat
 //           IDirectInputDevice::SetCooperativeLevel
 //-----------------------------------------------------------------------------
+//
+//==============================================================================
 procedure I_InitInput;
 var
   hres: HRESULT;
@@ -118,6 +153,8 @@ end;
 // Name: I_ShutDownInput
 // Desc: Terminate our usage of DirectInput
 //-----------------------------------------------------------------------------
+//
+//==============================================================================
 procedure I_ShutDownInput;
 begin
   memfree(pointer(curkeys), SizeOf(TKeyboardState));
@@ -128,6 +165,8 @@ end;
 // Name: I_ProcessInput;
 // Desc: The game plays here. Read keyboard data and displaying it.
 //-----------------------------------------------------------------------------
+//
+//==============================================================================
 procedure I_ProcessInput;
 
   function DIKEYtoVK(Key: Byte): Integer;
@@ -294,6 +333,11 @@ begin
 
 end;
 
+//==============================================================================
+//
+// I_SynchronizeInput
+//
+//==============================================================================
 procedure I_SynchronizeInput(active: boolean);
 begin
   if active then

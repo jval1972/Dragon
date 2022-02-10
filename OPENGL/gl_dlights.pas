@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -50,7 +50,6 @@ type
     GLDL_UNKNOWN  // unknown light
   );
 
-
   GLDRenderLight = record
     r, g, b: float;     // Color
     radius: float;     // radious
@@ -82,14 +81,39 @@ type
   GLDLightArray = array[0..$FFFF] of GLDLight;
   PGLDLightArray = ^GLDLightArray;
 
+//==============================================================================
+//
+// gld_InitDynamicLights
+//
+//==============================================================================
 procedure gld_InitDynamicLights;
 
+//==============================================================================
+//
+// gld_DynamicLightsDone
+//
+//==============================================================================
 procedure gld_DynamicLightsDone;
 
+//==============================================================================
+//
+// gld_AddDynamicLight
+//
+//==============================================================================
 function gld_AddDynamicLight(const l: GLDLight): integer;
 
+//==============================================================================
+//
+// gld_FindDynamicLight
+//
+//==============================================================================
 function gld_FindDynamicLight(const check: string): integer;
 
+//==============================================================================
+//
+// gld_GetDynamicLight
+//
+//==============================================================================
 function gld_GetDynamicLight(const index: integer): PGLDRenderLight;
 
 var
@@ -136,10 +160,12 @@ var
 //       don't bother reseting it....
   lightrnd: integer = 0;
 
+//==============================================================================
 //
 // SC_ParceDynamicLights
 // JVAL: Parse LIGHTDEF
 //
+//==============================================================================
 procedure SC_ParceDynamicLight(const in_text: string);
 var
   sc: TScriptEngine;
@@ -415,10 +441,12 @@ begin
   sc.Free;
 end;
 
+//==============================================================================
 //
 // SC_ParceDynamicLights
 // JVAL: Parse all LIGHTDEF lumps
 //
+//==============================================================================
 procedure SC_ParceDynamicLights;
 var
   i: integer;
@@ -437,12 +465,16 @@ begin
   lightdeflumppresent := lightdeflumppresent or (i > 0);
 end;
 
-
 var
   numdlights: integer;
   realnumdlights: integer;
   dlightslist: PGLDLightArray;
 
+//==============================================================================
+//
+// gld_InitDynamicLights
+//
+//==============================================================================
 procedure gld_InitDynamicLights;
 begin
   numdlights := 0;
@@ -452,6 +484,11 @@ begin
   SC_ParceDynamicLights;
 end;
 
+//==============================================================================
+//
+// gld_DynamicLightsDone
+//
+//==============================================================================
 procedure gld_DynamicLightsDone;
 begin
   memfree(pointer(dlightslist), realnumdlights * SizeOf(GLDLight));
@@ -463,6 +500,11 @@ begin
   realdlitems := 0;
 end;
 
+//==============================================================================
+//
+// gld_GrowDynlightsArray
+//
+//==============================================================================
 procedure gld_GrowDynlightsArray;
 begin
   if numdlights >= realnumdlights then
@@ -481,6 +523,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// gld_AddDynamicLight
+//
+//==============================================================================
 function gld_AddDynamicLight(const l: GLDLight): integer;
 var
   i: integer;
@@ -493,6 +540,11 @@ begin
   inc(numdlights);
 end;
 
+//==============================================================================
+//
+// gld_FindDynamicLight
+//
+//==============================================================================
 function gld_FindDynamicLight(const check: string): integer;
 var
   i: integer;
@@ -509,11 +561,13 @@ begin
   result := -1;
 end;
 
+//==============================================================================
 //
 // gld_GetDynamicLight
 // JVAL: Retrieving rendering information for lights
 //       Dynamic lights animations
 //
+//==============================================================================
 function gld_GetDynamicLight(const index: integer): PGLDRenderLight;
 var
   l: PGLDLight;

@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -54,10 +54,25 @@ var
   lightboost: PLongWordArray = nil;
   uselightboost: boolean;
 
+//==============================================================================
+//
+// R_InitLightBoost
+//
+//==============================================================================
 procedure R_InitLightBoost;
 
+//==============================================================================
+//
+// R_ShutDownLightBoost
+//
+//==============================================================================
 procedure R_ShutDownLightBoost;
 
+//==============================================================================
+//
+// R_CmdLightBoostFactor
+//
+//==============================================================================
 procedure R_CmdLightBoostFactor(const parm1: string = '');
 
 implementation
@@ -65,9 +80,11 @@ implementation
 uses
   gl_lights;
 
+//==============================================================================
 //
 // R_InitLightBoost
 //
+//==============================================================================
 procedure R_InitLightBoost;
 var
   i, j: integer;
@@ -101,12 +118,22 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// R_ShutDownLightBoost
+//
+//==============================================================================
 procedure R_ShutDownLightBoost;
 begin
   if lightboost <> nil then
     memfree(pointer(lightboost), LIGHTBOOSTSIZE * LIGHTBOOSTSIZE * SizeOf(LongWord));
 end;
 
+//==============================================================================
+//
+// R_CmdLightBoostFactor
+//
+//==============================================================================
 procedure R_CmdLightBoostFactor(const parm1: string = '');
 var
   newfactor: LongWord;

@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -36,21 +36,56 @@ uses
   d_ticcmd,
   d_event;
 
+//==============================================================================
+//
+// I_Init
+//
+//==============================================================================
 procedure I_Init;
 
+//==============================================================================
+// I_ZoneBase
+//
 // Called by startup code
 // to get the ammount of memory to malloc
 // for the zone management.
+//
+//==============================================================================
 function I_ZoneBase(var size: integer): pointer;
+
+//==============================================================================
+//
+// I_ZoneFree
+//
+//==============================================================================
 procedure I_ZoneFree(var p: pointer);
 
+//==============================================================================
+// I_GetSysTime
+//
 // Called by D_GameLoop,
 // Called by HU_DoFPSStuff
 // returns current time in tics.
+//
+//==============================================================================
 function I_GetSysTime: extended;
+
+//==============================================================================
+//
+// I_GetTime
+//
+//==============================================================================
 function I_GetTime: integer;
+
+//==============================================================================
+//
+// I_GetFracTime
+//
+//==============================================================================
 function I_GetFracTime: integer;
 
+//==============================================================================
+// I_StartFrame
 //
 //  Called by D_GameLoop,
 //  called before processing any tics in a frame
@@ -59,15 +94,23 @@ function I_GetFracTime: integer;
 //  are performed here (joystick reading).
 //  Can call D_PostEvent.
 //
+//==============================================================================
 procedure I_StartFrame;
 
+//==============================================================================
+// I_StartTic
 //
 //  Called by D_GameLoop, }
 //  called before processing each tic in a frame.
 //  Quick syncronous operations are performed here.
 //  Can call D_PostEvent.
+//
+//==============================================================================
 procedure I_StartTic;
 
+//==============================================================================
+// I_BaseTiccmd
+//
 //  Asynchronous interrupt functions should maintain private queues
 //  that are read by the synchronous functions
 //  to be converted into events.
@@ -75,38 +118,115 @@ procedure I_StartTic;
 //  or calls a loadable driver to build it.
 //  This ticcmd will then be modified by the gameloop
 //  for normal input.
+//
+//==============================================================================
 function I_BaseTiccmd: Pticcmd_t;
 
+//==============================================================================
+// I_Quit
+//
 //  Called by M_Responder when quit is selected.
 //  Clean exit, displays sell blurb.
+//
+//==============================================================================
 procedure I_Quit;
 
+//==============================================================================
+//
+// I_Destroy
+//
+//==============================================================================
 procedure I_Destroy(const code: integer);
 
+//==============================================================================
+//
+// I_FlashCachedOutput
+//
+//==============================================================================
 procedure I_FlashCachedOutput;
 
+//==============================================================================
+//
+// I_Error
+//
+//==============================================================================
 procedure I_Error(const error: string; const Args: array of const); overload;
 
+//==============================================================================
+//
+// I_Error
+//
+//==============================================================================
 procedure I_Error(const error: string); overload;
 
+//==============================================================================
+//
+// I_DevError
+//
+//==============================================================================
 procedure I_DevError(const error: string; const Args: array of const); overload;
 
+//==============================================================================
+//
+// I_DevError
+//
+//==============================================================================
 procedure I_DevError(const error: string); overload;
 
+//==============================================================================
+//
+// I_Warning
+//
+//==============================================================================
 procedure I_Warning(const warning: string; const Args: array of const); overload;
 
+//==============================================================================
+//
+// I_Warning
+//
+//==============================================================================
 procedure I_Warning(const warning: string); overload;
 
+//==============================================================================
+//
+// I_DevWarning
+//
+//==============================================================================
 procedure I_DevWarning(const error: string; const Args: array of const); overload;
 
+//==============================================================================
+//
+// I_DevWarning
+//
+//==============================================================================
 procedure I_DevWarning(const error: string); overload;
 
+//==============================================================================
+//
+// I_GameFinished
+//
+//==============================================================================
 function I_GameFinished: boolean;
 
+//==============================================================================
+//
+// I_ProcessWindows
+//
+//==============================================================================
 procedure I_ProcessWindows;
 
+//==============================================================================
+//
+// I_WaitVBL
+//
+//==============================================================================
 procedure I_WaitVBL(const count: integer);
 
+//==============================================================================
+//
+// I_Sleep
+//
+//==============================================================================
 procedure I_Sleep(const msecs: integer);
 
 var
@@ -115,37 +235,112 @@ var
   InBackground: boolean = true;
   in_i_error: boolean = false;
 
+//==============================================================================
+//
+// I_BeginDiskBusy
+//
+//==============================================================================
 procedure I_BeginDiskBusy;
 
+//==============================================================================
+//
+// I_IsCDRomDrive
+//
+//==============================================================================
 function I_IsCDRomDrive(const drive: char = #0): boolean;
 
+//==============================================================================
+//
+// I_GetExeImageSize
+//
+//==============================================================================
 function I_GetExeImageSize(fname: string = ''): LongWord;
 
+//==============================================================================
+//
+// I_VersionBuilt
+//
+//==============================================================================
 function I_VersionBuilt(fname: string = ''): string;
 
+//==============================================================================
+//
+// I_DirectoryExists
+//
+//==============================================================================
 function I_DirectoryExists(const Name: string): Boolean;
 
+//==============================================================================
+//
+// I_SetCriticalCPUPriority
+//
+//==============================================================================
 procedure I_SetCriticalCPUPriority;
 
+//==============================================================================
+//
+// I_SetNormalCPUPriority
+//
+//==============================================================================
 procedure I_SetNormalCPUPriority;
 
+//==============================================================================
+//
+// I_DetectOS
+//
+//==============================================================================
 procedure I_DetectOS;
 
+//==============================================================================
+//
+// I_DetectCPU
+//
+//==============================================================================
 procedure I_DetectCPU;
 
+//==============================================================================
+//
+// I_ClearInterface
+//
+//==============================================================================
 procedure I_ClearInterface(var Dest: IInterface);
 
 type
   process_t = function(p: pointer): LongInt; stdcall;
 
+//==============================================================================
+//
+// I_CreateProcess
+//
+//==============================================================================
 function I_CreateProcess(p: process_t; parm: pointer): integer;
 
+//==============================================================================
+//
+// I_WaitForProcess
+//
+//==============================================================================
 procedure I_WaitForProcess(pid: integer);
 
+//==============================================================================
+//
+// I_GoToWebPage
+//
+//==============================================================================
 procedure I_GoToWebPage(const cmd: string);
 
+//==============================================================================
+//
+// I_ScreenWidth
+//
+//==============================================================================
 function I_ScreenWidth: integer;
 
+//==============================================================================
+//
+// I_ScreenHeight
+//
+//==============================================================================
 function I_ScreenHeight: integer;
 
 type
@@ -163,8 +358,18 @@ var
   usemultithread: boolean;
   criticalcpupriority: boolean;
 
+//==============================================================================
+//
+// I_SetDPIAwareness
+//
+//==============================================================================
 function I_SetDPIAwareness: boolean;
 
+//==============================================================================
+//
+// I_GetWindowDPI
+//
+//==============================================================================
 function I_GetWindowDPI(const h: THandle): integer;
 
 implementation
@@ -191,14 +396,21 @@ uses
 var
   finished: boolean = false;
 
+//==============================================================================
+//
+// I_GameFinished
+//
+//==============================================================================
 function I_GameFinished: boolean;
 begin
   result := finished;
 end;
 
+//==============================================================================
 //
 // I_StartFrame
 //
+//==============================================================================
 procedure I_StartFrame;
 begin
   I_ProcessWindows;
@@ -206,9 +418,11 @@ begin
   I_ProcessInput;
 end;
 
+//==============================================================================
 //
 // I_StartTic
 //
+//==============================================================================
 procedure I_StartTic;
 begin
   if not InBackground then   // JVAL ?
@@ -218,22 +432,42 @@ end;
 var
   emptycmd: ticcmd_t;
 
+//==============================================================================
+//
+// I_BaseTiccmd
+//
+//==============================================================================
 function I_BaseTiccmd: Pticcmd_t;
 begin
   result := @emptycmd;
 end;
 
+//==============================================================================
+//
+// I_GetHeapSize
+//
+//==============================================================================
 function I_GetHeapSize: integer;
 begin
   result := mb_used * 1024 * 1024;
 end;
 
+//==============================================================================
+//
+// I_ZoneBase
+//
+//==============================================================================
 function I_ZoneBase(var size: integer): pointer;
 begin
   size := I_GetHeapSize;
   result := malloc(size);
 end;
 
+//==============================================================================
+//
+// I_ZoneFree
+//
+//==============================================================================
 procedure I_ZoneFree(var p: pointer);
 begin
   memfree(p, I_GetHeapSize);
@@ -247,6 +481,11 @@ var
   basetime: int64 = 0;
   Freq: int64;
 
+//==============================================================================
+//
+// I_GetSysTime
+//
+//==============================================================================
 function I_GetSysTime: extended;
 var
   _time: int64;
@@ -268,17 +507,30 @@ begin
   result := (_time - basetime) / Freq;
 end;
 
+//==============================================================================
+//
+// I_GetTime
+//
+//==============================================================================
 function I_GetTime: integer;
 begin
   result := trunc(I_GetSysTime * TICRATE);
 end;
 
+//==============================================================================
+//
+// I_GetFracTime
+//
+//==============================================================================
 function I_GetFracTime: integer;
 begin
   result := trunc(I_GetSysTime * TICRATE * FRACUNIT);
 end;
 
+//==============================================================================
+// I_CmdUseMMX
 //
+//==============================================================================
 procedure I_CmdUseMMX(const parm: string = '');
 var
   newusemmx: boolean;
@@ -304,9 +556,11 @@ begin
   I_CmdUseMMX;
 end;
 
+//==============================================================================
 //
 // I_Init
 //
+//==============================================================================
 procedure I_Init;
 begin
   printf('I_DetectOS: Detecting operating system.'#13#10);
@@ -321,19 +575,31 @@ begin
   C_AddCmd('usemmx, mmx', @I_CmdUseMMX);
 end;
 
+//==============================================================================
 //
 // I_Quit
 //
+//==============================================================================
 procedure I_Quit;
 begin
   PostMessage(hMainWnd, WM_DESTROY, 0, 0);
 end;
 
+//==============================================================================
+//
+// I_RestoreDesktop
+//
+//==============================================================================
 procedure I_RestoreDesktop;
 begin
   InvalidateRect(0, nil, true)
 end;
 
+//==============================================================================
+//
+// I_Destroy
+//
+//==============================================================================
 procedure I_Destroy(const code: integer);
 begin
   printf(#13#10'I_Destroy: Game finished.'#13#10#13#10);
@@ -363,15 +629,22 @@ begin
   Halt(code);
 end;
 
+//==============================================================================
+//
+// I_FlashCachedOutput
+//
+//==============================================================================
 procedure I_FlashCachedOutput;
 begin
   if stdoutbuffer <> nil then
     stdoutbuffer.SaveToFile('dragon_stdout.cachedbuffer.txt');
 end;
 
+//==============================================================================
 //
 // I_Error
 //
+//==============================================================================
 procedure I_Error(const error: string; const Args: array of const);
 var
   soutproc: TOutProc;
@@ -400,11 +673,21 @@ begin
   I_Destroy(1);
 end;
 
+//==============================================================================
+//
+// I_Error
+//
+//==============================================================================
 procedure I_Error(const error: string);
 begin
   I_Error(error, []);
 end;
 
+//==============================================================================
+//
+// I_DevError
+//
+//==============================================================================
 procedure I_DevError(const error: string; const Args: array of const);
 begin
   if devparm then
@@ -413,12 +696,21 @@ begin
     I_Error(error + #13#10#13#10'Specify -devparm from the command line if you want this error to be ignored', Args);
 end;
 
+//==============================================================================
+//
+// I_DevError
+//
+//==============================================================================
 procedure I_DevError(const error: string);
 begin
   I_DevError(error, []);
 end;
 
-
+//==============================================================================
+//
+// I_Warning
+//
+//==============================================================================
 procedure I_Warning(const warning: string; const Args: array of const);
 var
   msg: string;
@@ -427,6 +719,11 @@ begin
   I_Warning(msg);
 end;
 
+//==============================================================================
+//
+// I_Warning
+//
+//==============================================================================
 procedure I_Warning(const warning: string);
 var
   wrstr: string;
@@ -436,18 +733,33 @@ begin
   printf(wrstr);
 end;
 
+//==============================================================================
+//
+// I_DevWarning
+//
+//==============================================================================
 procedure I_DevWarning(const error: string; const Args: array of const);
 begin
   if devparm then
     I_Warning(error, Args);
 end;
 
+//==============================================================================
+//
+// I_DevWarning
+//
+//==============================================================================
 procedure I_DevWarning(const error: string);
 begin
   if devparm then
     I_Warning(error);
 end;
 
+//==============================================================================
+//
+// I_ProcessWindows
+//
+//==============================================================================
 procedure I_ProcessWindows;
 var
   msg: TMsg;
@@ -463,7 +775,12 @@ begin
 
 end;
 
+//==============================================================================
+// I_WaitVBL
+//
 // Wait for vertical retrace or pause a bit.
+//
+//==============================================================================
 procedure I_WaitVBL(const count: integer);
 var
   waituntil: extended;
@@ -474,16 +791,31 @@ begin
   until I_GetSysTime >= waituntil;
 end;
 
+//==============================================================================
+//
+// I_Sleep
+//
+//==============================================================================
 procedure I_Sleep(const msecs: integer);
 begin
   sleep(msecs);
 end;
 
+//==============================================================================
+//
+// I_BeginDiskBusy
+//
+//==============================================================================
 procedure I_BeginDiskBusy;
 begin
   isdiskbusy := true;
 end;
 
+//==============================================================================
+//
+// I_IsCDRomDrive
+//
+//==============================================================================
 function I_IsCDRomDrive(const drive: char = #0): boolean;
 var
   drv: array[0..3] of char;
@@ -516,6 +848,11 @@ end;
 const
   IMAGE_NT_OPTIONAL_HDR32_MAGIC = $10b;
 
+//==============================================================================
+//
+// I_GetOptHeader
+//
+//==============================================================================
 function I_GetOptHeader(PEOptHeader: PImageOptionalHeader; fname: string = ''): boolean;
 var
   f: file;
@@ -575,6 +912,11 @@ begin
   result := IOResult = 0;
 end;
 
+//==============================================================================
+//
+// I_GetExeImageSize
+//
+//==============================================================================
 function I_GetExeImageSize(fname: string = ''): LongWord;
 var
   PEOptHeader: TImageOptionalHeader;
@@ -585,6 +927,11 @@ begin
     result := 0;
 end;
 
+//==============================================================================
+//
+// I_VersionBuilt
+//
+//==============================================================================
 function I_VersionBuilt(fname: string = ''): string;
 var
   vsize: LongWord;
@@ -617,6 +964,11 @@ begin
   memfree(pointer(buffer), vsize + 1);
 end;
 
+//==============================================================================
+//
+// I_DirectoryExists
+//
+//==============================================================================
 function I_DirectoryExists(const Name: string): Boolean;
 var
   Code: Integer;
@@ -630,6 +982,11 @@ var
   iPriority: integer = THREAD_PRIORITY_ERROR_RETURN;
   prioritycheck: integer = 0;
 
+//==============================================================================
+//
+// I_SetCriticalCPUPriority
+//
+//==============================================================================
 procedure I_SetCriticalCPUPriority;
 begin
   if prioritycheck = 0 then
@@ -641,6 +998,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// I_SetNormalCPUPriority
+//
+//==============================================================================
 procedure I_SetNormalCPUPriority;
 begin
   if prioritycheck = 1 then
@@ -651,6 +1013,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// I_DetectOS
+//
+//==============================================================================
 procedure I_DetectOS;
 var
   info: TOSVersionInfo;
@@ -712,6 +1079,11 @@ begin
 
 end;
 
+//==============================================================================
+//
+// I_DetectCPU
+//
+//==============================================================================
 procedure I_DetectCPU;
 begin
 
@@ -744,7 +1116,11 @@ begin
     printf(' AMD 3D Now! extentions detected'#13#10);
 end;
 
-
+//==============================================================================
+//
+// I_ClearInterface
+//
+//==============================================================================
 procedure I_ClearInterface(var Dest: IInterface);
 var
   P: Pointer;
@@ -759,6 +1135,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// I_CreateProcess
+//
+//==============================================================================
 function I_CreateProcess(p: process_t; parm: pointer): integer;
 var
   id: LongWord;
@@ -766,6 +1147,11 @@ begin
   result := CreateThread(nil, $1000, @p, parm, 0, id);
 end;
 
+//==============================================================================
+//
+// I_WaitForProcess
+//
+//==============================================================================
 procedure I_WaitForProcess(pid: integer);
 begin
   WaitForSingleObject(pid, INFINITE);
@@ -775,11 +1161,14 @@ type
   shellexecute_t = function (hWnd: HWND; Operation, FileName, Parameters,
     Directory: PChar; ShowCmd: Integer): HINST; stdcall;
 
+//==============================================================================
+// I_GoToWebPage
 //
 // JVAL
 // Dynamically get ShellExecute function to avoid malicius detection of
 // some antivirus programs
 //
+//==============================================================================
 procedure I_GoToWebPage(const cmd: string);
 var
   shellexecutefunc: shellexecute_t;
@@ -791,11 +1180,21 @@ begin
   FreeLibrary(inst);
 end;
 
+//==============================================================================
+//
+// I_ScreenWidth
+//
+//==============================================================================
 function I_ScreenWidth: integer;
 begin
   result := GetSystemMetrics(SM_CXSCREEN);
 end;
 
+//==============================================================================
+//
+// I_ScreenHeight
+//
+//==============================================================================
 function I_ScreenHeight: integer;
 begin
   result := GetSystemMetrics(SM_CYSCREEN);
@@ -805,6 +1204,11 @@ type
   dpiproc_t = function: BOOL; stdcall;
   dpiproc2_t = function(value: integer): HRESULT; stdcall;
 
+//==============================================================================
+//
+// I_SetDPIAwareness
+//
+//==============================================================================
 function I_SetDPIAwareness: boolean;
 var
   dpifunc: dpiproc_t;
@@ -834,6 +1238,11 @@ begin
   FreeLibrary(dllinst);
 end;
 
+//==============================================================================
+//
+// I_GetWindowDPI
+//
+//==============================================================================
 function I_GetWindowDPI(const h: THandle): integer;
 var
   dpifunc2: dpiproc2_t;

@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -31,12 +31,10 @@ unit tables;
 
 interface
 
-
 uses
   m_fixed;
 
 const D_PI = 3.141592657;
-
 
 const
 // 0x100000000 to 0x2000
@@ -1353,7 +1351,6 @@ var
     65531,65531,65532,65532,65533,65533,65534,65534,
     65534,65535,65535,65535,65535,65535,65535,65535);
 
-
 // Re-use data, is just PI/2 pahse shift.
   finecosine: Pfixed_tArray;
 
@@ -2134,6 +2131,11 @@ var
     535533216,535700704,535868128,536035456,536202720,536369888,536536992,536704000,
     536870912);
 
+//==============================================================================
+//
+// SlopeDiv
+//
+//==============================================================================
 function SlopeDiv(const num: integer; const den: integer): LongWord;
 
 implementation
@@ -2141,6 +2143,11 @@ implementation
 uses
   d_delphi;
 
+//==============================================================================
+//
+// SlopeDiv
+//
+//==============================================================================
 function SlopeDiv(const num: integer; const den: integer): LongWord;
 begin
   if den < 512 then
@@ -2154,5 +2161,4 @@ begin
 end;
 
 end.
-
 

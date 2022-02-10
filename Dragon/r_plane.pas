@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -43,11 +43,26 @@ uses
   r_data,
   r_defs;
 
+//==============================================================================
+// R_InitPlanes
+//
 //-----------------------------------------------------------------------------
-
+//
+//==============================================================================
 procedure R_InitPlanes;
+
+//==============================================================================
+//
+// R_ClearPlanes
+//
+//==============================================================================
 procedure R_ClearPlanes;
 
+//==============================================================================
+//
+// R_FindPlane
+//
+//==============================================================================
 function R_FindPlane(height: fixed_t; picnum: integer; lightlevel: integer; xoffs, yoffs: fixed_t): Pvisplane_t;
 
 var
@@ -106,19 +121,23 @@ var
 
   cachedheight: array[0..MAXHEIGHT - 1] of fixed_t;
 
+//==============================================================================
 //
 // R_InitPlanes
 // Only at game startup.
 //
+//==============================================================================
 procedure R_InitPlanes;
 begin
   // Doh!
 end;
 
+//==============================================================================
 //
 // R_ClearPlanes
 // At begining of frame.
 //
+//==============================================================================
 procedure R_ClearPlanes;
 var
   angle: angle_t;
@@ -137,6 +156,7 @@ begin
   baseyscale := -FixedDiv(finesine[angle], centerxfrac);
 end;
 
+//==============================================================================
 //
 // R_NewVisPlane
 //
@@ -144,6 +164,7 @@ end;
 //   Create a new visplane
 //   Uses zone memory to allocate top and bottom arrays
 //
+//==============================================================================
 procedure R_NewVisPlane;
 begin
   if lastvisplane > maxvisplane then
@@ -152,9 +173,11 @@ begin
   inc(lastvisplane);
 end;
 
+//==============================================================================
 //
 // R_FindPlane
 //
+//==============================================================================
 function R_FindPlane(height: fixed_t; picnum: integer; lightlevel: integer; xoffs, yoffs: fixed_t): Pvisplane_t;
 var
   check: integer;

@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -38,36 +38,86 @@ uses
 const
   AppTitle = 'Dragon';
 
+//==============================================================================
+//
+// D_ProcessEvents
+//
+//==============================================================================
 procedure D_ProcessEvents;
+
+//==============================================================================
+//
+// D_DoAdvanceDemo
+//
+//==============================================================================
 procedure D_DoAdvanceDemo;
 
-
+//==============================================================================
+//
+// D_AddFile
+//
+//==============================================================================
 procedure D_AddFile(const fname: string);
 
+//==============================================================================
 //
 // DragonMain()
 // Not a globally visible function, just included for source reference,
 // calls all startup code, parses command line options.
 // If not overrided by user input, calls N_AdvanceDemo.
 //
+//==============================================================================
 procedure DragonMain;
 
+//==============================================================================
+// D_PostEvent
+//
 // Called by IO functions when input is detected.
+//
+//==============================================================================
 procedure D_PostEvent(ev: Pevent_t);
 
+//==============================================================================
+// D_PageTicker
 //
 // BASE LEVEL
 //
+//==============================================================================
 procedure D_PageTicker;
 
+//==============================================================================
+//
+// D_PageDrawer
+//
+//==============================================================================
 procedure D_PageDrawer;
 
+//==============================================================================
+//
+// D_AdvanceDemo
+//
+//==============================================================================
 procedure D_AdvanceDemo;
 
+//==============================================================================
+//
+// D_StartTitle
+//
+//==============================================================================
 procedure D_StartTitle;
 
+//==============================================================================
+//
+// D_IsPaused
+//
+//==============================================================================
 function D_IsPaused: boolean;
 
+//==============================================================================
+//
+// D_Display
+//
+//==============================================================================
 procedure D_Display;
 
 // wipegamestate can be set to -1 to force a wipe on the next draw
@@ -91,9 +141,25 @@ var
 
   basedefault: string;          // default file
 
+//==============================================================================
+//
+// D_Version
+//
+//==============================================================================
 function D_Version: string;
+
+//==============================================================================
+//
+// D_VersionBuilt
+//
+//==============================================================================
 function D_VersionBuilt: string;
 
+//==============================================================================
+//
+// D_ShutDown
+//
+//==============================================================================
 procedure D_ShutDown;
 
 var
@@ -154,6 +220,7 @@ const
   BGCOLOR = 7;
   FGCOLOR = 8;
 
+//==============================================================================
 //
 // D_GameLoop()
 // Not a globally visible function,
@@ -163,11 +230,10 @@ const
 //  calls all ?_Responder, ?_Ticker, and ?_Drawer,
 //  calls I_GetTime, I_StartFrame, and I_StartTic
 //
-
-//
 // D_PostEvent
 // Called by the I/O functions when input is detected
 //
+//==============================================================================
 procedure D_PostEvent(ev: Pevent_t);
 begin
   events[eventhead] := ev^;
@@ -182,6 +248,11 @@ end;
 var
   map01_lump: integer = -2;
 
+//==============================================================================
+//
+// D_ProcessEvents
+//
+//==============================================================================
 procedure D_ProcessEvents;
 var
   ev: Pevent_t;
@@ -235,13 +306,22 @@ var
   shotnumber: integer = 0;
   lastshotnumber: integer = -1;
 
-
+//==============================================================================
+//
+// D_FinishUpdate
+//
+//==============================================================================
 procedure D_FinishUpdate;
 begin
   if not noblit then
     I_FinishUpdate; // page flip or blit buffer
 end;
 
+//==============================================================================
+//
+// D_RenderPlayerView
+//
+//==============================================================================
 procedure D_RenderPlayerView(player: Pplayer_t);
 begin
   if norender then
@@ -257,8 +337,18 @@ end;
 var
   diskbusyend: integer = -1;
 
+//==============================================================================
+//
+// D_Display
+//
+//==============================================================================
 procedure D_Display;
 
+//==============================================================================
+//
+// D_DisplayHU
+//
+//==============================================================================
 procedure D_DisplayHU;
 var
   redrawsbar: boolean;
@@ -374,10 +464,11 @@ begin
   D_FinishUpdate; // page flip or blit buffer
 end;
 
+//==============================================================================
 //
 //  D_GameLoop
 //
-
+//==============================================================================
 procedure D_GameLoop;
 var
   iscritical: boolean;
@@ -415,10 +506,12 @@ var
   pagetic: integer;
   pagename: string;
 
+//==============================================================================
 //
 // D_PageTicker
 // Handles timing for warped projection
 //
+//==============================================================================
 procedure D_PageTicker;
 begin
   dec(pagetic);
@@ -426,27 +519,34 @@ begin
     D_AdvanceDemo;
 end;
 
+//==============================================================================
 //
 // D_PageDrawer
 //
+//==============================================================================
 procedure D_PageDrawer;
 begin
   V_PageDrawer(pagename);
 end;
 
+//==============================================================================
 //
 // D_AdvanceDemo
 // Called after each demo or intro demosequence finishes
 //
+//==============================================================================
 procedure D_AdvanceDemo;
 begin
   advancedemo := true;
 end;
 
+//==============================================================================
+// D_DoAdvanceDemo
 //
 // This cycles through the demo sequences.
 // FIXME - version dependend demo numbers?
 //
+//==============================================================================
 procedure D_DoAdvanceDemo;
 begin
   players[consoleplayer].playerstate := PST_LIVE;  // not reborn
@@ -518,9 +618,11 @@ begin
   end;
 end;
 
+//==============================================================================
 //
 // D_StartTitle
 //
+//==============================================================================
 procedure D_StartTitle;
 begin
   gameaction := ga_nothing;
@@ -531,9 +633,11 @@ end;
 var
   wadfiles: TDStringList;
 
+//==============================================================================
 //
 // D_AddFile
 //
+//==============================================================================
 procedure D_AddFile(const fname: string);
 begin
   if fname <> '' then
@@ -549,16 +653,25 @@ end;
 var
   doomcwad: string = ''; // Custom main WAD
 
+//==============================================================================
+//
+// IdentifyVersion
+//
+//==============================================================================
 procedure IdentifyVersion;
 begin
   D_AddFile('DRAGON1.DAT');
   gamemode := shareware; // Will check if retail or register mode later
 end;
 
+//==============================================================================
+// FindResponseFile
 //
 // Find a Response File
 //
 // JVAL: Changed to handle more than 1 response files
+//
+//==============================================================================
 procedure FindResponseFile;
 var
   i: integer;
@@ -621,21 +734,41 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// D_Version
+//
+//==============================================================================
 function D_Version: string;
 begin
   sprintf(result, Apptitle + ' version %d.%d', [VERSION div 100, VERSION mod 100]);
 end;
 
+//==============================================================================
+//
+// D_VersionBuilt
+//
+//==============================================================================
 function D_VersionBuilt: string;
 begin
   sprintf(result, ' built %s', [I_VersionBuilt]);
 end;
 
+//==============================================================================
+//
+// D_CmdVersion
+//
+//==============================================================================
 procedure D_CmdVersion;
 begin
   printf('%s,%s'#13#10, [D_Version, D_VersionBuilt]);
 end;
 
+//==============================================================================
+//
+// D_CmdAddPakFile
+//
+//==============================================================================
 procedure D_CmdAddPakFile(const parm: string);
 var
   files: TDStringList;
@@ -675,12 +808,22 @@ begin
 
 end;
 
+//==============================================================================
+//
+// D_StartThinkers
+//
+//==============================================================================
 procedure D_StartThinkers;
 begin
   Info_Init(true);
   printf('Thinkers initialized'#13#10);
 end;
 
+//==============================================================================
+//
+// D_StopThinkers
+//
+//==============================================================================
 procedure D_StopThinkers;
 begin
   if demoplayback then
@@ -699,6 +842,11 @@ begin
   printf('Thinkers disabled'#13#10);
 end;
 
+//==============================================================================
+//
+// D_AddWADFiles
+//
+//==============================================================================
 procedure D_AddWADFiles(const parm: string);
 var
   p: integer;
@@ -718,6 +866,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// D_AddPAKFiles
+//
+//==============================================================================
 procedure D_AddPAKFiles(const parm: string);
 var
   p: integer;
@@ -738,6 +891,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// D_AddDEHFiles
+//
+//==============================================================================
 procedure D_AddDEHFiles(const parm: string);
 var
   p: integer;
@@ -758,6 +916,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// D_IdentifyGameDirectories
+//
+//==============================================================================
 procedure D_IdentifyGameDirectories;
 var
   gamedirectorystring: string;
@@ -784,9 +947,11 @@ begin
   end;
 end;
 
+//==============================================================================
 //
 // DragonMain
 //
+//==============================================================================
 procedure DragonMain;
 var
   p: integer;
@@ -854,7 +1019,6 @@ begin
            'Dragon One Level Demo Startup v%d.%d' +
            '                           '#13#10,
             [VERSION div 100, VERSION mod 100]);
-
 
   if devparm then
     printf(D_DEVSTR);
@@ -1348,11 +1512,21 @@ begin
   D_GameLoop;  // never returns
 end;
 
+//==============================================================================
+//
+// D_IsPaused
+//
+//==============================================================================
 function D_IsPaused: boolean;
 begin
   result := paused;
 end;
 
+//==============================================================================
+//
+// D_ShutDown
+//
+//==============================================================================
 procedure D_ShutDown;
 var
   i: integer;

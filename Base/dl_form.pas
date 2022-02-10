@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -69,6 +69,11 @@ uses
 
 {$R *.dfm}
 
+//==============================================================================
+//
+// TConfigForm.FormCreate
+//
+//==============================================================================
 procedure TConfigForm.FormCreate(Sender: TObject);
 var
   dm: TDevMode;
@@ -92,6 +97,11 @@ begin
   ComboBox1.ItemIndex := ComboBox1.Items.Count - 1;
 end;
 
+//==============================================================================
+//
+// TConfigForm.GetDefCmd
+//
+//==============================================================================
 function TConfigForm.GetDefCmd(const demo: Boolean): string;
 var
   s: string;
@@ -112,26 +122,43 @@ begin
   end;
 end;
 
-
+//==============================================================================
+//
+// TConfigForm.DoneCmd
+//
+//==============================================================================
 procedure TConfigForm.DoneCmd(const cmd: string);
 begin
   addcmds := cmd;
   Close;
 end;
 
-
-
+//==============================================================================
+//
+// TConfigForm.Button1Click
+//
+//==============================================================================
 procedure TConfigForm.Button1Click(Sender: TObject);
 begin
   DoneCmd(GetDefCmd(False));
 end;
 
+//==============================================================================
+//
+// TConfigForm.Button2Click
+//
+//==============================================================================
 procedure TConfigForm.Button2Click(Sender: TObject);
 begin
   if OpenDialog1.Execute then
     DoneCmd(GetDefCmd(True) + '-playdemo'#13#10 + OpenDialog1.FileName + #13#10);
 end;
 
+//==============================================================================
+//
+// TConfigForm.Button3Click
+//
+//==============================================================================
 procedure TConfigForm.Button3Click(Sender: TObject);
 begin
   if SaveDialog1.Execute then

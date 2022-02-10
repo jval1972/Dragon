@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -40,16 +40,46 @@ uses
   m_fixed,
   t_main;
 
+//==============================================================================
+//
+// gld_InitTerrainData
+//
+//==============================================================================
 procedure gld_InitTerrainData;
 
+//==============================================================================
+//
+// gld_FreeTerrainData
+//
+//==============================================================================
 procedure gld_FreeTerrainData;
 
+//==============================================================================
+//
+// gld_DrawTerrain
+//
+//==============================================================================
 procedure gld_DrawTerrain(const x, y, z: single);
 
+//==============================================================================
+//
+// gld_GetDoomHeightFromCoord
+//
+//==============================================================================
 function gld_GetDoomHeightFromCoord(const x, y: fixed_t): float;
 
+//==============================================================================
+//
+// gld_GetDoomHeightFromCoordFixed
+//
+//==============================================================================
 function gld_GetDoomHeightFromCoordFixed(const x, y: fixed_t): fixed_t;
 
+//==============================================================================
+//
+// gld_TerrainAdjustFloorZ
+//
+//==============================================================================
 function gld_TerrainAdjustFloorZ(const x, y: fixed_t; const floorz: fixed_t): fixed_t;
 
 implementation
@@ -115,7 +145,6 @@ type
   end;
   Pterrainsubdivision_t = ^terrainsubdivision_t;
 
-
 var
   FTerrainPoints: Pterrainvert_tArray;
   FTerrainSubDivisions: array[0..TerrainSubDivisions - 1, 0..TerrainSubDivisions - 1] of terrainsubdivision_t;
@@ -123,6 +152,11 @@ var
 var
   WaterRealHeight: single;
 
+//==============================================================================
+//
+// CalculateTerrainNormals
+//
+//==============================================================================
 procedure CalculateTerrainNormals;
 var
   X,Y, XX,YY, targetY, targetX: integer;
@@ -181,12 +215,15 @@ begin
   end;
 end;
 
-
 var
 
   subdivisionlength: single;
 
-
+//==============================================================================
+//
+// MakeSubDivision
+//
+//==============================================================================
 procedure MakeSubDivision(const x, y: integer);
 
 var
@@ -219,7 +256,6 @@ var
 begin
   sd := @FTerrainSubDivisions[x, y];
 
-
   xStart := x * (TerrainSize - 1) div TerrainSubDivisions;
 
   xEnd := (x + 1) * (TerrainSize - 1) div TerrainSubDivisions;
@@ -227,7 +263,6 @@ begin
   yStart := y * (TerrainSize - 1) div TerrainSubDivisions;
 
   yEnd := (y + 1) * (TerrainSize - 1) div TerrainSubDivisions;
-
 
   llow := 1e10;
   lhi := -1e10;
@@ -252,16 +287,13 @@ begin
 
            FTerrainPoints[xEnd, yEnd].Vector[2]) / 2;
 
-
   lheight := lhi - sd.Y;
 
   sd.radious := sqrt(2 * sqr(subdivisionlength / 2) + sqr(lheight));
 
-
   avheight := 0;; // Average height for small list
 
   avcount := 0;
-
 
   underwaterdivision := false;
 
@@ -309,7 +341,6 @@ begin
       ptv_xy1 := @FTerrainPoints[iX, iY + 1];
 
       ptv_x1y1 := @FTerrainPoints[iX + 1, iY + 1];
-
 
       if (ptv_xy.Vector[1] > WaterRealHeight) or
 
@@ -367,7 +398,6 @@ begin
 
         ptv_x1y1 := @FTerrainPoints[iX + 1, iY + 1];
 
-
       if (ptv_xy.Vector[1] > WaterRealHeight) and
 
          (ptv_x1y.Vector[1] > WaterRealHeight) and
@@ -405,13 +435,9 @@ begin
 
     end;
 
-
-
   glEnd;
 
   glEndList;
-
-
 
   // Create the small detail list (actually medium detail)
 
@@ -432,7 +458,6 @@ begin
         ptv_xy1 := @FTerrainPoints[iX, iY + 1];
 
         ptv_x1y1 := @FTerrainPoints[iX + 1, iY + 1];
-
 
         glTexCoord2f(ptv_xy.U, ptv_xy.V);
 
@@ -473,7 +498,6 @@ begin
     glTexCoord2f(ptv_xy.U, ptv_xy.V);
     glNormal3fv(@ptv_xy.normal);
     glVertex3f(ptv_xy.Vector[0], avheight, ptv_xy.Vector[2]);
-
 
     // Left
 
@@ -526,15 +550,15 @@ begin
   glEndList;
 end;
 
-
-
-
 var
 
   terrain_initialized: boolean = false;
 
-
-
+//==============================================================================
+//
+// gld_InitTerrainData
+//
+//==============================================================================
 procedure gld_InitTerrainData;
 var
   iX, iY: Integer;
@@ -554,15 +578,17 @@ begin
 
   WaterRealHeight := (WaterHeightMapValue - 128) * TerrainHeightScale;
 
-
   for iX := 0 to TerrainSubDivisions - 1 do
     for iY := 0 to TerrainSubDivisions - 1 do
 
       MakeSubDivision(iX, iY);
 end;
 
-
-
+//==============================================================================
+//
+// gld_FreeTerrainData
+//
+//==============================================================================
 procedure gld_FreeTerrainData;
 var
   x, y: integer;
@@ -587,6 +613,11 @@ end;
 var
   doMultiTexturingTerrain: boolean;
 
+//==============================================================================
+//
+// ActivateMultitexturing
+//
+//==============================================================================
 procedure ActivateMultitexturing;
 begin
   if canuselightmaps then
@@ -623,6 +654,11 @@ begin
   end
 end;
 
+//==============================================================================
+//
+// DeActivateMultitexturing
+//
+//==============================================================================
 procedure DeActivateMultitexturing;
 begin
   if canuselightmaps then
@@ -649,6 +685,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// gld_DrawTerrain
+//
+//==============================================================================
 procedure gld_DrawTerrain(const x, y, z: single);
 var
   i, j: integer;
@@ -767,6 +808,11 @@ begin
 
 end;
 
+//==============================================================================
+//
+// gld_GetDoomHeightFromCoord
+//
+//==============================================================================
 function gld_GetDoomHeightFromCoord(const x, y: fixed_t): float;
 var
   x1, y1: float;
@@ -820,11 +866,21 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// gld_GetDoomHeightFromCoordFixed
+//
+//==============================================================================
 function gld_GetDoomHeightFromCoordFixed(const x, y: fixed_t): fixed_t;
 begin
   result := round(gld_GetDoomHeightFromCoord(x, y) * MAP_SCALE);
 end;
 
+//==============================================================================
+//
+// gld_TerrainAdjustFloorZ
+//
+//==============================================================================
 function gld_TerrainAdjustFloorZ(const x, y: fixed_t; const floorz: fixed_t): fixed_t;
 var
   x1, y1: float;
@@ -895,5 +951,4 @@ begin
 end;
 
 end.
-
 

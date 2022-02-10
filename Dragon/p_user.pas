@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -41,8 +41,18 @@ interface
 uses
   d_player;
 
+//==============================================================================
+//
+// P_PlayerThink
+//
+//==============================================================================
 procedure P_PlayerThink(player: Pplayer_t);
 
+//==============================================================================
+//
+// P_CalcHeight
+//
+//==============================================================================
 procedure P_CalcHeight(player: Pplayer_t);
 
 implementation
@@ -82,10 +92,12 @@ const
 var
   onground: boolean;
 
+//==============================================================================
 //
 // P_Thrust
 // Moves the given origin along a given angle.
 //
+//==============================================================================
 procedure P_Thrust(player: Pplayer_t; angle: angle_t; const move: fixed_t);
 begin
   angle := angle shr ANGLETOFINESHIFT;
@@ -94,10 +106,12 @@ begin
   player.mo.momy := player.mo.momy + FixedMul(move, finesine[angle]);
 end;
 
+//==============================================================================
 //
 // P_CalcHeight
 // Calculate the walking / running height adjustment
 //
+//==============================================================================
 procedure P_CalcHeight(player: Pplayer_t);
 var
   angle: integer;
@@ -162,9 +176,12 @@ begin
     player.viewz := player.mo.ceilingz - 4 * FRACUNIT;
 end;
 
+//==============================================================================
+// PlayerInIdleFrame
 //
 // P_MovePlayer
 //
+//==============================================================================
 function PlayerInIdleFrame(const p: Pplayer_t): Boolean;
 begin
   if p.mo.state = @states[Ord(S_PLAY)] then
@@ -180,6 +197,11 @@ begin
   result := false;
 end;
 
+//==============================================================================
+//
+// P_MovePlayer
+//
+//==============================================================================
 procedure P_MovePlayer(player: Pplayer_t);
 var
   cmd: Pticcmd_t;
@@ -328,6 +350,11 @@ const
   ANG5 = ANG90 div 18;
   ANG355 = ANG270 +  ANG5 * 17; // add by JVAL
 
+//==============================================================================
+//
+// P_DeathThink
+//
+//==============================================================================
 procedure P_DeathThink(player: Pplayer_t);
 var
   angle: angle_t;
@@ -380,9 +407,11 @@ begin
     player.playerstate := PST_REBORN;
 end;
 
+//==============================================================================
 //
 // P_PlayerThink
 //
+//==============================================================================
 procedure P_PlayerThink(player: Pplayer_t);
 var
   cmd: Pticcmd_t;
@@ -403,7 +432,6 @@ begin
     cmd.sidemove := 0;
     player.mo.flags := player.mo.flags and (not MF_JUSTATTACKED);
   end;
-
 
   if player.playerstate = PST_DEAD then
   begin
@@ -449,13 +477,11 @@ begin
           newweapon := wp_fist;
     end;
 
-
     if (gamemode = commercial) and
        (newweapon = wp_shotgun) and
        (player.weaponowned[Ord(wp_supershotgun)] <> 0) and
        (player.readyweapon <> wp_supershotgun) then
       newweapon := wp_supershotgun;
-
 
     if (player.weaponowned[Ord(newweapon)] <> 0) and
        (newweapon <> player.readyweapon) then
@@ -513,7 +539,6 @@ begin
   if player.bonuscount <> 0 then
     player.bonuscount := player.bonuscount - 1;
 
-
   // Handling colormaps.
   if player.powers[Ord(pw_invulnerability)] <> 0 then
   begin
@@ -538,6 +563,5 @@ begin
   A_PlayerBreath(player);// jval: WOLF
 //  A_PlayerWalk(player);
 end;
-
 
 end.

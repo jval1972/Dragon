@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -86,6 +86,11 @@ var
 const
   PLAYPAL = 'PLAYPAL';
 
+//==============================================================================
+//
+// V_ReadPalette
+//
+//==============================================================================
 function V_ReadPalette(tag: integer): PByteArray;
 
 var
@@ -105,8 +110,13 @@ uses
 const
   playpalnum: integer = -2;
 
+//==============================================================================
+// V_ReadPalette
+//
 // JVAL
 // Reads the 'PLAYPAL' lump, optimized, keep lump number
+//
+//==============================================================================
 function V_ReadPalette(tag: integer): PByteArray;
 begin
   if playpalnum < 0 then

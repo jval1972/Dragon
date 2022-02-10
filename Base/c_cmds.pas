@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -43,27 +43,82 @@ type
   end;
   Pcmd_t = ^cmd_t;
 
+//==============================================================================
+//
+// C_AddCmd
+//
+//==============================================================================
 procedure C_AddCmd(const name: string; proc: cmdproc_t);
 
+//==============================================================================
+//
+// C_GetCmd
+//
+//==============================================================================
 function C_GetCmd(name: string; var cmd: cmd_t): boolean;
 
+//==============================================================================
+//
+// C_CmdExists
+//
+//==============================================================================
 function C_CmdExists(name: string): boolean;
 
+//==============================================================================
+//
+// C_ExecuteCmd
+//
+//==============================================================================
 function C_ExecuteCmd(const cmd: Pcmd_t;
   const parm1: string = ''; const parm2: string = ''): boolean; overload;
 
+//==============================================================================
+//
+// C_ExecuteCmd
+//
+//==============================================================================
 function C_ExecuteCmd(const name: string): boolean; overload;
 
+//==============================================================================
+//
+// C_ExecuteCmd
+//
+//==============================================================================
 function C_ExecuteCmd(const name: string; const parm: string): boolean; overload;
 
+//==============================================================================
+//
+// C_ExecuteCmd
+//
+//==============================================================================
 function C_ExecuteCmd(name: string; const parm1, parm2: string): boolean; overload;
 
+//==============================================================================
+//
+// C_BoolEval
+//
+//==============================================================================
 function C_BoolEval(parm: string; const default: boolean): boolean;
 
+//==============================================================================
+//
+// C_CmdList
+//
+//==============================================================================
 procedure C_CmdList(const mask: string);
 
+//==============================================================================
+//
+// C_GetMachingList
+//
+//==============================================================================
 function C_GetMachingList(const src: TDStringList; const mask: string): TDStringList;
 
+//==============================================================================
+//
+// C_UnknowCommandMsg
+//
+//==============================================================================
 procedure C_UnknowCommandMsg;
 
 implementation
@@ -83,6 +138,11 @@ var
 const
   CMDSPLITSTR = ',';
 
+//==============================================================================
+//
+// C_AddCmd
+//
+//==============================================================================
 procedure C_AddCmd(const name: string; proc: cmdproc_t);
 var
   name1, name2: string;
@@ -111,6 +171,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// C_ExecuteCmd
+//
+//==============================================================================
 function C_ExecuteCmd(const name: string): boolean;
 var
   name1,
@@ -120,6 +185,11 @@ begin
   result := C_ExecuteCmd(name1, parm);
 end;
 
+//==============================================================================
+//
+// C_ExecuteCmd
+//
+//==============================================================================
 function C_ExecuteCmd(const name: string; const parm: string): boolean;
 var
   parm1,
@@ -129,6 +199,11 @@ begin
   result := C_ExecuteCmd(name, parm1, parm2);
 end;
 
+//==============================================================================
+//
+// C_QuickSortCmds
+//
+//==============================================================================
 procedure C_QuickSortCmds;
 
   procedure qsort(l, r: Integer);
@@ -166,6 +241,11 @@ begin
   cmdssorted := true;
 end;
 
+//==============================================================================
+//
+// C_GetCmd
+//
+//==============================================================================
 function C_GetCmd(name: string; var cmd: cmd_t): boolean;
 var
   l, h, i: integer;
@@ -197,6 +277,11 @@ begin
   result := false;
 end;
 
+//==============================================================================
+//
+// C_CmdExists
+//
+//==============================================================================
 function C_CmdExists(name: string): boolean;
 var
   c: cmd_t;
@@ -204,6 +289,11 @@ begin
   result := C_GetCmd(name, c);
 end;
 
+//==============================================================================
+//
+// C_ExecuteCmd
+//
+//==============================================================================
 function C_ExecuteCmd(const cmd: Pcmd_t;
   const parm1: string = ''; const parm2: string = ''): boolean;
 begin
@@ -219,6 +309,11 @@ begin
   result := true;
 end;
 
+//==============================================================================
+//
+// C_ExecuteCmd
+//
+//==============================================================================
 function C_ExecuteCmd(name: string; const parm1, parm2: string): boolean;
 var
   l, h, i: integer;
@@ -275,6 +370,11 @@ const
     '0'
   );
 
+//==============================================================================
+//
+// C_BoolEval
+//
+//==============================================================================
 function C_BoolEval(parm: string; const default: boolean): boolean;
 var
   i: integer;
@@ -299,6 +399,11 @@ begin
 
 end;
 
+//==============================================================================
+//
+// C_GetMachingList
+//
+//==============================================================================
 function C_GetMachingList(const src: TDStringList; const mask: string): TDStringList;
 var
   i, j: integer;
@@ -363,6 +468,11 @@ begin
 
 end;
 
+//==============================================================================
+//
+// C_CmdList
+//
+//==============================================================================
 procedure C_CmdList(const mask: string);
 var
   i: integer;
@@ -401,6 +511,11 @@ end;
 const
   S_UNKNOWNCOMMAND = 'Unknown command'#13#10;
 
+//==============================================================================
+//
+// C_UnknowCommandMsg
+//
+//==============================================================================
 procedure C_UnknowCommandMsg;
 begin
   printf(S_UNKNOWNCOMMAND);

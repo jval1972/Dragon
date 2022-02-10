@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -61,7 +61,6 @@ uses
   s_sound,
   t_main,
   v_video;
-
 
 const
   DFS_NEVER = 0;
@@ -561,7 +560,6 @@ const
      defaultbvalue: false;
      _type: tBoolean),
 
-
      // Navigation
     (name: 'Controls';
      location: nil;
@@ -702,7 +700,6 @@ const
 
      _type: tInteger),
 
-
      // JVAL Look LEFT/RIGHT
     (name: 'key_lookright';
 
@@ -728,7 +725,6 @@ const
      defaultivalue: KEY_ENTER;
      defaultbvalue: false;
      _type: tInteger),
-
 
      // Mouse
 

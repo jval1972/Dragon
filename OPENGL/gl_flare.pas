@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -34,16 +34,46 @@ interface
 uses
   d_delphi;
 
+//==============================================================================
+//
+// gld_SetSun
+//
+//==============================================================================
 procedure gld_SetSun(const x, y, z: float);
 
+//==============================================================================
+//
+// gld_DrawSun
+//
+//==============================================================================
 procedure gld_DrawSun;
 
+//==============================================================================
+//
+// gld_CalculateSun
+//
+//==============================================================================
 procedure gld_CalculateSun;
 
+//==============================================================================
+//
+// gld_ResetSun
+//
+//==============================================================================
 procedure gld_ResetSun;
 
+//==============================================================================
+//
+// gld_EnableSunLight
+//
+//==============================================================================
 procedure gld_EnableSunLight;
 
+//==============================================================================
+//
+// gld_DisableSunLight
+//
+//==============================================================================
 procedure gld_DisableSunLight;
 
 implementation
@@ -65,6 +95,11 @@ var
  gl_sun: array[0..3] of float;
  timesunstops: integer;
 
+//==============================================================================
+//
+// gld_SetSun
+//
+//==============================================================================
 procedure gld_SetSun(const x, y, z: float);
 begin
   gl_sun[0] := x;
@@ -73,11 +108,21 @@ begin
   gl_sun[3] := 1.0;
 end;
 
+//==============================================================================
+//
+// gld_ResetSun
+//
+//==============================================================================
 procedure gld_ResetSun;
 begin
   timesunstops := -1;
 end;
 
+//==============================================================================
+//
+// gld_GetSunFlarePos
+//
+//==============================================================================
 function gld_GetSunFlarePos(var sx, sy, sz: glDouble): boolean;
 var
   modelMatrix: TGLMatrixd4; // The model matrix.
@@ -105,6 +150,11 @@ begin
 
 end;
 
+//==============================================================================
+//
+// gld_DrawFlareQuad
+//
+//==============================================================================
 procedure gld_DrawFlareQuad(x, y, size: glFloat);
 begin
   glbegin(GL_QUADS);
@@ -122,6 +172,11 @@ var
   sunvisible: boolean;
   sx, sy, sz: glDouble;
 
+//==============================================================================
+//
+// gld_CalculateSun
+//
+//==============================================================================
 procedure gld_CalculateSun;
 begin
   dec(timesunstops);
@@ -136,7 +191,11 @@ begin
 
 end;
 
-
+//==============================================================================
+//
+// DrawQuad
+//
+//==============================================================================
 procedure DrawQuad(Size: glFloat);
 begin
   glbegin(GL_QUADS);
@@ -147,6 +206,11 @@ begin
   glend;
 end;
 
+//==============================================================================
+//
+// gld_DrawSun
+//
+//==============================================================================
 procedure gld_DrawSun;
 var
   flx, fly: glFloat;
@@ -180,7 +244,6 @@ begin
   glEnable(GL_BLEND);
   glBlendFunc(GL_ONE, GL_ONE);
 
-
   glcolor3f(FlareCol, FlareCol, FlareCol);
 
   glMatrixMode(GL_PROJECTION);
@@ -211,7 +274,6 @@ begin
     glBindTexture(GL_TEXTURE_2D, FlareTex[2]);
     DrawQuad(FlareSize * 0.8);
   glPopMatrix;
-
 
   glPushMatrix;
     glTranslatef(hw - flx * 0.9, hh - fly * 0.9, -5);
@@ -259,7 +321,11 @@ begin
 
 end;
 
-
+//==============================================================================
+//
+// gld_EnableSunLight
+//
+//==============================================================================
 procedure gld_EnableSunLight;
 var
   lightcolor: array[0..3] of float;
@@ -303,6 +369,11 @@ begin
 	glEnable(GL_LIGHT1);
 end;
 
+//==============================================================================
+//
+// gld_DisableSunLight
+//
+//==============================================================================
 procedure gld_DisableSunLight;
 begin
   glDisable(GL_LIGHTING);

@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -37,22 +37,62 @@ interface
 uses
   d_delphi;
 
+//==============================================================================
+// P_ArchivePlayers
+//
 // Persistent storage/archiving.
 // These are the load / save game routines.
+//
+//==============================================================================
 procedure P_ArchivePlayers;
 
+//==============================================================================
+//
+// P_UnArchivePlayers
+//
+//==============================================================================
 procedure P_UnArchivePlayers;
 
+//==============================================================================
+//
+// P_ArchiveWorld
+//
+//==============================================================================
 procedure P_ArchiveWorld;
 
+//==============================================================================
+//
+// P_UnArchiveWorld
+//
+//==============================================================================
 procedure P_UnArchiveWorld;
 
+//==============================================================================
+//
+// P_ArchiveThinkers
+//
+//==============================================================================
 procedure P_ArchiveThinkers;
 
+//==============================================================================
+//
+// P_UnArchiveThinkers
+//
+//==============================================================================
 procedure P_UnArchiveThinkers;
 
+//==============================================================================
+//
+// P_ArchiveSpecials
+//
+//==============================================================================
 procedure P_ArchiveSpecials;
 
+//==============================================================================
+//
+// P_UnArchiveSpecials
+//
+//==============================================================================
 procedure P_UnArchiveSpecials;
 
 var
@@ -88,17 +128,23 @@ uses
   r_defs,
   z_zone;
 
+//==============================================================================
+// PADSAVEP
+//
 // Pads save_p to a 4-byte boundary
 //  so that the load/save works on SGI&Gecko.
-
+//
+//==============================================================================
 procedure PADSAVEP;
 begin
   save_p := PByteArray(integer(save_p) + ((4 - (integer(save_p) and 3) and 3)));
 end;
 
+//==============================================================================
 //
 // P_ArchivePlayers
 //
+//==============================================================================
 procedure P_ArchivePlayers;
 var
   i: integer;
@@ -121,9 +167,12 @@ begin
   end;
 end;
 
+//==============================================================================
+// P_UnArchiveOldPlayer
 //
 // P_UnArchivePlayers
 //
+//==============================================================================
 function P_UnArchiveOldPlayer(p: Pplayer_t): boolean;
 begin
   if savegameversion <= VERSION114 then
@@ -138,6 +187,11 @@ begin
     result := false
 end;
 
+//==============================================================================
+//
+// P_UnArchivePlayers
+//
+//==============================================================================
 procedure P_UnArchivePlayers;
 var
   i: integer;
@@ -169,9 +223,11 @@ begin
   end;
 end;
 
+//==============================================================================
 //
 // P_ArchiveWorld
 //
+//==============================================================================
 procedure P_ArchiveWorld;
 var
   i: integer;
@@ -248,9 +304,11 @@ begin
   save_p := PByteArray(put);
 end;
 
+//==============================================================================
 //
 // P_UnArchiveWorld
 //
+//==============================================================================
 procedure P_UnArchiveWorld;
 var
   i: integer;
@@ -347,9 +405,11 @@ end;
 type
   thinkerclass_t = (tc_end, tc_mobj);
 
+//==============================================================================
 //
 // P_ArchiveThinkers
 //
+//==============================================================================
 procedure P_ArchiveThinkers;
 var
   th: Pthinker_t;
@@ -382,6 +442,11 @@ begin
   save_p := @save_p[1];
 end;
 
+//==============================================================================
+//
+// P_UnArchiveOldPmobj
+//
+//==============================================================================
 function P_UnArchiveOldPmobj(const mobj: Pmobj_t): boolean;
 var
   mobj113: Pmobj_t113;
@@ -592,6 +657,7 @@ end;
 
 // P_UnArchiveThinkers
 //
+//==============================================================================
 procedure P_UnArchiveThinkers;
 var
   tclass: byte;
@@ -678,8 +744,8 @@ type
     tc_endspecials
   );
 
-
-
+//==============================================================================
+// P_ArchiveSpecials
 //
 // Things to handle:
 //
@@ -691,6 +757,7 @@ type
 // T_Glow, (glow_t: sector_t *),
 // T_PlatRaise, (plat_t: sector_t *), - active list
 //
+//==============================================================================
 procedure P_ArchiveSpecials;
 var
   th: Pthinker_t;
@@ -864,9 +931,11 @@ begin
   save_p := @save_p[1];
 end;
 
+//==============================================================================
 //
 // P_UnArchiveSpecials
 //
+//==============================================================================
 procedure P_UnArchiveSpecials;
 var
   tclass: byte;
@@ -1088,8 +1157,6 @@ begin
           @pusher.thinker._function.acp1 := @T_Pusher;
           P_AddThinker(@pusher.thinker);
         end;
-
-
 
       else
         I_Error('P_UnarchiveSpecials(): Unknown tclass %d in savegame', [tclass]);

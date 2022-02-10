@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -196,7 +196,6 @@ const
   // Just appeard - new spawn monsters or just teleported monsters
   MF_JUSTAPPEARED = $10000000;
 
-
 const
   // Sprite is transparent
   MF_EX_TRANSPARENT = 1;
@@ -280,9 +279,6 @@ const
   MF2_EX_CANNOTPUSH = $40;
   // don't generate a vissprite
   MF2_EX_DONTDRAW = $80;
-
-
-
 
 type
 // Map Object definition.

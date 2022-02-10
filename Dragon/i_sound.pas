@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -37,38 +37,74 @@ interface
 uses
   sounds;
 
+//==============================================================================
+// I_InitSound
+//
 // Init at program start...
+//
+//==============================================================================
 procedure I_InitSound;
 
+//==============================================================================
+// I_ShutDownSound
+//
 // ... shut down and relase at program termination.
+//
+//==============================================================================
 procedure I_ShutDownSound;
 
+//==============================================================================
+// I_SetChannels
 //
 //  SFX I/O
 //
-
 // Initialize channels?
+//
+//==============================================================================
 procedure I_SetChannels;
 
+//==============================================================================
+// I_GetSfxLumpNum
+//
 // Get raw data lump index for sound descriptor.
+//
+//==============================================================================
 function I_GetSfxLumpNum(sfxinfo: Psfxinfo_t): integer;
 
-
+//==============================================================================
+// I_StartSound
+//
 // Starts a sound in a particular sound channel.
+//
+//==============================================================================
 function I_StartSound(id: integer; vol: integer; sep: integer;
   pitch: integer; priority: integer): integer;
 
-
+//==============================================================================
+// I_StopSound
+//
 // Stops a sound channel.
+//
+//==============================================================================
 procedure I_StopSound(handle: integer);
 
+//==============================================================================
+// I_SoundIsPlaying
+//
 // Called by S_*() functions
 //  to see if a channel is still playing.
 // Returns 0 if no longer playing, 1 if playing.
+//
+//==============================================================================
 function I_SoundIsPlaying(handle: integer): boolean;
 
+//==============================================================================
+// I_UpdateSoundParams
+//
 // Updates the volume, separation,
 //  and pitch of a sound channel.
+//
+//==============================================================================
 procedure I_UpdateSoundParams(handle: integer; vol: integer; sep: integer;
   pitch: integer);
 
@@ -76,8 +112,18 @@ var
   useexternalwav: boolean;
   preferewavnamesingamedirectory: boolean;
 
+//==============================================================================
+//
+// I_SetUseExternalWav
+//
+//==============================================================================
 procedure I_SetUseExternalWav(const newu: boolean);
 
+//==============================================================================
+//
+// I_PlayMediaSound
+//
+//==============================================================================
 procedure I_PlayMediaSound(id: integer);
 
 implementation
@@ -134,6 +180,11 @@ var
   soundparams: Psoundparam_tArray = nil;
   numsoundparams: integer = 0;
 
+//==============================================================================
+//
+// GetSoundParam
+//
+//==============================================================================
 function GetSoundParam(id: integer): Psoundparam_t;
 var
   oldsize: integer;
@@ -170,10 +221,13 @@ var
   ChannelBuffers: array[0..NUM_CHANNELS - 1] of IDirectSoundBuffer;
   ChannelActive: packed array[0..NUM_CHANNELS - 1] of boolean;
 
+//==============================================================================
+// I_GetSfxLumpNum
 //
 // Retrieve the raw data lump index
 //  for a given SFX name.
 //
+//==============================================================================
 function I_GetSfxLumpNum(sfxinfo: Psfxinfo_t): integer;
 var
   namebuf: string;
@@ -197,6 +251,11 @@ const
   CS_fmt  = $20746D66;  // fmt' ' in HEX
   CS_data = $61746164;  // data in HEX
 
+//==============================================================================
+//
+// I_CacheSFX
+//
+//==============================================================================
 procedure I_CacheSFX(const sfxid: integer);
 var
   name: string;
@@ -456,6 +515,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// I_SetSfxFormat
+//
+//==============================================================================
 procedure I_SetSfxFormat(const sfxid: integer);
 var
   sparm: Psoundparam_t;
@@ -467,6 +531,8 @@ begin
   SampleFormat.nChannels := sparm.channels;
 end;
 
+//==============================================================================
+// I_SetChannels
 //
 // SFX API
 // Note: this was called by S_Init.
@@ -476,10 +542,16 @@ end;
 // version.
 // See soundserver initdata().
 //
+//==============================================================================
 procedure I_SetChannels;
 begin
 end;
 
+//==============================================================================
+//
+// I_SetSfxVolume
+//
+//==============================================================================
 procedure I_SetSfxVolume(volume: integer);
 begin
   // Identical to DOS.
@@ -490,6 +562,11 @@ begin
   snd_SfxVolume := volume;
 end;
 
+//==============================================================================
+//
+// I_ChannelPlaying
+//
+//==============================================================================
 function I_ChannelPlaying(channel: integer): boolean;
 var
   status: LongWord;
@@ -522,6 +599,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// I_KillChannel
+//
+//==============================================================================
 procedure I_KillChannel(channel: integer);
 begin
   if pDS <> nil then
@@ -542,6 +624,11 @@ const
 
   vulumetransshift = 8;
 
+//==============================================================================
+//
+// I_SepToDSPan
+//
+//==============================================================================
 function I_SepToDSPan(const sep: integer): integer;
 begin
   result := DSBPAN_CENTER +
@@ -549,12 +636,22 @@ begin
       (16 * 128 * 128);
 end;
 
+//==============================================================================
+//
+// I_VolToDSVol
+//
+//==============================================================================
 function I_VolToDSVol(const vol: integer): integer;
 begin
   result := DSBVOLUME_MIN +
     _SHR((DSBVOLUME_MAX - DSBVOLUME_MIN) * (vulumetrans[vol] + 1), vulumetransshift);
 end;
 
+//==============================================================================
+//
+// I_UpdateSoundParams
+//
+//==============================================================================
 procedure I_UpdateSoundParams(handle: integer; vol: integer; sep: integer;
   pitch: integer);
 var
@@ -576,6 +673,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// I_RestartChannel
+//
+//==============================================================================
 function I_RestartChannel(channel: integer; vol: integer; sep: integer): integer;
 var
   dsb: IDirectSoundBuffer;
@@ -602,6 +704,8 @@ begin
   inc(HandleCount);
 end;
 
+//==============================================================================
+// I_StartSound
 //
 // Starting a sound means adding it
 //  to the current list of active sounds
@@ -614,6 +718,7 @@ end;
 // Pitching (that is, increased speed of playback)
 //  is set, but currently not used by mixing.
 //
+//==============================================================================
 function I_StartSound(id: integer; vol: integer; sep: integer;
   pitch: integer; priority: integer): integer;
 var
@@ -765,6 +870,11 @@ begin
   result := I_RestartChannel(channel, vol, sep);
 end;
 
+//==============================================================================
+//
+// I_StopSound
+//
+//==============================================================================
 procedure I_StopSound(handle: integer);
 var
   channel: integer;
@@ -782,6 +892,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// I_SoundIsPlaying
+//
+//==============================================================================
 function I_SoundIsPlaying(handle: integer): boolean;
 var
   channel: integer;
@@ -803,6 +918,11 @@ begin
   result := false;
 end;
 
+//==============================================================================
+//
+// I_ShutDownSound
+//
+//==============================================================================
 procedure I_ShutDownSound;
 var
   i: integer;
@@ -824,6 +944,11 @@ begin
   S_ShutDownSound;
 end;
 
+//==============================================================================
+//
+// I_InitSound
+//
+//==============================================================================
 procedure I_InitSound;
 var
   hres: HRESULT;
@@ -881,6 +1006,11 @@ begin
 
 end;
 
+//==============================================================================
+//
+// I_SetUseExternalWav
+//
+//==============================================================================
 procedure I_SetUseExternalWav(const newu: boolean);
 var
   i: integer;
@@ -899,12 +1029,16 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// I_PlayMediaSound
+//
+//==============================================================================
 procedure I_PlayMediaSound(id: integer);
 begin
   I_CacheSFX(id);
   sndPlaySound(S_sfx[id].data, SND_ASYNC or SND_MEMORY);
 end;
-
 
 initialization
   pDS := nil;

@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -337,10 +337,25 @@ type
   GLNode_tArray = array[0..$FFFF] of GLNode_t;
   PGLNode_tArray = ^GLNode_tArray;
 
+//==============================================================================
+//
+// gld_GetGLNodesVersion
+//
+//==============================================================================
 function gld_GetGLNodesVersion(const base: integer): integer;
 
+//==============================================================================
+//
+// gld_GetGLVertexes
+//
+//==============================================================================
 procedure gld_GetGLVertexes(v: Pvertex_t; lump: integer; count: integer; ver: integer);
 
+//==============================================================================
+//
+// gld_GetGLMapLump
+//
+//==============================================================================
 function gld_GetGLMapLump(const maplump: integer): integer;
 
 implementation
@@ -353,10 +368,13 @@ uses
   m_misc,
   z_zone;
 
+//==============================================================================
+// gld_GetGLNodesVersion
 //
 // JVAL
 //  Returns the glbsp nodes version.
 //
+//==============================================================================
 function gld_GetGLNodesVersion(const base: integer): integer;
 var
   data: pointer;
@@ -408,6 +426,11 @@ begin
   result := 0;
 end;
 
+//==============================================================================
+//
+// gld_GetGLVertexes
+//
+//==============================================================================
 procedure gld_GetGLVertexes(v: Pvertex_t; lump: integer; count: integer; ver: integer);
 var
   i: integer;
@@ -450,6 +473,11 @@ end;
 const
   MOD_ADLER = 65521;
 
+//==============================================================================
+//
+// GetMapAdler32
+//
+//==============================================================================
 function GetMapAdler32(maplump: integer): longword;
 var
   data: PByteArray;
@@ -484,10 +512,12 @@ begin
 
 end;
 
+//==============================================================================
 //
 // GetGLMapAdler32
 // JVAL: This function returns the Adler-32 value of glBSP utility
 //
+//==============================================================================
 function GetGLMapAdler32(glmaplump: integer; glmapname: string): longword;
 var
   txt: string;
@@ -539,7 +569,11 @@ begin
     result := 0;
 end;
 
-
+//==============================================================================
+//
+// gld_GetGLMapLump
+//
+//==============================================================================
 function gld_GetGLMapLump(const maplump: integer): integer;
 var
   adler32: longword;

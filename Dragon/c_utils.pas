@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -31,6 +31,11 @@ unit c_utils;
 
 interface
 
+//==============================================================================
+//
+// C_RegisterUtilityCommands
+//
+//==============================================================================
 procedure C_RegisterUtilityCommands;
 
 implementation
@@ -42,6 +47,11 @@ uses
   gl_main,
   i_system;
 
+//==============================================================================
+//
+// C_CmdDir
+//
+//==============================================================================
 procedure C_CmdDir(const parm1, parm2: string);
 var
   mask: string;
@@ -70,6 +80,11 @@ begin
 
 end;
 
+//==============================================================================
+//
+// C_CmdCD
+//
+//==============================================================================
 procedure C_CmdCD;
 var
   cd: string;
@@ -78,6 +93,11 @@ begin
   printf('%s'#13#10, [cd]);
 end;
 
+//==============================================================================
+//
+// C_CmdCat
+//
+//==============================================================================
 procedure C_CmdCat(const parm1, parm2: string);
 var
   files: TDStringList;
@@ -118,6 +138,11 @@ begin
 
 end;
 
+//==============================================================================
+//
+// C_CmdGoToWebPage
+//
+//==============================================================================
 procedure C_CmdGoToWebPage(const parm: string);
 begin
   if fullscreen then
@@ -125,28 +150,52 @@ begin
   I_GoToWebPage(parm);
 end;
 
-
+//==============================================================================
+//
+// C_CmdHomepage
+//
+//==============================================================================
 procedure C_CmdHomepage;
 begin
 //  Site  : https://sourceforge.net/projects/dragon-game/
 end;
 
+//==============================================================================
+//
+// C_CmdHelp
+//
+//==============================================================================
 procedure C_CmdHelp;
 begin
 //  Site  : https://sourceforge.net/projects/dragon-game/
 end;
 
+//==============================================================================
+//
+// C_CmdForums
+//
+//==============================================================================
 procedure C_CmdForums;
 begin
   C_CmdGoToWebPage('http://delphidoom.forumotion.com/index.htm');
 end;
 
+//==============================================================================
+//
+// C_CmdGetLatestVersion
+//
+//==============================================================================
 procedure C_CmdGetLatestVersion;
 begin
   C_ExecuteCmd('ver');
 //  Site  : https://sourceforge.net/projects/dragon-game/
 end;
 
+//==============================================================================
+//
+// C_RegisterUtilityCommands
+//
+//==============================================================================
 procedure C_RegisterUtilityCommands;
 begin
   C_AddCmd('dir, ls', @C_CmdDir);

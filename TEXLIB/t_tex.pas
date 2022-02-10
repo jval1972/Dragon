@@ -1,4 +1,4 @@
-{$I Doom32.inc}
+{$I dragon.inc}
 
 unit t_tex;
 
@@ -26,6 +26,11 @@ begin
   SetFileExt('.TEX');
 end;
 
+//==============================================================================
+//
+// TTexTextureManager.LoadHeader
+//
+//==============================================================================
 function TTexTextureManager.LoadHeader(stream: TStream): boolean;
 var
   w, h: integer;
@@ -39,6 +44,11 @@ begin
   result := true;
 end;
 
+//==============================================================================
+//
+// TTexTextureManager.LoadImage
+//
+//==============================================================================
 function TTexTextureManager.LoadImage(stream: TStream): boolean;
 begin
   stream.Read(FBitmap.GetImage^, FBitmap.GetWidth * FBitmap.GetHeight * 4);

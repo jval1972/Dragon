@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -91,7 +91,11 @@ var
   // 32,33 count1-tables
   ht: array[0..HTN-1] of THuffCodeTab;
 
-
+//==============================================================================
+//
+// HuffmanDecoder
+//
+//==============================================================================
 function HuffmanDecoder(h: PHuffCodeTab; var x, y, v, w: Integer; br: TBitReserve): Integer;
 
 implementation
@@ -438,10 +442,14 @@ const
     (0,9),(2,1),(0,10),(0,11),(4,1),(2,1),(0,12),(0,13),(2,1),(0,14),
     (0,15));
 
-
+//==============================================================================
+// HuffmanDecoder
+//
 // do the huffman-decoding
 // note! for counta,countb -the 4 bit value is returned in y,
 // discard x
+//
+//==============================================================================
 function HuffmanDecoder(h: PHuffCodeTab; var x, y, v, w: Integer; br: TBitReserve): Integer;
 var level: HuffBits;
     point: Cardinal;
@@ -549,7 +557,11 @@ begin
   result := error;
 end;
 
-
+//==============================================================================
+//
+// SetHuffTable
+//
+//==============================================================================
 procedure SetHuffTable(ht: PHuffCodeTab; Name: PChar; xlen, ylen, linbits, linmax, ref: Integer;
                        table: PHuffBits; hlen: PChar; val: PPHTArray; treelen: Cardinal);
 begin

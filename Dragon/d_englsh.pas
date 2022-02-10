@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -432,7 +432,6 @@ var
     'The Shores of Hell and its amazing' + #13#10 +
     'sequel, Inferno!' + #13#10;
 
-
   E2TEXT: string =
     'You''ve done it! The hideous cyber-' + #13#10 +
     'demon lord that ruled the lost Deimos' + #13#10 +
@@ -451,7 +450,6 @@ var
     ' ' + #13#10 +
     'Now, it''s on to the final chapter of' + #13#10 +
     'DOOM! -- Inferno.';
-
 
   E3TEXT: string =
     'The loathsome spiderdemon that' + #13#10 +
@@ -472,7 +470,6 @@ var
     'spawn could have come through that' + #13#10 +
     'door with you ...';
 
-
   E4TEXT: string =
     'the spider mastermind must have sent forth' + #13#10 +
     'its legions of hellspawn before your' + #13#10 +
@@ -490,7 +487,6 @@ var
     'of demons run amok among our cities.' + #13#10 +
     ' ' + #13#10 +
     'next stop, hell on earth!';
-
 
 // after level 6, put this:
 
@@ -529,7 +525,6 @@ var
     'STARPORT.'' SLOWLY AND PAINFULLY YOU GET' + #13#10 +
     'UP AND RETURN TO THE FRAY.';
 
-
 // After level 20, put this:
 
   C3TEXT: string =
@@ -542,7 +537,6 @@ var
     'THERE MUST BE A WAY TO CLOSE IT ON THE' + #13#10 +
     'OTHER SIDE. WHAT DO YOU CARE IF YOU''VE' + #13#10 +
     'GOT TO GO THROUGH HELL TO GET TO IT?';
-
 
 // After level 29, put this:
 
@@ -563,8 +557,6 @@ var
     'HOME. REBUILDING EARTH OUGHT TO BE A' + #13#10 +
     'LOT MORE FUN THAN RUINING IT WAS.' + #13#10;
 
-
-
 // Before level 31, put this:
 
   C5TEXT: string =
@@ -574,14 +566,12 @@ var
     'WHO THE INMATES OF THIS CORNER OF HELL' + #13#10 +
     'WILL BE.';
 
-
 // Before level 32, put this:
 
   C6TEXT: string =
     'CONGRATULATIONS, YOU''VE FOUND THE' + #13#10 +
     'SUPER SECRET LEVEL!  YOU''D BETTER' + #13#10 +
     'BLAZE THROUGH THIS ONE!' + #13#10;
-
 
 // after map 06
 
@@ -599,7 +589,6 @@ var
     'moving, keep fighting, keep killing.' + #13#10 +
     'Oh yes, keep living, too.';
 
-
 // after map 11
 
   P2TEXT: string =
@@ -609,7 +598,6 @@ var
     'efficiently and permanently deactivated.' + #13#10 +
     ' ' + #13#10 +
     'You''re good at that kind of thing.';
-
 
 // after map 20
 
@@ -656,7 +644,6 @@ var
     'level we had ready for ya?  Now you know.' + #13#10 +
     'No one gets out alive.';
 
-
   T1TEXT: string =
     'You''ve fought your way out of the infested' + #13#10 +
     'experimental labs.   It seems that UAC has' + #13#10 +
@@ -671,7 +658,6 @@ var
     'complex still has some warlike ordnance' + #13#10 +
     'laying around.';
 
-
   T2TEXT: string =
     'You hear the grinding of heavy machinery' + #13#10 +
     'ahead.  You sure hope they''re not stamping' + #13#10 +
@@ -682,7 +668,6 @@ var
     'maniacs packed into one mad killer.' + #13#10 +
     ' ' + #13#10 +
     'You don''t plan to go down easy.';
-
 
   T3TEXT: string =
     'The vista opening ahead looks real damn' + #13#10 +
@@ -707,14 +692,12 @@ var
     'A blue light begins to glow inside the' + #13#10 +
     'ruined skull of the demon-spitter.';
 
-
   T5TEXT: string =
     'What now? Looks totally different. Kind' + #13#10 +
     'of like King Tut''s condo. Well,' + #13#10 +
     'whatever''s here can''t be any worse' + #13#10 +
     'than usual. Can it?  Or maybe it''s best' + #13#10 +
     'to let sleeping gods lie..';
-
 
   T6TEXT: string =
     'Time for a vacation. You''ve burst the' + #13#10 +
@@ -775,9 +758,7 @@ var
         '                       Undetermined version! (Ouch)' + #13#10 +
         '===========================================================================' + #13#10;
 
-
 implementation
-
 
 end.
 

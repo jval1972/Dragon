@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2020 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -38,19 +38,49 @@ uses
 // Needs access to LFB (guess what).
   v_video;
 
+//==============================================================================
+//
+// R_VideoErase
+//
+//==============================================================================
 procedure R_VideoErase(const ofs: integer; const count: integer);
 
+//==============================================================================
+//
+// R_VideoBlanc
+//
+//==============================================================================
 procedure R_VideoBlanc(const scn: integer; const ofs: integer; const count: integer; const black: byte = 0);
 
+//==============================================================================
+//
+// R_PlayerViewBlanc
+//
+//==============================================================================
 procedure R_PlayerViewBlanc(const black: byte);
 
+//==============================================================================
+//
+// R_InitBuffer
+//
+//==============================================================================
 procedure R_InitBuffer(width, height: integer);
 
+//==============================================================================
+// R_InitTranslationTables
+//
 // Initialize color translation tables,
 //  for player rendering etc.
+//
+//==============================================================================
 procedure R_InitTranslationTables;
 
+//==============================================================================
+// R_DrawDiskBusy
+//
 // Draw disk busy patch
+//
+//==============================================================================
 procedure R_DrawDiskBusy;
 
 var
@@ -111,6 +141,7 @@ uses
   doomstat,
   v_data;
 
+//==============================================================================
 //
 // R_InitTranslationTables
 // Creates the translation tables to map
@@ -118,6 +149,7 @@ uses
 // Assumes a given structure of the PLAYPAL.
 // Could be read from a lump instead.
 //
+//==============================================================================
 procedure R_InitTranslationTables;
 var
   i, j: integer;
@@ -166,6 +198,7 @@ begin
 
 end;
 
+//==============================================================================
 //
 // R_InitBuffer
 // Creats lookup tables that avoid
@@ -173,6 +206,7 @@ end;
 //  for getting the framebuffer address
 //  of a pixel to draw.
 //
+//==============================================================================
 procedure R_InitBuffer(width, height: integer);
 var
   i: integer;
@@ -198,6 +232,11 @@ begin
 
 end;
 
+//==============================================================================
+//
+// R_ScreenBlanc
+//
+//==============================================================================
 procedure R_ScreenBlanc(const scn: integer; const black: byte = 0);
 var
   x, i: integer;
@@ -210,10 +249,12 @@ begin
   end;
 end;
 
-
+//==============================================================================
+// R_VideoErase
 //
 // Copy a screen buffer.
 //
+//==============================================================================
 procedure R_VideoErase(const ofs: integer; const count: integer);
 var
   i: integer;
@@ -235,6 +276,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// R_VideoBlanc
+//
+//==============================================================================
 procedure R_VideoBlanc(const scn: integer; const ofs: integer; const count: integer; const black: byte = 0);
 var
   start: PByte;
@@ -259,6 +305,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// R_PlayerViewBlanc
+//
+//==============================================================================
 procedure R_PlayerViewBlanc(const black: byte);
 begin
   R_ScreenBlanc(SCN_FG, black);
@@ -268,6 +319,11 @@ var
   disklump: integer = -2;
   diskpatch: Ppatch_t = nil;
 
+//==============================================================================
+//
+// R_DrawDiskBusy
+//
+//==============================================================================
 procedure R_DrawDiskBusy;
 begin
   if not displaydiskbusyicon then

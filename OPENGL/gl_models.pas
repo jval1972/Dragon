@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -80,14 +80,39 @@ type
     function FrameIndex(const frame: string): integer; virtual;
   end;
 
+//==============================================================================
+//
+// gld_InitModels
+//
+//==============================================================================
 procedure gld_InitModels;
 
+//==============================================================================
+//
+// gld_CleanModelTextures
+//
+//==============================================================================
 procedure gld_CleanModelTextures;
 
+//==============================================================================
+//
+// gld_ModelsDone
+//
+//==============================================================================
 procedure gld_ModelsDone;
 
+//==============================================================================
+//
+// gld_Init3DFloors
+//
+//==============================================================================
 procedure gld_Init3DFloors(const lumpname: string);
 
+//==============================================================================
+//
+// gld_Draw3DFloors
+//
+//==============================================================================
 procedure gld_Draw3DFloors;
 
 const
@@ -123,7 +148,6 @@ type
     size: integer;
     items: Ptexturemanagetitem_tArray;
   end;
-
 
 type
   modelstate_t = record
@@ -165,6 +189,11 @@ uses
   w_pak,
   w_wad;
 
+//==============================================================================
+//
+// gld_AddModel
+//
+//==============================================================================
 function gld_AddModel(const item: modelmanageritem_t): integer;
 var
   i: integer;
@@ -198,6 +227,11 @@ begin
   inc(modelmanager.size);
 end;
 
+//==============================================================================
+//
+// gld_AddModelState
+//
+//==============================================================================
 procedure gld_AddModelState(const item: modelstate_t);
 begin
   if item.state < 0 then
@@ -211,6 +245,11 @@ begin
   inc(nummodelstates);
 end;
 
+//==============================================================================
+//
+// gld_AddModelTexture
+//
+//==============================================================================
 function gld_AddModelTexture(const texturename: string): integer;
 var
   i: integer;
@@ -238,10 +277,12 @@ end;
 const
   MODELDEFLUMPNAME = 'MODELDEF';
 
+//==============================================================================
 //
 // SC_ParseModelDefinition
 // JVAL: Parse MODELDEF LUMP
 //
+//==============================================================================
 procedure SC_ParseModelDefinition(const in_text: string);
 var
   sc: TScriptEngine;
@@ -429,10 +470,13 @@ begin
   modelitem.framemerge.Free;
 end;
 
+//==============================================================================
+// SC_ParseModelDefinitions
 //
 // SC_ParceDynamicLights
 // JVAL: Parse all MODELDEF lumps
 //
+//==============================================================================
 procedure SC_ParseModelDefinitions;
 var
   i: integer;
@@ -446,7 +490,11 @@ begin
   PAK_StringIterator(MODELDEFLUMPNAME + '.txt', SC_ParseModelDefinition);
 end;
 
-
+//==============================================================================
+//
+// gld_InitModels
+//
+//==============================================================================
 procedure gld_InitModels;
 begin
   modelmanager.size := 0;
@@ -459,6 +507,11 @@ begin
   SC_ParseModelDefinitions;
 end;
 
+//==============================================================================
+//
+// gld_CleanModelTextures
+//
+//==============================================================================
 procedure gld_CleanModelTextures;
 var
   i: integer;
@@ -476,6 +529,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// gld_ModelsDone
+//
+//==============================================================================
 procedure gld_ModelsDone;
 var
   i: integer;
@@ -529,6 +587,11 @@ var
   floors3d: floor3d_tArray;
   numfloors3d: integer;
 
+//==============================================================================
+//
+// gld_Init3DFloors
+//
+//==============================================================================
 procedure gld_Init3DFloors(const lumpname: string);
 var
   sc: TScriptEngine;
@@ -657,7 +720,6 @@ begin
           inc(numfloors3d);
         end;
 
-
       else
         begin
           I_Warning('gld_Init3DFloors(): Unknown token "%s" at line %d'#13#10, [token, sc._Line]);
@@ -669,6 +731,11 @@ begin
   tokens.Free;
 end;
 
+//==============================================================================
+//
+// gld_Draw3DFloors
+//
+//==============================================================================
 procedure gld_Draw3DFloors;
 var
   i, j: integer;
@@ -918,8 +985,12 @@ begin
 
 end;
 
+//==============================================================================
+// TModel.MergeFrames
+//
 //------------------------------------------------------------------------------
-
+//
+//==============================================================================
 function TModel.MergeFrames(const model: TModel): boolean;
 var
   i: integer;
@@ -986,8 +1057,12 @@ begin
   frameNames.Free;
 end;
 
+//==============================================================================
+// TModel.Draw
+//
 //------------------------------------------------------------------------------
-
+//
+//==============================================================================
 procedure TModel.Draw(const frm1, frm2: integer; const offset: float);
 var
   w2: float;
@@ -1041,8 +1116,12 @@ begin
   glEnd;
 end;
 
+//==============================================================================
+// TModel.DrawSimple
+//
 //------------------------------------------------------------------------------
-
+//
+//==============================================================================
 procedure TModel.DrawSimple(const frm: integer);
 var
   i: integer;
@@ -1068,8 +1147,12 @@ begin
   end;
 end;
 
+//==============================================================================
+// TModel.StartFrame
+//
 //------------------------------------------------------------------------------
-
+//
+//==============================================================================
 function TModel.StartFrame(const i: integer): integer;
 begin
   result := -1;
@@ -1078,8 +1161,12 @@ begin
       result := (frameNames.Objects[i] as TFrameIndexInfo).StartFrame;
 end;
 
+//==============================================================================
+// TModel.EndFrame
+//
 //------------------------------------------------------------------------------
-
+//
+//==============================================================================
 function TModel.EndFrame(const i: integer): integer;
 begin
   result := -1;
@@ -1088,8 +1175,12 @@ begin
       result := (frameNames.Objects[i] as TFrameIndexInfo).EndFrame;
 end;
 
+//==============================================================================
+// TModel.StartFrame
+//
 //------------------------------------------------------------------------------
-
+//
+//==============================================================================
 function TModel.StartFrame(const frame: string): integer;
 begin
   result := StartFrame(frameNames.IndexOf(frame));
@@ -1097,8 +1188,12 @@ begin
     result := StartFrame(frameNames.IndexOf(strupper(frame)));
 end;
 
+//==============================================================================
+// TModel.EndFrame
+//
 //------------------------------------------------------------------------------
-
+//
+//==============================================================================
 function TModel.EndFrame(const frame: string): integer;
 begin
   result := EndFrame(frameNames.IndexOf(frame));
@@ -1106,8 +1201,12 @@ begin
     result := EndFrame(frameNames.IndexOf(strupper(frame)));
 end;
 
+//==============================================================================
+// TModel.FrameName
+//
 //------------------------------------------------------------------------------
-
+//
+//==============================================================================
 function TModel.FrameName(const i: integer): string;
 begin
   if IsIntegerInRange(i, 0, frameNames.Count - 1) then
@@ -1116,8 +1215,12 @@ begin
     result := '';
 end;
 
+//==============================================================================
+// TModel.FrameIndex
+//
 //------------------------------------------------------------------------------
-
+//
+//==============================================================================
 function TModel.FrameIndex(const frame: string): integer;
 begin
   result := frameNames.IndexOf(frame);

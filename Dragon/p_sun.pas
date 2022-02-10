@@ -4,7 +4,7 @@
 //  DelphiDoom engine
 //
 //  Copyright (C) 1993-1996 by id Software, Inc.
-//  Copyright (C) 2004-2021 by Jim Valavanis
+//  Copyright (C) 2004-2022 by Jim Valavanis
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -35,8 +35,18 @@ uses
   m_fixed,
     p_mobj_h;
 
+//==============================================================================
+//
+// P_SetSun
+//
+//==============================================================================
 procedure P_SetSun(const mo: Pmobj_t);
 
+//==============================================================================
+//
+// P_CanSeeSun
+//
+//==============================================================================
 function P_CanSeeSun(const actor: Pmobj_t): boolean;
 
 var
@@ -47,11 +57,21 @@ implementation
 uses
   p_sight;
 
+//==============================================================================
+//
+// P_SetSun
+//
+//==============================================================================
 procedure P_SetSun(const mo: Pmobj_t);
 begin
   sun := mo;
 end;
 
+//==============================================================================
+//
+// P_CanSeeSun
+//
+//==============================================================================
 function P_CanSeeSun(const actor: Pmobj_t): boolean;
 begin
   if sun = nil then
