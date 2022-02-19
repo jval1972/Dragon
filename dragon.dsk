@@ -6,10 +6,16 @@ File_3=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\r_things.pas',0,1,3
 File_4=SourceModule,'F:\DelphiDoom_Release\Dragon\Src\Dragon\i_music.pas',0,1,88,3,92,0,0
 
 [Modules]
-Module0=G:\DelphiDoom_Release\Dragon\Src\Dragon\g_game.pas
-Module1=G:\DelphiDoom_Release\Dragon\Src\dragon.dpr
-Count=2
+Module0=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_sight.pas
+Module1=G:\DelphiDoom_Release\Dragon\Src\Dragon\g_game.pas
+Module2=G:\DelphiDoom_Release\Dragon\Src\dragon.dpr
+Count=3
 EditWindowCount=1
+
+[G:\DelphiDoom_Release\Dragon\Src\Dragon\p_sight.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
 
 [G:\DelphiDoom_Release\Dragon\Src\Dragon\g_game.pas]
 ModuleType=SourceModule
@@ -26,10 +32,11 @@ FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=2
-CurrentView=1
+ViewCount=3
+CurrentView=2
 View0=0
 View1=1
+View2=2
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -62,9 +69,16 @@ LeftCol=1
 
 [View1]
 Module=G:\DelphiDoom_Release\Dragon\Src\Dragon\g_game.pas
-CursorX=6
+CursorX=1
 CursorY=1190
 TopLine=1693
+LeftCol=1
+
+[View2]
+Module=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_sight.pas
+CursorX=27
+CursorY=128
+TopLine=1
 LeftCol=1
 
 [Watches]
