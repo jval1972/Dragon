@@ -672,6 +672,11 @@ begin
   end;
 end;
 
+//==============================================================================
+//
+// TJPGTextureManager.Create
+//
+//==============================================================================
 constructor TJPGTextureManager.Create(const ext: string);
 begin
   TTextureManager.Create;
@@ -679,6 +684,11 @@ begin
   SetFileExt(ext);
 end;
 
+//==============================================================================
+//
+// TJPGTextureManager.Destroy
+//
+//==============================================================================
 destructor TJPGTextureManager.Destroy;
 begin
   bmpstream.Free;

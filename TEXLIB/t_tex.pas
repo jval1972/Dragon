@@ -20,6 +20,11 @@ type
 
 implementation
 
+//==============================================================================
+//
+// TTexTextureManager.Create
+//
+//==============================================================================
 constructor TTexTextureManager.Create;
 begin
   inherited Create;
@@ -55,6 +60,11 @@ begin
   result := true;
 end;
 
+//==============================================================================
+//
+// TTexTextureManager.Destroy
+//
+//==============================================================================
 destructor TTexTextureManager.Destroy;
 begin
   Inherited destroy;
