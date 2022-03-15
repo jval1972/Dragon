@@ -109,9 +109,7 @@ uses
   g_game,
   info_h,
   i_system,
-{$IFDEF OPENGL}
   gl_render, // JVAL OPENGL
-{$ENDIF}
   p_mobj_h,
   p_pspr,
   p_pspr_h,
