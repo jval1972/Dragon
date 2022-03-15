@@ -550,7 +550,7 @@ begin
     if index >= MAXLIGHTSCALE then
       index := MAXLIGHTSCALE - 1;
 
-     vis.colormap := spritelights[index];
+    vis.colormap := spritelights[index];
   end;
 
   gld_AddSprite(vis); // JVAL: OPENGL
