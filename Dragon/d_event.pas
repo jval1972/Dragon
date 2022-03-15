@@ -31,9 +31,6 @@ unit d_event;
 
 interface
 
-uses
-  doomtype;
-
 //
 // Event handling.
 //

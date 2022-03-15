@@ -526,7 +526,6 @@ uses
   p_doors,
   p_spec,
   p_inter,
-  p_floor,
   p_pspr,
   p_extra,
   p_sounds,

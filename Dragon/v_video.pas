@@ -33,7 +33,6 @@ interface
 
 uses
   d_delphi,
-  doomtype,
   doomdef,
   m_fixed,
 // Needed because we are refering to patches.
@@ -345,10 +344,7 @@ var
 implementation
 
 uses
-  m_bbox,
   r_hires,
-  r_data,
-  r_mmx,
   t_draw,
   w_wad,
   z_zone;

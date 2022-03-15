@@ -35,16 +35,16 @@ unit p_telept;
 interface
 
 uses
-  p_local,
   p_mobj_h,
   r_defs;
 
-//==============================================================================
-// EV_Teleport
-//
-//-----------------------------------------------------------------------------
 //
 // TELEPORTATION
+//
+
+//==============================================================================
+//
+// EV_Teleport
 //
 //==============================================================================
 function EV_Teleport(line: Pline_t; side: integer; thing: Pmobj_t): integer;
@@ -67,7 +67,6 @@ implementation
 
 uses
   d_delphi,
-  doomdef,
   d_think,
   d_player,
   info_h,

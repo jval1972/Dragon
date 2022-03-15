@@ -212,7 +212,6 @@ var
 implementation
 
 uses
-  doomdef,
   z_zone,
   v_data,
   v_video,

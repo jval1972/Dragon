@@ -131,14 +131,10 @@ implementation
 
 uses
   m_argv,
-  r_hires,
   w_wad,
   z_zone,
   st_stuff,
   i_system,
-  gl_render,
-// State.
-  doomstat,
   v_data;
 
 //==============================================================================

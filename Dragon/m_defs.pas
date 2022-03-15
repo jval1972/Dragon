@@ -56,7 +56,6 @@ uses
   r_hires,
   r_lights,
   r_intrpl,
-  r_plane,
   r_draw,
   s_sound,
   t_main,

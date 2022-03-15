@@ -106,11 +106,11 @@ uses
   gl_render,
   r_data,
   doomtype,
-
-  r_main, r_plane, r_things, r_draw, r_sky,
-
-// State.
-  doomstat;
+  r_main,
+  r_plane,
+  r_things,
+  r_draw,
+  r_sky;
 
 //==============================================================================
 // R_FakeFlat

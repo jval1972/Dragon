@@ -251,16 +251,10 @@ uses
   c_cmds,
   doomdef,
   m_misc,
-  i_system,
   gl_main,
   gl_tex,
-  r_defs,
   r_main,
-  r_data,
-  r_lights,
-  v_video,
-  w_wad,
-  z_zone;
+  r_lights;
 
 ////////////////////////////////////////////////////////////////////////////////
 //

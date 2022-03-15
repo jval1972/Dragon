@@ -32,7 +32,6 @@ unit f_finale;
 interface
 
 uses
-  doomtype,
   d_event,
   info_h;
 
@@ -110,15 +109,11 @@ uses
   r_data,
   r_defs,
   r_things,
-// Functions.
-  i_system,
   z_zone,
   v_data,
   v_video,
   w_wad,
   s_sound,
-// Data.
-  dstrings,
   d_englsh,
   sounds,
   doomdef,

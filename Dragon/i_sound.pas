@@ -131,17 +131,15 @@ implementation
 uses
   d_delphi,
   MMSystem,
-  c_cmds,
   z_zone,
   m_argv,
-  m_misc,
   i_system,
   DirectX,
   s_sound,
   gl_main,
   w_wad,
   w_pak,
-  doomdef, doomstat;
+  doomdef;
 
 // The number of internal mixing channels,
 //  the samples calculated for each mixing step,

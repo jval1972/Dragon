@@ -163,18 +163,14 @@ uses
   w_wad,
   i_system,
   doomstat,
-  dstrings,
   d_englsh,
   d_player,
   g_game,
   hu_lib,
   m_menu,
   m_fixed,
-  p_tick,
-  r_draw,
   s_sound,
   sounds,
-  st_stuff,
   v_data,
   v_video;
 

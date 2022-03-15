@@ -230,7 +230,6 @@ uses
   g_game,
   gl_misc,
   info,
-  i_system,
   p_mobj,
   p_mobj_h,
   p_setup,
@@ -241,7 +240,6 @@ uses
   r_things,
   r_hires,
   t_main,
-  d_player,
   v_data;
 
 //==============================================================================

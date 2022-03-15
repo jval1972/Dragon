@@ -52,7 +52,7 @@ unit mp3_SubBand1;
 
 interface
 uses
-  Windows, mp3_Shared, mp3_BitStream, mp3_Header, mp3_SynthFilter, mp3_SubBand, mp3_CRC;
+  mp3_Shared, mp3_BitStream, mp3_Header, mp3_SynthFilter, mp3_SubBand, mp3_CRC;
 
 type
   // class for layer I subbands in single channel mode:

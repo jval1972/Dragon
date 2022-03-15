@@ -38,7 +38,6 @@ uses
   d_delphi,
   m_fixed,
   dglOpenGL,
-  p_mobj_h,
   gl_types;
 
 var
@@ -177,7 +176,6 @@ implementation
 uses
   doomdef,
   d_main,
-  g_game,
   i_system,
   info,
   gl_md2,

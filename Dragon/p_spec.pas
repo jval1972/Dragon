@@ -729,11 +729,9 @@ implementation
 uses
   d_delphi,
   doomdef,
-  doomstat,
   doomdata,
   d_englsh,
   i_system,
-  i_io,
   z_zone,
   m_argv,
   m_rnd,

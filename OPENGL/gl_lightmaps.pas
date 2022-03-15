@@ -106,7 +106,6 @@ implementation
 
 uses
   p_tick,
-  v_video,
   gl_defs,
   gl_dlights;
 

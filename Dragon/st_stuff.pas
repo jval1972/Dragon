@@ -32,7 +32,7 @@ unit st_stuff;
 interface
 
 uses
-  doomtype, doomdef,
+  doomdef,
   d_event;
 
 // Size of statusbar.
@@ -108,7 +108,6 @@ uses
   tables,
   c_cmds,
   d_items,
-  i_system,
   z_zone,
   w_wad,
   info,
@@ -117,7 +116,6 @@ uses
   gl_render,
   g_game,
   st_lib,
-  p_local,
   p_inter,
   p_setup,
   p_enemy,
@@ -125,7 +123,6 @@ uses
   r_defs,
   r_main,
   r_draw,
-  r_hires,
   m_cheat,
   m_rnd,
   m_fixed,
@@ -136,8 +133,7 @@ uses
 // State.
   doomstat,
 // Data.
-  dstrings,
-   d_englsh,
+  d_englsh,
   sounds,
 // for mapnames
   hu_stuff;

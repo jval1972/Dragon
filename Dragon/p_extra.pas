@@ -649,7 +649,6 @@ uses
   p_pspr,
   p_sounds,
   p_tick,
-  r_main,
   sounds,
   s_sound,
   tables;

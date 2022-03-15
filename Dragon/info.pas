@@ -127,13 +127,7 @@ function Info_GetInheritance(const imo: Pmobjinfo_t): integer;
 implementation
 
 uses
-  i_system,
-  m_fixed,
-  p_enemy,
-  p_pspr,
-  p_mobj_h,
-  p_extra,
-  sounds;
+  i_system;
 
 var
   DO_states: array[0..Ord(DO_NUMSTATES) - 1] of state_t;

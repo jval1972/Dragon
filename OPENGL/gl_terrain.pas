@@ -37,8 +37,7 @@ interface
 uses
   dglOpenGL,
   d_delphi,
-  m_fixed,
-  t_main;
+  m_fixed;
 
 //==============================================================================
 //
@@ -85,10 +84,6 @@ function gld_TerrainAdjustFloorZ(const x, y: fixed_t; const floorz: fixed_t): fi
 implementation
 
 uses
-  d_main,
-  i_system,
-  g_game,
-  r_draw,
   gl_defs,
   gl_tex,
   gl_render,

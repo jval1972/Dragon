@@ -232,8 +232,7 @@ uses
   sc_engine,
   w_wad,
   z_zone,
-  hu_stuff,
-  d_net;
+  hu_stuff;
 
 {$IFDEF DEBUG}
 var

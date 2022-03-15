@@ -38,7 +38,6 @@ interface
 uses
   d_delphi,
   doomdef,
-  info,
   m_fixed,
   r_defs;
 
@@ -106,7 +105,6 @@ implementation
 
 uses
   tables,
-  g_game,
   info_h,
   i_system,
   gl_render, // JVAL OPENGL
@@ -116,9 +114,6 @@ uses
   r_data,
   r_draw,
   r_main,
-  r_bsp,
-  r_hires,
-  r_lights,
   z_zone,
   w_wad,
   doomstat;

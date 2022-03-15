@@ -44,9 +44,8 @@ uses
   r_defs;
 
 //==============================================================================
-// R_InitPlanes
 //
-//-----------------------------------------------------------------------------
+// R_InitPlanes
 //
 //==============================================================================
 procedure R_InitPlanes;
@@ -85,17 +84,10 @@ implementation
 
 uses
   d_delphi,
-  doomstat,
-  d_player,
   tables,
   i_system,
   r_sky,
-  r_draw,
-  r_main,
-  r_things,
-  r_hires,
-  z_zone,
-  w_wad;
+  r_main;
 
 // Here comes the obnoxious "visplane".
 const

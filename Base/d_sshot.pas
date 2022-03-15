@@ -35,7 +35,7 @@ unit d_sshot;
 interface
 
 uses
-  Windows, Forms, SysUtils, Classes, Graphics;
+  SysUtils, Classes, Graphics;
 
 type
   TTGABitmap = class(TBitmap)

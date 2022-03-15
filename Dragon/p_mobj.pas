@@ -40,12 +40,7 @@ interface
 uses
   p_mobj_h,
   tables,
-// We need the WAD data structure for Map things,
-// from the THINGS lump.
   doomdata,
-// States are tied to finite states are
-//  tied to animation frames.
-// Needs precompiled tables/data structures.
   info_h,
   m_fixed;
 
@@ -219,8 +214,7 @@ uses
   hu_stuff,
   s_sound,
   info,
-  info_rnd,
-  doomstat;
+  info_rnd;
 
 //==============================================================================
 //

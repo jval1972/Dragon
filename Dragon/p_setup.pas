@@ -38,7 +38,8 @@ interface
 
 uses
   d_delphi,
-  doomdef, doomdata,
+  doomdef,
+  doomdata,
   m_fixed,
   p_mobj_h,
   r_defs;
@@ -175,7 +176,6 @@ uses
   p_mobj,
   p_tick,
   p_spec,
-  p_switch,
   p_sun, // JVAL: wolf
   p_inter,
   p_enemy, // jval: wolf
@@ -185,7 +185,6 @@ uses
   r_intrpl,
   info_h,
   gl_data,    // JVAL OPENGL
-  gl_tex,     // JVAL OPENGL
   gl_render,  // JVAL OPENGL
   gl_models,  // JVAL: WOLF
   r_main,

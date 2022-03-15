@@ -51,10 +51,7 @@ const
 implementation
 
 uses
-  d_delphi,
-  p_local,
-  r_data,
-  w_wad;
+  d_delphi;
 
 type
   terraintypedef_t = record

@@ -43,9 +43,8 @@ uses
   r_defs;
 
 //==============================================================================
-// R_GetColumn
 //
-//-----------------------------------------------------------------------------
+// R_GetColumn
 // Retrieve column data for span blitting.
 //
 //==============================================================================
@@ -169,15 +168,11 @@ var
 implementation
 
 uses
-  doomdef,
-  doomstat,
 {$IFDEF FPC}
   d_fpc,
 {$ENDIF}
   d_think,
-  g_game,
   i_system,
-  p_local,
   p_setup,
   p_tick,
   p_mobj_h,
@@ -191,8 +186,7 @@ uses
   v_data,
   v_video,
   w_wad,
-  z_zone,
-  sc_engine;
+  z_zone;
 
 //==============================================================================
 //

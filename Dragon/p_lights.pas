@@ -35,7 +35,6 @@ unit p_lights;
 interface
 
 uses
-  doomdef,
   m_rnd,
   p_spec,
   r_defs,
@@ -115,7 +114,6 @@ procedure T_LightFlash(flash: Plightflash_t);
 implementation
 
 uses
-  d_delphi,
   p_tick,
   p_setup;
 

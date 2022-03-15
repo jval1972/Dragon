@@ -52,7 +52,7 @@ unit mp3_SubBand2;
 
 interface
 uses
-  Windows, SysUtils, mp3_Shared, mp3_BitStream, mp3_SubBand, mp3_Header, mp3_CRC, mp3_SynthFilter;
+  mp3_Shared, mp3_BitStream, mp3_SubBand, mp3_Header, mp3_CRC, mp3_SynthFilter;
 
 type
   // class for layer II subbands in single channel mode:
@@ -123,6 +123,7 @@ type
   end;
 
 implementation
+
 uses
   mp3_ScaleFac;
 

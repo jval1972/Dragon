@@ -43,7 +43,6 @@ interface
 
 uses
   jpg_morecfg,
-  jpg_error,
   jpg_utils,
   jpg_lib;
 

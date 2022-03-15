@@ -167,7 +167,6 @@ implementation
 
 uses
   m_menu,
-  c_con,
   i_system,
   i_net,
   i_io,
@@ -177,8 +176,7 @@ uses
   r_main,
   p_mobj_h,
   p_terrain,
-  g_game,
-  doomstat;
+  g_game;
 
 const
   NCMD_EXIT = $80000000;

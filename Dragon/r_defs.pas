@@ -37,18 +37,12 @@ interface
 uses
   d_delphi,
   tables,
-// Screenwidth.
-  doomdef,
-  info_h,
-// Some more or less basic data types
-// we depend on.
   m_fixed,
 // We rely on the thinker data struct
 // to handle sound origins in sectors.
   d_think,
 // SECTORS do store MObjs anyway.
   p_mobj_h,
-  t_main,
   w_wad;
 
 //-----------------------------------------------------------------------------
@@ -189,10 +183,10 @@ type
     m_snext: Pmsecnode_t;  // next msecnode_t for this sector
     visited: boolean; // killough 4/4/98, 4/7/98: used in search algorithms
   end;
+
 //
 // The SideDef.
 //
-
   side_t = packed record
     // add this to the calculated texture column
     textureoffset: fixed_t;

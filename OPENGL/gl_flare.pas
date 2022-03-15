@@ -80,10 +80,8 @@ implementation
 
 uses
   doomdef,
-  p_mobj_h,
   gl_tex,
   gl_defs,
-  gl_frustum,
   p_tick,
   r_main,
   dglOpenGL;

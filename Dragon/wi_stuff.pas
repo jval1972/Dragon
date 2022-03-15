@@ -84,7 +84,6 @@ uses
   g_game,
   s_sound,
   r_defs,
-  r_hires,
   doomstat,
   sounds,
   v_data,

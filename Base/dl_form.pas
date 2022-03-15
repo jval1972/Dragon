@@ -32,7 +32,7 @@ unit dl_form;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, SysUtils, Classes, Controls, Forms,
   Dialogs, StdCtrls, XPMan, ExtCtrls;
 
 type

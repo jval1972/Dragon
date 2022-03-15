@@ -34,14 +34,11 @@ interface
 uses
   z_zone,
   doomdef,
-  p_local,
   p_mobj_h,
   p_spec,
   r_defs,
   s_sound,
   sounds,
-  doomstat,
-  dstrings,
   d_englsh;
 
 //==============================================================================
@@ -89,7 +86,7 @@ procedure P_SpawnDoorRaiseIn5Mins(sec: Psector_t; secnum: integer);
 implementation
 
 uses
-  d_delphi,
+  
   d_player,
   g_game,
   m_fixed,
