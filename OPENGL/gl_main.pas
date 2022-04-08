@@ -93,6 +93,7 @@ var
   h_DC: HDC;    // Global device context
   h_RC: HGLRC;  // OpenGL rendering context
   hMainWnd: HWND;
+
 var
   gl_initialized: boolean = false;
 
@@ -245,16 +246,16 @@ procedure glEnable2D;
 var
   vPort: array[0..3] of GLInt;
 begin
-   glGetIntegerv(GL_VIEWPORT, @vPort);
+  glGetIntegerv(GL_VIEWPORT, @vPort);
 
-   glMatrixMode(GL_PROJECTION);
-   glPushMatrix();
-   glLoadIdentity();
+  glMatrixMode(GL_PROJECTION);
+  glPushMatrix();
+  glLoadIdentity();
 
-   glOrtho(0, vPort[2], 0, vPort[3], -1, 1);
-   glMatrixMode(GL_MODELVIEW);
-   glPushMatrix();
-   glLoadIdentity();
+  glOrtho(0, vPort[2], 0, vPort[3], -1, 1);
+  glMatrixMode(GL_MODELVIEW);
+  glPushMatrix();
+  glLoadIdentity();
 end;
 
 //==============================================================================
@@ -264,10 +265,10 @@ end;
 //==============================================================================
 procedure glDisable2D;
 begin
-   glMatrixMode(GL_PROJECTION);
-   glPopMatrix();
-   glMatrixMode(GL_MODELVIEW);
-   glPopMatrix();
+  glMatrixMode(GL_PROJECTION);
+  glPopMatrix();
+  glMatrixMode(GL_MODELVIEW);
+  glPopMatrix();
 end;
 
 var
@@ -299,7 +300,6 @@ end;
 
 var
   overlay_created: boolean = false;
-//  sub_y2: integer;
   did_fullhu: integer = 10;
   last_y1: integer = GLDRAWTEXHEIGHT;
   health1, health2, ammo1, ammo2: GLuint;
@@ -504,11 +504,11 @@ end;
 //==============================================================================
 procedure glInit;
 begin
-  glClearColor(0.0, 0.0, 0.0, 0.0); 	     // Black Background
+  glClearColor(0.0, 0.0, 0.0, 0.0);        // Black Background
   glShadeModel(GL_SMOOTH);                 // Enables Smooth Color Shading
   glClearDepth(1.0);                       // Depth Buffer Setup
   glEnable(GL_DEPTH_TEST);                 // Enable Depth Buffer
-  glDepthFunc(GL_LESS);		                 // The Type Of Depth Test To Do
+  glDepthFunc(GL_LESS);                    // The Type Of Depth Test To Do
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);   //Realy Nice perspective calculations
   glEnable(GL_TEXTURE_2D);                     // Enable Texture Mapping
 end;
@@ -577,12 +577,12 @@ end;
 procedure GL_InitGraphics;
 var
   WindowClass: TWndClass;
-  dwStyle : DWORD;              // Window styles
-  dwExStyle : DWORD;            // Extended window styles
-  dmScreenSettings : DEVMODE;   // Screen settings (fullscreen, etc...)
-  PixelFormat : GLuint;         // Settings for the OpenGL rendering
-  h_Instance : HINST;           // Current instance
-  pfd : TPIXELFORMATDESCRIPTOR;  // Settings for the OpenGL window
+  dwStyle: DWORD;              // Window styles
+  dwExStyle: DWORD;            // Extended window styles
+  dmScreenSettings: DEVMODE;   // Screen settings (fullscreen, etc...)
+  PixelFormat: GLuint;         // Settings for the OpenGL rendering
+  h_Instance: HINST;           // Current instance
+  pfd: TPIXELFORMATDESCRIPTOR;  // Settings for the OpenGL window
 begin
   InitOpenGL;                               // New call to initialize and bind the OpenGL dll
   gl_initialized := true;
@@ -595,7 +595,7 @@ begin
     style         := CS_HREDRAW or    // Redraws entire window if length changes
                      CS_VREDRAW or    // Redraws entire window if height changes
                      CS_OWNDC;        // Unique device context for the window
-    lpfnWndProc   := @WindowProc;        // Set the window procedure to our func WndProc
+    lpfnWndProc   := @WindowProc;     // Set the window procedure to our func WndProc
     hInstance     := h_Instance;
     hCursor       := LoadCursor(0, IDC_ARROW);
     lpszClassName := 'Dragon';
@@ -614,9 +614,9 @@ begin
     ZeroMemory(@dmScreenSettings, SizeOf(dmScreenSettings));
     with dmScreenSettings do begin              // Set parameters for the screen setting
       dmSize       := SizeOf(dmScreenSettings);
-      dmPelsWidth  := SCREENWIDTH;                    // Window width
-      dmPelsHeight := SCREENHEIGHT;                   // Window height
-      dmBitsPerPel := 32;               // Window color depth
+      dmPelsWidth  := SCREENWIDTH;  // Window width
+      dmPelsHeight := SCREENHEIGHT; // Window height
+      dmBitsPerPel := 32;           // Window color depth
       dmFields     := DM_PELSWIDTH or DM_PELSHEIGHT or DM_BITSPERPEL;
     end;
 
@@ -635,17 +635,19 @@ begin
   ShowCursor(False);                    // Turn of the cursor (gets in the way)
 
   // Attempt to create the actual window
-  hMainWnd := CreateWindowEx(dwExStyle,      // Extended window styles
-                          WindowClass.lpszClassName,
-                          AppTitle,
-                          dwStyle,        // Window styles
-                          0, 0,           // Window position
-                          SCREENWIDTH,
-                          SCREENHEIGHT,
-                          0,              // No parent window
-                          0,              // No menu
-                          h_Instance,     // Instance
-                          nil);           // Pass nothing to WM_CREATE
+  hMainWnd := CreateWindowEx(
+    dwExStyle,      // Extended window styles
+    WindowClass.lpszClassName,
+    AppTitle,
+    dwStyle,        // Window styles
+    0, 0,           // Window position
+    SCREENWIDTH,
+    SCREENHEIGHT,
+    0,              // No parent window
+    0,              // No menu
+    h_Instance,     // Instance
+    nil             // Pass nothing to WM_CREATE
+  );
 
   if hMainWnd = 0 then
   begin
@@ -693,7 +695,7 @@ begin
     bReserved       := 0;                    // Number of overlay and underlay planes
     dwLayerMask     := 0;                    // Ignored
     dwVisibleMask   := 0;                    // Transparent color of underlay plane
-    dwDamageMask    := 0;                     // Ignored
+    dwDamageMask    := 0;                    // Ignored
   end;
 
   // Attempts to find the pixel format supported by a device context that is the best match to a given pixel format specification.
@@ -812,7 +814,7 @@ end;
 //==============================================================================
 procedure I_ReadScreen32(dest: pointer);
 begin
-    glReadPixels(0, 0, SCREENWIDTH, SCREENHEIGHT, GL_BGRA, GL_UNSIGNED_BYTE, dest);
+  glReadPixels(0, 0, SCREENWIDTH, SCREENHEIGHT, GL_BGRA, GL_UNSIGNED_BYTE, dest);
 end;
 
 end.
