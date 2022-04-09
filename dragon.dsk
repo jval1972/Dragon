@@ -7,32 +7,32 @@ File_4=SourceModule,'G:\DelphiDoom_Release\Dragon\Src\Base\w_pak.pas',0,1,1,1,1,
 File_5=SourceModule,'G:\DelphiDoom_Release\Dragon\Src\Dragon\w_utils.pas',0,1,1,1,1,0,0
 
 [Modules]
-Module0=G:\DelphiDoom_Release\Dragon\Src\Base\dl_form.pas
-Module1=G:\DelphiDoom_Release\Dragon\Src\Base\i_startup.pas
-Module2=G:\DelphiDoom_Release\Dragon\Src\Base\d_sshot.pas
-Module3=G:\DelphiDoom_Release\Dragon\Src\Base\w_wad.pas
-Module4=G:\DelphiDoom_Release\Dragon\Src\Dragon\wi_stuff.pas
-Module5=G:\DelphiDoom_Release\Dragon\Src\Dragon\v_video.pas
-Module6=G:\DelphiDoom_Release\Dragon\Src\Dragon\st_stuff.pas
-Module7=G:\DelphiDoom_Release\Dragon\Src\Dragon\st_lib.pas
-Module8=G:\DelphiDoom_Release\Dragon\Src\Dragon\r_plane.pas
-Module9=G:\DelphiDoom_Release\Dragon\Src\Dragon\r_main.pas
-Module10=G:\DelphiDoom_Release\Dragon\Src\Base\r_hires.pas
-Module11=G:\DelphiDoom_Release\Dragon\Src\Dragon\r_draw.pas
-Module12=G:\DelphiDoom_Release\Dragon\Src\Dragon\r_defs.pas
-Module13=G:\DelphiDoom_Release\Dragon\Src\Dragon\r_data.pas
-Module14=G:\DelphiDoom_Release\Dragon\Src\Dragon\r_bsp.pas
-Module15=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_sun.pas
-Module16=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_terrain.pas
-Module17=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_telept.pas
-Module18=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_switch.pas
-Module19=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_spec.pas
-Module20=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_sight.pas
-Module21=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_setup.pas
-Module22=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_saveg.pas
-Module23=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_pspr.pas
-Module24=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_mobj.pas
-Module25=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_maputl.pas
+Module0=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_maputl.pas
+Module1=G:\DelphiDoom_Release\Dragon\Src\Base\dl_form.pas
+Module2=G:\DelphiDoom_Release\Dragon\Src\Base\i_startup.pas
+Module3=G:\DelphiDoom_Release\Dragon\Src\Base\d_sshot.pas
+Module4=G:\DelphiDoom_Release\Dragon\Src\Base\w_wad.pas
+Module5=G:\DelphiDoom_Release\Dragon\Src\Dragon\wi_stuff.pas
+Module6=G:\DelphiDoom_Release\Dragon\Src\Dragon\v_video.pas
+Module7=G:\DelphiDoom_Release\Dragon\Src\Dragon\st_stuff.pas
+Module8=G:\DelphiDoom_Release\Dragon\Src\Dragon\st_lib.pas
+Module9=G:\DelphiDoom_Release\Dragon\Src\Dragon\r_plane.pas
+Module10=G:\DelphiDoom_Release\Dragon\Src\Dragon\r_main.pas
+Module11=G:\DelphiDoom_Release\Dragon\Src\Base\r_hires.pas
+Module12=G:\DelphiDoom_Release\Dragon\Src\Dragon\r_draw.pas
+Module13=G:\DelphiDoom_Release\Dragon\Src\Dragon\r_defs.pas
+Module14=G:\DelphiDoom_Release\Dragon\Src\Dragon\r_data.pas
+Module15=G:\DelphiDoom_Release\Dragon\Src\Dragon\r_bsp.pas
+Module16=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_sun.pas
+Module17=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_terrain.pas
+Module18=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_telept.pas
+Module19=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_switch.pas
+Module20=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_spec.pas
+Module21=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_sight.pas
+Module22=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_setup.pas
+Module23=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_saveg.pas
+Module24=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_pspr.pas
+Module25=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_mobj.pas
 Module26=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_map.pas
 Module27=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_lights.pas
 Module28=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_inter.pas
@@ -81,6 +81,11 @@ Module70=G:\DelphiDoom_Release\Dragon\Src\Dragon\s_sound.pas
 Module71=G:\DelphiDoom_Release\Dragon\Src\Dragon\m_menu.pas
 Count=72
 EditWindowCount=1
+
+[G:\DelphiDoom_Release\Dragon\Src\Dragon\p_maputl.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
 
 [G:\DelphiDoom_Release\Dragon\Src\Base\dl_form.pas]
 ModuleType=SourceModule
@@ -203,11 +208,6 @@ FormState=0
 FormOnTop=0
 
 [G:\DelphiDoom_Release\Dragon\Src\Dragon\p_mobj.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[G:\DelphiDoom_Release\Dragon\Src\Dragon\p_maputl.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -448,7 +448,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=72
-CurrentView=71
+CurrentView=46
 View0=0
 View1=1
 View2=2
@@ -868,9 +868,9 @@ LeftCol=1
 
 [View46]
 Module=G:\DelphiDoom_Release\Dragon\Src\Dragon\p_maputl.pas
-CursorX=1
-CursorY=1
-TopLine=1
+CursorX=40
+CursorY=378
+TopLine=373
 LeftCol=1
 
 [View47]
